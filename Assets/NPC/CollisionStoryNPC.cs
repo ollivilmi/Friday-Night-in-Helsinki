@@ -7,11 +7,13 @@ using NPC;
 using Game;
 using Player;
 
-namespace NPC {
-    public class CollisionNPC : MonoBehaviour {
+namespace NPC
+{
+    public class CollisionStoryNPC : MonoBehaviour
+    {
         private DialogueHolder dHolder;
         private DialogueManager dManager;
-        private BarNPC barNPC;
+        private NPCBouncer npc;
         private Player.Player player;
         private GameController controller;
         private GameEvents events;
@@ -23,8 +25,8 @@ namespace NPC {
             events = controller.GetEvents();
             player = events.GetPlayer();
 
-            barNPC = new BarNPC();
-            dHolder = new DialogueHolder(player, dManager, barNPC);
+            npc = new NPCBouncer();
+            dHolder = new DialogueHolderStory(player, dManager, npc);
         }
 
 
@@ -34,17 +36,16 @@ namespace NPC {
             {
                 dHolder.touching = true;
                 dManager.SetHolder(dHolder);
-                dManager.ShowBox("Talk", dManager.dNPC, "Start");
+                try
+                {
+                    dManager.ShowBox("Talk", dManager.dBoxNPC, "Start");
+                } catch (System.ArgumentException ae)
+                {
+                    Debug.Log(ae);
+                }
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (dHolder.moodChange != 0)
-            {
-                barNPC.changeMood(dHolder.ReturnMoodChange());
-            }
-        }
 
         private void OnTriggerExit2D(Collider2D col)
         {

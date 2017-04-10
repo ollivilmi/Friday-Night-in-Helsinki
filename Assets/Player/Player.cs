@@ -16,6 +16,11 @@ namespace Player
         public string name { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
+        public string[] story { get; set; }
+        public string[] reply { get; set; }
+        public string[] answer { get; set; }
+        public string special { get; set; }
+
 
         public Player(string name, float speed, int likability, double money, int drunkLevel, int funLevel)
         {
@@ -101,5 +106,9 @@ namespace Player
             return AllItems;
         }
         public abstract string Think();
+        public abstract void SetStoryHAY();
+        public abstract void SetStoryWAYF();
+        public abstract string Special();
+        public abstract string SpecialUsed();
     }
 }

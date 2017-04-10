@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 namespace NPC
 {
-    public class BarNPC : NPC
+    public class NPCBar : NPC
     {
         private int x;
 
-        public BarNPC()
+        public NPCBar()
         {
             mood = random.Next(0, 101);
             items = new List<string>() { "Love letter", "Phone number" };

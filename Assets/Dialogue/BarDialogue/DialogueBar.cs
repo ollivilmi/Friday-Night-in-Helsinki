@@ -3,7 +3,7 @@ using Player;
 
 namespace Dialogue
 {
-	public class Dialogue
+	public class DialogueBar
 	{
 		private string[] dialogue1, dialogue2Positive, dialogue2Neutral,
 		dialogue2Negative, dialogue3Positive, dialogue3Neutral, dialogue3Negative;
@@ -11,7 +11,7 @@ namespace Dialogue
 		private Random random;
         private string[] dialogue, answers;
 		private int select;
-		public Dialogue ()
+		public DialogueBar ()
 		{
 			this.dialogue1 = new string[] { "Hey.", "Hello.", "Greetings.", "Yes?", "Sup." };
 			this.dialogue2Positive = new string[] {
@@ -53,7 +53,7 @@ namespace Dialogue
 			this.select = 0;
 		}
 
-		public Dialogue (string[] dialogue1, string[][] dialogue2, string[][] dialogue3)
+		public DialogueBar (string[] dialogue1, string[][] dialogue2, string[][] dialogue3)
 		{
 			this.dialogue1 = dialogue1;
 			this.dialogue2 = dialogue2; 

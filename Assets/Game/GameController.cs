@@ -13,28 +13,28 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character;
-        private GameObject npc;
-        private DialogueManager dMan; //TODO: FIX DIALOGUE BUG CLICKING NPC TWICE
+        private GameObject character, barNPC, storyNPC;
+        private DialogueManager dManager;
         private GameEvents events;
         private Movement playerMovement;
         private Text stats, info;
-        private DialogueHolder dHolder;
         private Vector3 pos;
 
         void Start()
         {
-            npc = (GameObject)Resources.Load("NPC", typeof(GameObject));
+            barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
+            storyNPC = (GameObject)Resources.Load("NPCBouncer", typeof(GameObject));
             pos = new Vector3(30f, -3.78f, 0f);
             events = new GameEvents();
             character = GameObject.Find("Player");
             stats = GameObject.Find("Stats").GetComponent<Text>();
             info = GameObject.Find("Info").GetComponent<Text>();
-            dMan = FindObjectOfType<DialogueManager>();
+            dManager = FindObjectOfType<DialogueManager>();
             player = events.GetPlayer();
-            playerMovement = new Movement(player, dMan, character);
-            Instantiate(npc, npc.transform.position, npc.transform.rotation);
-            Instantiate(npc, pos, npc.transform.rotation);
+            playerMovement = new Movement(player, dManager, character);
+
+            Instantiate(storyNPC, barNPC.transform.position, barNPC.transform.rotation);
+            Instantiate(barNPC, pos, barNPC.transform.rotation);
         }
 
         public GameEvents GetEvents()
@@ -44,7 +44,7 @@ namespace Game
 
         void Update()
         {
-            playerMovement.charPos = character.transform.position; //Get character position in the world
+            playerMovement.charPos = character.transform.position;
             playerMovement.LeftClick();
             info.text = events.UpdateEvents();
             stats.text = player.UpdateStats();

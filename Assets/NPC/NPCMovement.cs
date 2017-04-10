@@ -15,10 +15,10 @@ public class NPCMovement : MonoBehaviour {
 	private int moveDirection;
     private DialogueManager dMan;
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
         dMan = FindObjectOfType<DialogueManager>();
-        theRigidbody = GetComponent<Rigidbody2D>();
+		theRigidbody = GetComponent<Rigidbody2D>();
 
 		waitCounter = waitTime;
 		moveCounter = moveTime;

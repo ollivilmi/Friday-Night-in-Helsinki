@@ -33,10 +33,7 @@ namespace Game
         {
             this.score += (int)(score + (0.1 * (double)player.getfunLevel())); //Add score, bonus points for funLevel
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="minute"></param>
+
         public void ChangeTime(int minute)
         {
             this.minute += minute;

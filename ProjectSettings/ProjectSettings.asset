@@ -470,11 +470,11 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 0
-    Collab: 1
+    Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 1
-  cloudProjectId: b13ac9c9-b736-4173-9479-9de974fc5707
-  projectName: Friday night in Helsinki
-  organizationId: ollivilmi
+    UNet: 0
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0

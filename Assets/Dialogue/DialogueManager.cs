@@ -9,71 +9,72 @@ namespace Dialogue
     {
 
         public bool dialogueActive;
-        public Button dNPC, dAnswer1, dAnswer2, dAnswer3;
+        public Button dBoxNPC, dBoxAnswer1, dBoxAnswer2, dBoxAnswer3;
         public Button[] answerButtons;
-        DialogueHolder dHolder;
-        Dictionary<Button, string> selection = new Dictionary<Button, string>();
+        private DialogueHolder dHolder;
+        private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
 
-        void Start()
+        private void Start()
         {
-            dNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
-            dNPC.onClick.AddListener(() => Click(dNPC));
+            dBoxNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
+            dBoxNPC.onClick.AddListener(() => Click(dBoxNPC));
 
-            dAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
-            dAnswer1.onClick.AddListener(() => Click(dAnswer1));
+            dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
+            dBoxAnswer1.onClick.AddListener(() => Click(dBoxAnswer1));
 
-            dAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
-            dAnswer2.onClick.AddListener(() => Click(dAnswer2));
+            dBoxAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
+            dBoxAnswer2.onClick.AddListener(() => Click(dBoxAnswer2));
 
-            dAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
-            dAnswer3.onClick.AddListener(() => Click(dAnswer3));
+            dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
+            dBoxAnswer3.onClick.AddListener(() => Click(dBoxAnswer3));
 
-            answerButtons = new Button[3] { dAnswer1, dAnswer2, dAnswer3 };
-
+            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 }; //The buttons are also accessible via this array if you need to iterate
+                                                                                    // in a for loop for example
             CloseDialogue();
         }
 
+        /// <summary>
+        /// After colliding with an npc, use the manager with the the dialogue it holds.
+        /// </summary>
+        /// <param name="dHolder">The NPC's dialogue.</param>
         public void SetHolder(DialogueHolder dHolder)
         {
             this.dHolder = dHolder;
         }
 
         /// <summary>
-        /// Set button active, change button's text and set a dictionary for +/n/-
+        /// Set button active, change it's text and what clicking it does.
         /// </summary>
-        /// <param name="dialogue">String that contains the answer option</param>
-        /// <param name="box">Enables button and gives access to button text</param>
-        /// <param name="answer">Contains if the string is +/n/-</param>
+        /// <param name="dialogue">String that contains the text that will be put on the button.</param>
+        /// <param name="box">Enables button and changes it's text.</param>
+        /// <param name="answer">Contains a string which is returned to DialogueHolder.</param>
         public void ShowBox(string dialogue, Button box, string answer)
         {
             box.gameObject.SetActive(true);
             Text text = box.GetComponentInChildren<Text>();
             text.text = dialogue;
-            selection.Add(box, answer);
+            selectedAnswer.Add(box, answer);
         }
         /// <summary>
-        /// When you click a button, sets DialogueHolder's selection:string to
-        /// the corresponding answer "Positive", "Neutral" or "Negative"
+        /// Returns which button was clicked to the DialogueHolder.
         /// </summary>
-        /// <param name="b">Which button is pressed</param>
-        public void Click(Button b) //When you click a button
+        /// <param name="answer">Which button is pressed</param>
+        public void Click(Button answer)
         {
-            dHolder.level++;
-            dHolder.selection = selection[b];
-            selection.Clear();
-            dHolder.DialogueLevel();
+            string selection = selectedAnswer[answer];
+            CloseDialogue();
+            dHolder.DialogueLevel(selection);
         }
         /// <summary>
-        /// Closes buttons, cleans up
+        /// Closes buttons, cleans up dictionary.
         /// </summary>
         public void CloseDialogue()
         {
-            dialogueActive = false;
-            dNPC.gameObject.SetActive(false);
-            dAnswer1.gameObject.SetActive(false);
-            dAnswer2.gameObject.SetActive(false);
-            dAnswer3.gameObject.SetActive(false);
-            selection.Clear();
+            dBoxNPC.gameObject.SetActive(false);
+            dBoxAnswer1.gameObject.SetActive(false);
+            dBoxAnswer2.gameObject.SetActive(false);
+            dBoxAnswer3.gameObject.SetActive(false);
+            selectedAnswer.Clear();
         }
     }
 }
