@@ -33,8 +33,8 @@ namespace Game
             player = events.GetPlayer();
             playerMovement = new Movement(player, dManager, character);
 
-            Instantiate(storyNPC, barNPC.transform.position, barNPC.transform.rotation);
-            Instantiate(barNPC, pos, barNPC.transform.rotation);
+            Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
+            Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
         }
 
         public GameEvents GetEvents()
