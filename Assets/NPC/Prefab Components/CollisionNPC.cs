@@ -23,7 +23,14 @@ namespace NPC
             {
                 dHolder.touching = true;
                 dManager.SetHolder(dHolder);
-                dManager.ShowBox("Talk", dManager.dBoxNPC, "Start");
+                try
+                {
+                    dManager.ShowBox("Talk", dManager.dBoxNPC, "Start");
+                }
+                catch (System.ArgumentException ae)
+                {
+                    Debug.Log(ae);
+                }
             }
         }
 
