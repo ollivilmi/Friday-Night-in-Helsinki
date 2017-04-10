@@ -13,7 +13,6 @@ namespace NPC
         protected int mood;
         protected List<string> items;
         protected System.Random random = new System.Random();
-        protected GameObject sprite;
 
         public void changeMood(int mood)
         {
@@ -27,12 +26,5 @@ namespace NPC
                 this.mood = 0;
             }
         }
-
-        public int getMood()
-        {
-            return this.mood;
-        }
-
-        public abstract GameObject GetObject();
     }
 }

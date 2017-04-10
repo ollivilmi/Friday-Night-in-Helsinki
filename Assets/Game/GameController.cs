@@ -18,13 +18,11 @@ namespace Game
         private GameEvents events;
         private Movement playerMovement;
         private Text stats, info;
-        private Vector3 pos;
 
-        void Start()
+        private void Start()
         {
             barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
             storyNPC = (GameObject)Resources.Load("NPCBouncer", typeof(GameObject));
-            pos = new Vector3(30f, -3.78f, 0f);
             events = new GameEvents();
             character = GameObject.Find("Player");
             stats = GameObject.Find("Stats").GetComponent<Text>();
@@ -42,9 +40,9 @@ namespace Game
             return events;
         }
 
-        void Update()
+        private void Update()
         {
-            playerMovement.charPos = character.transform.position;
+            playerMovement.posChar = character.transform.position;
             playerMovement.LeftClick();
             info.text = events.UpdateEvents();
             stats.text = player.UpdateStats();

@@ -16,10 +16,13 @@ namespace Game
         public int score { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
-
+        /// <summary>
+        /// Creates an instance of the player's character and sets
+        /// time from the character's variables.
+        /// </summary>
         public GameEvents()
         {
-            player = new Jarno("Jarno", 8f, 100, 50, 0, 20);
+            player = new Jarno();
             this.hour = player.hour;
             this.minute = player.minute;
         }

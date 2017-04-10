@@ -12,7 +12,8 @@ namespace Game
     {
         private bool moveRight, moveLeft;
         private DialogueManager dMan;
-        public Vector2 mousePos, charPos;
+        private Vector2 posMouse;
+        public Vector2 posChar { get; set; }
         private Player.Player player;
         private GameObject character;
 
@@ -32,39 +33,54 @@ namespace Game
         }
 
         /// <summary>
-        /// On left click, move to the click's x-coordinate. However, if you are busy (in dialogue)
-        /// don't move. Uses player variable float speed.
+        /// On left click, get the click's x world coordinate and move to it.
         /// </summary>
         public void LeftClick()
         {
-            if (moveRight && !dMan.dialogueActive) //Move right if clicked
-            {                                                                 //Don't move if in dialogue
-                character.transform.Translate(player.speed * Time.deltaTime, 0f, 0f);
-                if (moveRight && charPos.x > mousePos.x) //Stop moving after reaching destination
-                {
-                    moveRight = false;
-                }
+            if (moveRight && !dMan.dialogueActive) 
+            {
+                CharacterMoveRight();
             }
-            else if (moveLeft && !dMan.dialogueActive) //Move left if clicked
-            {                                                                     //Don't move if in dialogue
-                character.transform.Translate(-player.speed * Time.deltaTime, 0f, 0f);
-                if (moveLeft && charPos.x < mousePos.x) //Stop moving after reaching destination
-                {
-                    moveLeft = false;
-                }
+            else if (moveLeft && !dMan.dialogueActive) 
+            {
+                CharacterMoveLeft();
             }
 
-            if (Input.GetMouseButtonDown(0) && !dMan.dialogueActive) //If player uses left click and is not in dialogue
+            if (Input.GetMouseButtonDown(0) && !dMan.dialogueActive) //Prevents moving while in dialogue
             {
-                mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //Register mouse position in World coordinates
-                if (mousePos.x > charPos.x)
+                posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition); //Register mouse position in World coordinates
+                if (posMouse.x > posChar.x)
                 {
                     moveRight = true;
                 }
-                else if (mousePos.x < charPos.x)
+                else if (posMouse.x < posChar.x)
                 {
                     moveLeft = true;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Moves character left until reaching the x world coordinate.
+        /// </summary>
+        private void CharacterMoveLeft()
+        {
+            character.transform.Translate(-player.speed * Time.deltaTime, 0f, 0f);
+            if (moveLeft && posChar.x < posMouse.x)
+            {
+                moveLeft = false;
+            }
+        }
+
+        /// <summary>
+        /// Moves character right until reaching the x world coordinate.
+        /// </summary>
+        private void CharacterMoveRight()
+        {
+            character.transform.Translate(player.speed * Time.deltaTime, 0f, 0f);
+            if (moveRight && posChar.x > posMouse.x)
+            {
+                moveRight = false;
             }
         }
     }

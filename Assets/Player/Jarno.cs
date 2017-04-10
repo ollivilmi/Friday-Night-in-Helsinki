@@ -9,12 +9,17 @@ namespace Player
     public class Jarno : Player
     {
 
-        public Jarno(string name, float speed, int likability, float money, int drunkLevel, int funLevel) :
-            base(name, speed, likability, money, drunkLevel, funLevel)
+        public Jarno()
         {
-            hour = 17;
-            minute = 0;
-            special = "Could you spare some change?";
+            this.hour = 17;
+            this.minute = 0;
+            this.special = "Could you spare some change?";
+            this.name = "Jarno";
+            this.speed = 8f;
+            this.likability = 100;
+            this.money = 50;
+            this.drunkLevel = 0;
+            this.funLevel = 20;
         }
 
         override public string Think()

@@ -28,10 +28,5 @@ namespace NPC
             else item = "";
         }
            
-
-        override public GameObject GetObject()
-        {
-            return this.sprite;
-        }
     }
 }

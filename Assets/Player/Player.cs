@@ -22,21 +22,15 @@ namespace Player
         public string special { get; set; }
 
 
-        public Player(string name, float speed, int likability, double money, int drunkLevel, int funLevel)
+        public Player()
         {
-            this.speed = speed;
-            this.likability = likability;
-            this.money = money;
-            this.drunkLevel = drunkLevel;
-            this.funLevel = funLevel;
             this.items = new List<string>();
-            this.name = name;
         }
 
         public string UpdateStats()
         {
             return "Drunk: " + drunkLevel + " Money: " + money +
-                " Likability: " + likability +" Items: " +GetItems();
+                " Likability: " + likability + " Fun: " +getfunLevel() +" Items: " +GetItems();
         }
 
         public void haveFun(int fun)

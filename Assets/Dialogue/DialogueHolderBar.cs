@@ -63,7 +63,7 @@ namespace Dialogue
         /// <summary>
         /// Initializes all of the dialogue answer buttons, their text and what clicking them does.
         /// </summary>
-        void InitializeBarDialogue()
+        private void InitializeBarDialogue()
         {
             dManager.ShowBox(dialogue[3], dManager.dBoxNPC, "Quit"); //Show NPC dialogue box, option is quit
             for (int i = 0; i < 3; i++)
@@ -75,7 +75,7 @@ namespace Dialogue
         /// <summary>
         /// Starts the first level of dialogue
         /// </summary>
-        void GetBarDialogue1()
+        private void GetBarDialogue1()
         {
             dialogue = randomBarDialogue.startDialogue1(out answers); //Returns dialogue strings, out = which strings are +/n/-  
             dManager.dialogueActive = true;
@@ -83,7 +83,7 @@ namespace Dialogue
         /// <summary>
         /// Starts the second level of dialogue by using the response from the player.
         /// </summary>
-        void GetBarDialogue2()
+        private void GetBarDialogue2()
         {
             switch (selection)
             {
@@ -112,7 +112,7 @@ namespace Dialogue
         /// <summary>
         /// Starts the third level of dialogue by using the response from the player.
         /// </summary>
-        void GetBarDialogue3()
+        private void GetBarDialogue3()
         {
             switch (selection)
             {

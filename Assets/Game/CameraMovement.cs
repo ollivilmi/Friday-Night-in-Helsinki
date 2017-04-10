@@ -6,38 +6,30 @@ namespace Game
 {
     public class CameraMovement : MonoBehaviour
     {
-        // Use this for initialization
-        bool moveRight, moveLeft;
-        Vector2 pos;
-        Vector3 camerapos;
+ 
+        private bool moveRight, moveLeft;
+        private Vector2 pos;
+        private Vector3 posCamera;
 
-        void Start()
+        private void Start()
         {
             moveLeft = false;
             moveRight = false;
             pos = this.gameObject.transform.position;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            camerapos = Camera.main.transform.position; //Check camera position every frame
 
-            if (moveRight) //If camera has been set to move right
+        private void Update()
+        {
+            posCamera = Camera.main.transform.position;
+
+            if (moveRight)
             {
-                if (camerapos.x < pos.x) //Move right until you reach the trigger's x coordinate
-                {
-                    Camera.main.transform.Translate(9f * Time.deltaTime, 0f, 0f);
-                }
-                else if (camerapos.x > pos.x) moveRight = false;
+                MoveCameraRight();   
             }
-            else if (moveLeft) //If camera has been set to move left
+            else if (moveLeft)
             {
-                if (camerapos.x > pos.x) //Move left until you reach the trigger's x coordinate
-                {
-                    Camera.main.transform.Translate(-9f * Time.deltaTime, 0f, 0f);
-                }
-                else if (camerapos.x < pos.x) moveLeft = false;
+                MoveCameraLeft();
             }
         }
 
@@ -45,15 +37,39 @@ namespace Game
         {
             if (col.gameObject.tag == "Player")
             {
-                if (pos.x > camerapos.x) //Set camera to move right if the camera is to the left of the trigger
+                if (pos.x > posCamera.x)
                 {
                     moveRight = true;
                 }
-                else if (pos.x < camerapos.x) //Set camera to move left if the camera is to the right of the trigger
+                else if (pos.x < posCamera.x)
                 {
                     moveLeft = true;
                 }
             }
+        }
+
+        /// <summary>
+        /// Moves the camera right until reaching the x position of the trigger.
+        /// </summary>
+        private void MoveCameraRight()
+        {
+            if (posCamera.x < pos.x)
+            {
+                Camera.main.transform.Translate(9f * Time.deltaTime, 0f, 0f);
+            }
+            else if (posCamera.x > pos.x) moveRight = false;
+        }
+
+        /// <summary>
+        /// Moves the camera left until reaching the x position of the trigger.
+        /// </summary>
+        private void MoveCameraLeft()
+        {
+            if (posCamera.x > pos.x)
+            {
+                Camera.main.transform.Translate(-9f * Time.deltaTime, 0f, 0f);
+            }
+            else if (posCamera.x < pos.x) moveLeft = false;
         }
     }
 }

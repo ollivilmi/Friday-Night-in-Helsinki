@@ -13,11 +13,11 @@ public class NPCMovement : MonoBehaviour {
 	public float waitTime;
 	private float waitCounter;
 	private int moveDirection;
-    private DialogueManager dMan;
+    private DialogueManager dManager;
 
 	// Use this for initialization
-	void Start () {
-        dMan = FindObjectOfType<DialogueManager>();
+	private void Start () {
+        dManager = FindObjectOfType<DialogueManager>();
 		theRigidbody = GetComponent<Rigidbody2D>();
 
 		waitCounter = waitTime;
@@ -27,9 +27,9 @@ public class NPCMovement : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
 
-		if (isMoving && !dMan.dialogueActive)
+		if (isMoving && !dManager.dialogueActive)
 		{
 			moveCounter -= Time.deltaTime;
 			switch(moveDirection)

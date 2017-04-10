@@ -8,7 +8,7 @@ namespace Dialogue
     public class DialogueManager : MonoBehaviour
     {
 
-        public bool dialogueActive;
+        public bool dialogueActive { get; set; }
         public Button dBoxNPC, dBoxAnswer1, dBoxAnswer2, dBoxAnswer3;
         public Button[] answerButtons;
         private DialogueHolder dHolder;

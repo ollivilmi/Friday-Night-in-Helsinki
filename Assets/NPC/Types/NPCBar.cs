@@ -58,9 +58,5 @@ namespace NPC
             item = "";
         }
 
-        override public GameObject GetObject()
-        {
-            return this.sprite;
-        }
     }
 }
