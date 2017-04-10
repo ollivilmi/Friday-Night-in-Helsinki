@@ -16,15 +16,18 @@ namespace NPC
             items = new List<string>() { "Love letter", "Phone number" };
             x = items.Count - 1;
         }
-
+        /// <summary>
+        /// Checks mood. If 100 and the NPC has items, return item.
+        /// </summary>
+        /// <param name="item"></param>
         public void ReturnItems(out string item)
         {
             if (mood == 100)
             {
                 if (items.Count > 0)
                 {
-                    item = items[x];                //Return first item in list
-                    items.Remove(items[x]);             //Remove first item from list
+                    item = items[x];
+                    items.Remove(items[x]); 
                     x--;
                 }
                 else

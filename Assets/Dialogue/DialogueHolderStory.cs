@@ -44,67 +44,22 @@ namespace Dialogue
         {
             if (!dManager.dialogueActive)
             {
-                dManager.ShowBox(randomStoryDialogue.GetDialogueOpener(), dManager.dBoxNPC, "Quit");
-
-                if (npc.Functionality != null) //Don't open a chat option for a functionality if the npc doesn't have one
-                {
-                    dManager.ShowBox(npc.Functionality, dManager.dBoxAnswer1, "Functionality");
-                }
-                dManager.ShowBox(player.special, dManager.dBoxAnswer2, "Special");
-                dManager.ShowBox(randomStoryDialogue.GetStoryName(), dManager.dBoxAnswer3, "Story"); //Randomize a story dialogue option, get the opening line for the story
-                                                                                                     //by using GetStoryName();
-                dManager.dialogueActive = true; //Set dialogue active to prevent movement and to ignore this (!dManager.dialogueActive)
-
-                dialogueLength = randomStoryDialogue.GetStoryLength(); //Check the length of the dialogue to stop it when the end is reached
+                InitializeDialogueOptions();
             }
             if (level == 0 && dManager.dialogueActive) //TODO: don't use level, use a bool
             {
-                switch (selection)
-                {
-                    case "Functionality":
-                            dManager.ShowBox(npc.Functionality, dManager.dBoxNPC, "Quit"); //If the npc had a functionality option you could click, then use it here.
-                        break;                                                             //this is still a work in progress.
-                    case "Special": //Character specific
-                        if (!specialUsed)
-                        {
-                            dManager.ShowBox(player.Special(), dManager.dBoxNPC, "Quit"); //Every playable character has their own special question, however you can only
-                            specialUsed = true;                                           //ask it once.
-                        }
-                        else if (specialUsed)
-                        {
-                            dManager.ShowBox(player.SpecialUsed(), dManager.dBoxNPC, "Quit");
-                        }
-                        break;
-                    case "Story": //Character specific
-                        if (randomStoryDialogue.finished)
-                        {
-                            dManager.ShowBox("Hey, we already talked.", dManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
-                            break;
-                        }
-                        InitializeStoryDialogue();
-                        break;
-                    case "Quit":
-                        QuitDialogue();
-                        break;
-                }
+                DialogueOptions();
             }
             else if (level < dialogueLength)
             {
-                switch (selection) //In case you want to do something else than just continue the dialogue,
-                {                  //for example Accept or Decline something but still continue the dialogue. Work in progress!
-                    case "Continue":
-                        InitializeStoryDialogue();
-                        break;
-                    case "Quit":
-                        QuitDialogue();
-                        break;
-                }
+                StoryOptions();
             }
             else if (level == dialogueLength)
             {
                 QuitDialogue();
             }
         }
+
         /// <summary>
         /// Initializes the answer options when engaged in a story dialogue.
         /// </summary>
@@ -116,6 +71,75 @@ namespace Dialogue
             dManager.ShowBox("Quit", dManager.dBoxAnswer1, "Quit"); 
             dManager.ShowBox(answerDialogue, dManager.dBoxAnswer2, answer);
             level++;
+        }
+
+        /// <summary>
+        /// Initialize the following: a story dialogue option, Functionality option if one exists,
+        /// character special option. Set dialogueActive to true.
+        /// </summary>
+        private void InitializeDialogueOptions()
+        {
+            dManager.ShowBox(randomStoryDialogue.GetDialogueOpener(), dManager.dBoxNPC, "Quit");
+
+            if (npc.Functionality != null)
+            {
+                dManager.ShowBox(npc.Functionality, dManager.dBoxAnswer1, "Functionality");
+            }
+
+            dManager.ShowBox(player.special, dManager.dBoxAnswer2, "Special");
+            dManager.ShowBox(randomStoryDialogue.GetStoryName(), dManager.dBoxAnswer3, "Story");
+            dManager.dialogueActive = true;
+            dialogueLength = randomStoryDialogue.GetStoryLength();
+        }
+
+        /// <summary>
+        /// The logic for what happens behind each option.
+        /// </summary>
+        private void DialogueOptions()
+        {
+            switch (selection)
+            {
+                case "Functionality": //NPC Specific
+                    dManager.ShowBox(npc.Functionality, dManager.dBoxNPC, "Quit"); 
+                    break;                                                             
+                case "Special": //Character specific
+                    if (!specialUsed)
+                    {
+                        dManager.ShowBox(player.Special(), dManager.dBoxNPC, "Quit");
+                        specialUsed = true;                      
+                    }
+                    else if (specialUsed)
+                    {
+                        dManager.ShowBox(player.SpecialUsed(), dManager.dBoxNPC, "Quit");
+                    }
+                    break;
+                case "Story": //Character specific
+                    if (randomStoryDialogue.finished)
+                    {
+                        dManager.ShowBox("Hey, we already talked.", dManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
+                        break;
+                    }
+                    InitializeStoryDialogue();
+                    break;
+                case "Quit":
+                    QuitDialogue();
+                    break;
+            }
+        }
+        /// <summary>
+        /// The logic for what happens behind each story answer option.
+        /// </summary>
+        private void StoryOptions()
+        {
+            switch (selection)
+            {
+                case "Continue":
+                    InitializeStoryDialogue();
+                    break;
+                case "Quit":
+                    QuitDialogue();
+                    break;
+            }
         }
     }
 }

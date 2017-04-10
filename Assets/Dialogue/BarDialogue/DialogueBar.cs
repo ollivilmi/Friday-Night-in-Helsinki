@@ -67,27 +67,27 @@ namespace Dialogue
         /// this answer.
         /// </summary>
         /// <returns>string[3] Dialogue and out answers[3]</returns>
-		public string[] randomSelection() { //Used to generate random answer options for array answers[3]
+		public string[] randomSelection() {
 			for (int i = 0; i < 3; i++)
 			{
-				select = random.Next (1, 4); //Random number 1-3
+				select = random.Next (1, 4);
 					switch (select) 
 					{
 						case 1:
-						answers[i] = DialoguePositive.getOutcome();  //Print answer and return that answers[i] = Positive
+						answers[i] = DialoguePositive.getOutcome();
                         dialogue[i] = DialoguePositive.getAnswer();
 						break;
 						case 2: 
-						answers[i] = DialogueNeutral.getOutcome(); //Print answer and return that answers[i] = Neutral
+						answers[i] = DialogueNeutral.getOutcome();
                         dialogue[i] = DialogueNeutral.getAnswer();
 						break;
 						case 3: 
-						answers[i] = DialogueNegative.getOutcome(); //Print answer and return that answers[i] = Negative
+						answers[i] = DialogueNegative.getOutcome();
                         dialogue[i] = DialogueNegative.getAnswer();
 						break;
 					}
 			}
-			return dialogue; //Return answers[3], which contains strings (Positive, Neutral, Negative)
+			return dialogue;
 		}
         /// <summary>
         /// Randomizes first level dialogue for the NPC and answers for the player.
@@ -98,8 +98,9 @@ namespace Dialogue
 		{
             dialogue[3] = dialogue1[random.Next(0, dialogue1.Length)];
             answers = this.answers;
-			return randomSelection (); //Print random answers and return answers[3]
+			return randomSelection ();
 		}
+
         /// <summary>
         /// Uses the user's answer to randomize a reaction dialogue, then randomizes new
         /// answers for the player.
@@ -111,15 +112,15 @@ namespace Dialogue
 		{
 			switch (selection) {
 			case "Positive":
-                    dialogue[3] = dialogue2Positive[random.Next(0, dialogue2Positive.Length)]; //If the reply was positive
+                    dialogue[3] = dialogue2Positive[random.Next(0, dialogue2Positive.Length)];
                     answers = this.answers;
 				return randomSelection ();
 			case "Neutral":
-                    dialogue[3] = dialogue2Neutral[random.Next(0, dialogue2Neutral.Length)]; //If the reply was neutral
+                    dialogue[3] = dialogue2Neutral[random.Next(0, dialogue2Neutral.Length)];
                     answers = this.answers;
 				return randomSelection ();
 			case "Negative":
-                    dialogue[3] = dialogue2Negative[random.Next(0, dialogue2Negative.Length)]; //If the reply was negative
+                    dialogue[3] = dialogue2Negative[random.Next(0, dialogue2Negative.Length)];
                     answers = this.answers;
 				return randomSelection ();
 			default:
@@ -127,6 +128,7 @@ namespace Dialogue
                     return dialogue;
 			}
 		}
+
         /// <summary>
         /// Uses the user's answer to randomize a reaction dialogue, then randomizes new
         /// answers for the player.
@@ -138,15 +140,15 @@ namespace Dialogue
 		{
 			switch (selection) {
                 case "Positive":
-                    dialogue[3] = dialogue3Positive[random.Next(0, dialogue3Positive.Length)]; //If the reply was positive
+                    dialogue[3] = dialogue3Positive[random.Next(0, dialogue3Positive.Length)];
                     answers = this.answers;
 				return randomSelection ();
                 case "Neutral":
-                    dialogue[3] = dialogue3Neutral[random.Next(0, dialogue3Neutral.Length)]; //If the reply was neutral
+                    dialogue[3] = dialogue3Neutral[random.Next(0, dialogue3Neutral.Length)];
                     answers = this.answers;
 				return randomSelection ();
                 case "Negative":
-                    dialogue[3] = dialogue3Negative[random.Next(0, dialogue3Negative.Length)]; //If the reply was negative
+                    dialogue[3] = dialogue3Negative[random.Next(0, dialogue3Negative.Length)];
                     answers = this.answers;
 				return randomSelection ();
 			default:

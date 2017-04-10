@@ -16,7 +16,10 @@ namespace NPC
             items = new List<string>() { "Quest item" };
             x = items.Count - 1;
         }
-
+        /// <summary>
+        /// Returns an item when called if the NPC has an item to give.
+        /// </summary>
+        /// <param name="item"></param>
         public void ReturnItems(out string item)
         {
             if (items.Count > 0)

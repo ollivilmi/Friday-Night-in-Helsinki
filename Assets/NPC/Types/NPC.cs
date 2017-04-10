@@ -14,6 +14,10 @@ namespace NPC
         protected List<string> items;
         protected System.Random random = new System.Random();
 
+        /// <summary>
+        /// Add to NPCs mood level. Mood is limited to 0-100.
+        /// </summary>
+        /// <param name="mood"></param>
         public void changeMood(int mood)
         {
             this.mood += mood;
