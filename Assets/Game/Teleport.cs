@@ -9,15 +9,17 @@ namespace Game
     {
         GameObject dude;
         Button tp;
+		Button tp2;
         Vector2 pos;
 
 
         void Start()
         {
             tp = GameObject.Find("Teleporter").GetComponent<Button>();
+			tp2 = GameObject.Find("Teleporter2").GetComponent<Button>();
             dude = GameObject.Find("Player");
             tp.onClick.AddListener(() => Tele());
-            pos = new Vector2(70f, 0f);
+			pos = new Vector2(tp2.transform.position.x, -8f);
         }
 
 
@@ -29,7 +31,7 @@ namespace Game
         void Tele()
         {
             dude.transform.position = pos;
-            Camera.main.transform.position = new Vector3(70f, 3f, -10f);
+			Camera.main.transform.position = new Vector3(tp2.transform.position.x, 3f, -10f);
         }
     }
 }
