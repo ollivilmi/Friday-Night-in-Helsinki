@@ -5,13 +5,14 @@ using System.Text;
 using UnityEngine;
 using Dialogue;
 using Player;
+using Interface;
 
 namespace Game
 {
     public class Movement
     {
         private bool moveRight, moveLeft;
-        private DialogueManager dManager;
+        private InterfaceManager iManager;
         private Vector2 posMouse;
         public Vector2 posChar { get; set; }
         private Player.Player player;
@@ -21,12 +22,12 @@ namespace Game
         /// 
         /// </summary>
         /// <param name="player">Uses player's speed</param>
-        /// <param name="dMan">Doesn't move if dialogue is active</param>
+        /// <param name="iManager">Doesn't move if dialogue is active</param>
         /// <param name="character">Character is used to get player sprite's position</param>
-        public Movement(Player.Player player, DialogueManager dMan, GameObject character)
+        public Movement(Player.Player player, InterfaceManager iManager, GameObject character)
         {
             this.player = player;
-            this.dManager = dMan;
+            this.iManager = iManager;
             this.character = character;
             moveRight = false;
             moveLeft = false;
@@ -37,16 +38,16 @@ namespace Game
         /// </summary>
         public void LeftClick()
         {
-            if (moveRight && !dManager.dialogueActive) 
+            if (moveRight && !iManager.dialogueActive) 
             {
                 CharacterMoveRight();
             }
-            else if (moveLeft && !dManager.dialogueActive) 
+            else if (moveLeft && !iManager.dialogueActive) 
             {
                 CharacterMoveLeft();
             }
 
-            if (Input.GetMouseButtonDown(0) && !dManager.dialogueActive) //Prevents moving while in dialogue
+            if (Input.GetMouseButtonDown(0) && !iManager.dialogueActive) //Prevents moving while in dialogue
             {
                 GetClick();
             }
@@ -90,6 +91,12 @@ namespace Game
             {
                 moveLeft = true;
             }
+        }
+
+        public void StopMovement()
+        {
+            moveRight = false;
+            moveLeft = false;
         }
     }
 }

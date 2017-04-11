@@ -5,6 +5,7 @@ using System.Text;
 using NPC;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Dialogue
 {
@@ -13,15 +14,14 @@ namespace Dialogue
         private NPCBar barNPC;
         private DialogueBar randomBarDialogue;
 
-        public DialogueHolderBar(Player.Player player, DialogueManager dManager, NPCBar npc)
+        public DialogueHolderBar(Player.Player player, InterfaceManager iManager, NPCBar npc)
         {
             this.player = player;
-            this.dManager = dManager;
-            dManager.SetHolder(this); //Set this dialogue to be used in the manager
+            this.iManager = iManager;
+            this.iManager.SetHolder(this); //Set this dialogue to be used in the manager
             this.barNPC = npc;
             this.randomBarDialogue = new DialogueBar();
             level = 0;
-            touching = false;
             moodChange = 0;
         }
 
@@ -65,10 +65,10 @@ namespace Dialogue
         /// </summary>
         private void InitializeBarDialogue()
         {
-            dManager.ShowBox(dialogue[3], dManager.dBoxNPC, "Quit"); //Show NPC dialogue box, option is quit
+            iManager.ShowBox(dialogue[3], iManager.dBoxNPC, "Quit"); //Show NPC dialogue box, option is quit
             for (int i = 0; i < 3; i++)
             {
-                dManager.ShowBox(dialogue[i], dManager.answerButtons[i], answers[i]); //Show answer boxes, tell which answers are +/n/-
+                iManager.ShowBox(dialogue[i], iManager.answerButtons[i], answers[i]); //Show answer boxes, tell which answers are +/n/-
             }
         }
 
@@ -78,7 +78,7 @@ namespace Dialogue
         private void GetBarDialogue1()
         {
             dialogue = randomBarDialogue.startDialogue1(out answers); //Returns dialogue strings, out = which strings are +/n/-  
-            dManager.dialogueActive = true;
+            iManager.dialogueActive = true;
         }
         /// <summary>
         /// Starts the second level of dialogue by using the response from the player.

@@ -6,27 +6,27 @@ using Dialogue;
 using NPC;
 using Game;
 using Player;
+using Interface;
 
 namespace NPC
 {
-    public class Collision : MonoBehaviour
+    abstract public class Collision : MonoBehaviour
     {
         protected DialogueHolder dHolder;
-        protected DialogueManager dManager;
+        protected InterfaceManager iManager;
         protected Player.Player player;
         protected GameController controller;
         protected GameEvents events;
         protected string collisionText;
    
-        private void OnTriggerEnter2D(Collider2D col)
+        protected virtual void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
-                dHolder.touching = true;
-                dManager.SetHolder(dHolder);
+                iManager.SetTarget(this);
                 try
                 {
-                    dManager.ShowBox(collisionText, dManager.dBoxNPC, "Start");
+                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
                 }
                 catch (System.ArgumentException)
                 {
@@ -38,9 +38,10 @@ namespace NPC
         {
             if (col.gameObject.tag == "Player")
             {
-                dHolder.touching = false;
-                dManager.CloseDialogue();
+                iManager.CloseDialogue();
             }
         }
+
+        public abstract void Interaction();
     }
 }

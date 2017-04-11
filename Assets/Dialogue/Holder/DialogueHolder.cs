@@ -6,6 +6,7 @@ using Dialogue;
 using Player;
 using Game;
 using NPC;
+using Interface;
 
 namespace Dialogue
 {
@@ -14,8 +15,7 @@ namespace Dialogue
 
         protected string[] dialogue, answers;
         protected string answer, answerDialogue, npcDialogue;
-        public bool touching { get; set; }
-        protected DialogueManager dManager;
+        protected InterfaceManager iManager;
         public int level { get; set; }
         protected int dialogueLength;
         public string selection { get; set; }
@@ -28,7 +28,7 @@ namespace Dialogue
         /// </summary>
         public void StartDialogue()
         {
-            if (touching && !dManager.dialogueActive)
+            if (!iManager.dialogueActive)
             {
                 DialogueLevel("");
             }
@@ -44,10 +44,10 @@ namespace Dialogue
         /// </summary>
         protected void QuitDialogue()
         {
-            dManager.CloseDialogue();
-            dManager.ShowBox("Talk", dManager.dBoxNPC, "Start");
+            iManager.CloseDialogue();
+            iManager.ShowBox("Talk", iManager.buttonInteraction, "Start");
             level = 0;
-            dManager.dialogueActive = false;
+            iManager.dialogueActive = false;
         }
 
         /// <summary>

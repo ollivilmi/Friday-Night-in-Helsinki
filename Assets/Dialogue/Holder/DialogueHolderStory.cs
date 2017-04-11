@@ -5,6 +5,7 @@ using System.Text;
 using NPC;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Dialogue
 {
@@ -14,15 +15,14 @@ namespace Dialogue
         private NPCStory npc;
         private bool specialUsed;
 
-        public DialogueHolderStory(Player.Player player, DialogueManager dManager, NPCStory npc)
+        public DialogueHolderStory(Player.Player player, InterfaceManager iManager, NPCStory npc)
         {
             this.player = player;
-            this.dManager = dManager;
-            dManager.SetHolder(this);
+            this.iManager = iManager;
+            iManager.SetHolder(this);
             this.npc = npc;
             this.randomStoryDialogue = new StoryRandom(player, npc);
             this.level = 0;
-            this.touching = false;
             this.specialUsed = false;
         }
 
@@ -42,11 +42,11 @@ namespace Dialogue
         /// </summary>
         private void StoryDialogue()
         {
-            if (!dManager.dialogueActive)
+            if (!iManager.dialogueActive)
             {
                 InitializeDialogueOptions();
             }
-            if (level == 0 && dManager.dialogueActive) //TODO: don't use level, use a bool
+            if (level == 0 && iManager.dialogueActive) //TODO: don't use level, use a bool
             {
                 DialogueOptions();
             }
@@ -67,9 +67,9 @@ namespace Dialogue
         {
             npcDialogue = randomStoryDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
-            dManager.ShowBox(npcDialogue, dManager.dBoxNPC, "Continue"); //At the moment only continue and quit, needs some flexibility. Work in progress.
-            dManager.ShowBox("Quit", dManager.dBoxAnswer1, "Quit"); 
-            dManager.ShowBox(answerDialogue, dManager.dBoxAnswer2, answer);
+            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Continue");
+            iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
+            iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
             level++;
         }
 
@@ -79,16 +79,16 @@ namespace Dialogue
         /// </summary>
         private void InitializeDialogueOptions()
         {
-            dManager.ShowBox(randomStoryDialogue.GetDialogueOpener(), dManager.dBoxNPC, "Quit");
+            iManager.ShowBox(randomStoryDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
 
             if (npc.Functionality != null)
             {
-                dManager.ShowBox(npc.Functionality, dManager.dBoxAnswer1, "Functionality");
+                iManager.ShowBox(npc.Functionality, iManager.dBoxAnswer1, "Functionality");
             }
 
-            dManager.ShowBox(player.special, dManager.dBoxAnswer2, "Special");
-            dManager.ShowBox(randomStoryDialogue.GetStoryName(), dManager.dBoxAnswer3, "Story");
-            dManager.dialogueActive = true;
+            iManager.ShowBox(player.special, iManager.dBoxAnswer2, "Special");
+            iManager.ShowBox(randomStoryDialogue.GetStoryName(), iManager.dBoxAnswer3, "Story");
+            iManager.dialogueActive = true;
             dialogueLength = randomStoryDialogue.GetStoryLength();
         }
 
@@ -100,23 +100,23 @@ namespace Dialogue
             switch (selection)
             {
                 case "Functionality": //NPC Specific
-                    dManager.ShowBox(npc.Functionality, dManager.dBoxNPC, "Quit"); 
+                    iManager.ShowBox(npc.Functionality, iManager.dBoxNPC, "Quit"); 
                     break;                                                             
                 case "Special": //Character specific
                     if (!specialUsed)
                     {
-                        dManager.ShowBox(player.Special(), dManager.dBoxNPC, "Quit");
+                        iManager.ShowBox(player.Special(), iManager.dBoxNPC, "Quit");
                         specialUsed = true;                      
                     }
                     else if (specialUsed)
                     {
-                        dManager.ShowBox(player.SpecialUsed(), dManager.dBoxNPC, "Quit");
+                        iManager.ShowBox(player.SpecialUsed(), iManager.dBoxNPC, "Quit");
                     }
                     break;
                 case "Story": //Character specific
                     if (randomStoryDialogue.finished)
                     {
-                        dManager.ShowBox("Hey, we already talked.", dManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
+                        iManager.ShowBox("Hey, we already talked.", iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
                         break;
                     }
                     InitializeStoryDialogue();

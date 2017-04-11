@@ -6,6 +6,7 @@ using Game;
 using UnityEngine.UI;
 using NPC;
 using Player;
+using Interface;
 
 namespace Game
 {
@@ -14,7 +15,7 @@ namespace Game
 
         private Player.Player player;
         private GameObject character, barNPC, storyNPC, doorTrigger;
-        private DialogueManager dManager;
+        private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
         private Text stats, info;
@@ -28,9 +29,9 @@ namespace Game
             character = GameObject.Find("Player");
             stats = GameObject.Find("Stats").GetComponent<Text>();
             info = GameObject.Find("Info").GetComponent<Text>();
-            dManager = FindObjectOfType<DialogueManager>();
+            iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
-            playerMovement = new Movement(player, dManager, character);
+            playerMovement = new Movement(player, iManager, character);
 
             Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
@@ -40,6 +41,11 @@ namespace Game
         public GameEvents GetEvents()
         {
             return events;
+        }
+
+        public Movement getMovement()
+        {
+            return playerMovement;
         }
 
         private void Update()

@@ -7,6 +7,7 @@ using UnityEngine;
 using Player;
 using Dialogue;
 using Game;
+using Interface;
 
 namespace NPC
 {
@@ -15,13 +16,15 @@ namespace NPC
         void Start()
         {
             this.controller = FindObjectOfType<GameController>();
-            this.dManager = FindObjectOfType<DialogueManager>();
+            this.iManager = FindObjectOfType<InterfaceManager>();
             this.events = controller.GetEvents();
             this.player = events.GetPlayer();
-            dHolder = new DialogueHolderDoor(player, dManager);
             collisionText = "Enter";
         }
 
-
+        override public void Interaction()
+        {
+            Debug.Log("Door click");
+        }
     }
 }

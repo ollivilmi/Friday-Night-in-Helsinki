@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
+using Dialogue;
 
-namespace Dialogue
+namespace Interface
 {
-    public class DialogueManager : MonoBehaviour
+    public class InterfaceManager : MonoBehaviour
     {
 
         public bool dialogueActive { get; set; }
-        public Button dBoxNPC, dBoxAnswer1, dBoxAnswer2, dBoxAnswer3;
-        public Button[] answerButtons;
+        public Button dBoxNPC { get; set; }
+        public Button dBoxAnswer1 { get; set; }
+        public Button dBoxAnswer2 { get; set; }
+        public Button dBoxAnswer3 { get; set; }
+        public Button buttonInteraction { get; set; }
+        public Button[] answerButtons { get; set; }
         private DialogueHolder dHolder;
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
+        private NPC.Collision target;
+        private Game.Movement playerMovement;
+        private GameController controller;
 
         private void Start()
         {
@@ -28,9 +37,15 @@ namespace Dialogue
             dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
             dBoxAnswer3.onClick.AddListener(() => Click(dBoxAnswer3));
 
-            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 }; //The buttons are also accessible via this array if you need to iterate
-                                                                                    // in a for loop for example
+            buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
+            buttonInteraction.onClick.AddListener(() => Interaction());
+
+            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 }; 
+            //For loop iteration
             CloseDialogue();
+
+            this.controller = FindObjectOfType<GameController>();
+            this.playerMovement = controller.getMovement();
         }
 
         /// <summary>
@@ -40,6 +55,11 @@ namespace Dialogue
         public void SetHolder(DialogueHolder dHolder)
         {
             this.dHolder = dHolder;
+        }
+
+        public void SetTarget(NPC.Collision target)
+        {
+            this.target = target;
         }
 
         /// <summary>
@@ -59,7 +79,7 @@ namespace Dialogue
         /// Returns which button was clicked to the DialogueHolder.
         /// </summary>
         /// <param name="answer">Which button is pressed</param>
-        public void Click(Button answer)
+        private void Click(Button answer)
         {
             string selection = selectedAnswer[answer];
             CloseDialogue();
@@ -74,7 +94,18 @@ namespace Dialogue
             dBoxAnswer1.gameObject.SetActive(false);
             dBoxAnswer2.gameObject.SetActive(false);
             dBoxAnswer3.gameObject.SetActive(false);
+            buttonInteraction.gameObject.SetActive(false);
             selectedAnswer.Clear();
+        }
+        /// <summary>
+        /// Clicking the button calls the Interaction()
+        /// function of the collider script and stops player movement.
+        /// </summary>
+        private void Interaction()
+        {
+            target.Interaction();
+            buttonInteraction.gameObject.SetActive(false);
+            playerMovement.StopMovement();
         }
     }
 }

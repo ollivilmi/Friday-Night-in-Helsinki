@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Dialogue;
+using Interface;
 
 public class NPCMovement : MonoBehaviour {
 
@@ -13,11 +14,10 @@ public class NPCMovement : MonoBehaviour {
 	public float waitTime;
 	private float waitCounter;
 	private int moveDirection;
-    private DialogueManager dManager;
+    private InterfaceManager iManager;
 
-	// Use this for initialization
 	private void Start () {
-        dManager = FindObjectOfType<DialogueManager>();
+        iManager = FindObjectOfType<InterfaceManager>();
 		theRigidbody = GetComponent<Rigidbody2D>();
 
 		waitCounter = waitTime;
@@ -26,10 +26,9 @@ public class NPCMovement : MonoBehaviour {
 		ChooseDirection();
 	}
 
-	// Update is called once per frame
 	private void Update () {
 
-		if (isMoving && !dManager.dialogueActive)
+		if (isMoving && !iManager.dialogueActive)
 		{
 			moveCounter -= Time.deltaTime;
 			switch(moveDirection)
