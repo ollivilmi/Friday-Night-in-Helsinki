@@ -11,7 +11,7 @@ namespace Game
     public class Movement
     {
         private bool moveRight, moveLeft;
-        private DialogueManager dMan;
+        private DialogueManager dManager;
         private Vector2 posMouse;
         public Vector2 posChar { get; set; }
         private Player.Player player;
@@ -26,7 +26,7 @@ namespace Game
         public Movement(Player.Player player, DialogueManager dMan, GameObject character)
         {
             this.player = player;
-            this.dMan = dMan;
+            this.dManager = dMan;
             this.character = character;
             moveRight = false;
             moveLeft = false;
@@ -37,26 +37,18 @@ namespace Game
         /// </summary>
         public void LeftClick()
         {
-            if (moveRight && !dMan.dialogueActive) 
+            if (moveRight && !dManager.dialogueActive) 
             {
                 CharacterMoveRight();
             }
-            else if (moveLeft && !dMan.dialogueActive) 
+            else if (moveLeft && !dManager.dialogueActive) 
             {
                 CharacterMoveLeft();
             }
 
-            if (Input.GetMouseButtonDown(0) && !dMan.dialogueActive) //Prevents moving while in dialogue
+            if (Input.GetMouseButtonDown(0) && !dManager.dialogueActive) //Prevents moving while in dialogue
             {
-                posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition); //Register mouse position in World coordinates
-                if (posMouse.x > posChar.x)
-                {
-                    moveRight = true;
-                }
-                else if (posMouse.x < posChar.x)
-                {
-                    moveLeft = true;
-                }
+                GetClick();
             }
         }
 
@@ -81,6 +73,22 @@ namespace Game
             if (moveRight && posChar.x > posMouse.x)
             {
                 moveRight = false;
+            }
+        }
+
+        /// <summary>
+        /// Get the x world coordinate from your mouse position and set character to move towards it.
+        /// </summary>
+        private void GetClick()
+        {
+            posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (posMouse.x > posChar.x)
+            {
+                moveRight = true;
+            }
+            else if (posMouse.x < posChar.x)
+            {
+                moveLeft = true;
             }
         }
     }

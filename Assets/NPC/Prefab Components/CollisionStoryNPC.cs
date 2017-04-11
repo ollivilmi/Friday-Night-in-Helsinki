@@ -9,7 +9,7 @@ using Player;
 
 namespace NPC
 {
-    public class CollisionStoryNPC : CollisionNPC
+    public class CollisionStoryNPC : Collision
     {
         private NPCBouncer npc;
 
@@ -21,6 +21,7 @@ namespace NPC
             player = events.GetPlayer();
             npc = new NPCBouncer();
             dHolder = new DialogueHolderStory(player, dManager, npc);
+            collisionText = "Talk";
         }
     }
 }

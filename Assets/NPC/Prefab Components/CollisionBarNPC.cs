@@ -8,7 +8,7 @@ using Game;
 using Player;
 
 namespace NPC {
-    public class CollisionBarNPC : CollisionNPC {
+    public class CollisionBarNPC : Collision {
 
         private NPCBar npc;
 
@@ -20,6 +20,7 @@ namespace NPC {
             player = events.GetPlayer();
             npc = new NPCBar();
             dHolder = new DialogueHolderBar(player, dManager, npc);
+            collisionText = "Talk";
         }
 
         private void OnTriggerStay2D(Collider2D collision)

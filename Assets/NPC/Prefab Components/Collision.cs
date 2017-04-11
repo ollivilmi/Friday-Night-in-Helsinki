@@ -9,13 +9,14 @@ using Player;
 
 namespace NPC
 {
-    public class CollisionNPC : MonoBehaviour
+    public class Collision : MonoBehaviour
     {
         protected DialogueHolder dHolder;
         protected DialogueManager dManager;
         protected Player.Player player;
         protected GameController controller;
         protected GameEvents events;
+        protected string collisionText;
    
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -25,11 +26,10 @@ namespace NPC
                 dManager.SetHolder(dHolder);
                 try
                 {
-                    dManager.ShowBox("Talk", dManager.dBoxNPC, "Start");
+                    dManager.ShowBox(collisionText, dManager.dBoxNPC, "Start");
                 }
-                catch (System.ArgumentException ae)
+                catch (System.ArgumentException)
                 {
-                    Debug.Log(ae);
                 }
             }
         }

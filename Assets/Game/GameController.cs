@@ -13,7 +13,7 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, barNPC, storyNPC;
+        private GameObject character, barNPC, storyNPC, doorTrigger;
         private DialogueManager dManager;
         private GameEvents events;
         private Movement playerMovement;
@@ -23,6 +23,7 @@ namespace Game
         {
             barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
             storyNPC = (GameObject)Resources.Load("NPCBouncer", typeof(GameObject));
+            doorTrigger = (GameObject)Resources.Load("DoorTrigger", typeof(GameObject));
             events = new GameEvents();
             character = GameObject.Find("Player");
             stats = GameObject.Find("Stats").GetComponent<Text>();
@@ -33,6 +34,7 @@ namespace Game
 
             Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
+            Instantiate(doorTrigger, doorTrigger.transform.position, doorTrigger.transform.rotation);
         }
 
         public GameEvents GetEvents()
