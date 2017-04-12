@@ -13,13 +13,13 @@ namespace NPC
 {
     public class CollisionDoor : Collision
     {
-		Teleport tp;
+		Door doorway;
 
         void Start()
         {
             this.controller = FindObjectOfType<GameController>();
             this.iManager = FindObjectOfType<InterfaceManager>();
-			this.tp = FindObjectOfType<Teleport> ();
+			this.doorway = FindObjectOfType<Door> ();
             this.events = controller.GetEvents();
             this.player = events.GetPlayer();
 			this.objectName = gameObject.transform.name;
@@ -28,7 +28,7 @@ namespace NPC
 
         override public void Interaction()
         {
-			tp.Tele (this);
+			doorway.Enter (this);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class Teleport : MonoBehaviour
+    public class Door : MonoBehaviour
     {
         GameObject player;
 		CameraMovement cameraMovement;
@@ -16,7 +16,7 @@ namespace Game
 			cameraMovement = FindObjectOfType<CameraMovement> ();
 		}
 
-		public void Tele(NPC.Collision teleporter)
+		public void Enter(NPC.Collision teleporter)
         {
 			cameraMovement.moveRight = false;
 			cameraMovement.moveLeft = false;
@@ -24,22 +24,24 @@ namespace Game
 			switch (name)
 			{
 			case "DoorRWS1(Clone)":
-				player.transform.position = new Vector2 (-60f, -8f);
-				Camera.main.transform.position = new Vector3 (-60f, 3f, -10f);
+                    EnterDoor(-60);
 				break;
 			case "DoorMainHall1(Clone)":
-				player.transform.position = new Vector2 (20f, -8f);
-				Camera.main.transform.position = new Vector3 (20f, 3f, -10f);
+                    EnterDoor(20);
 				break;
 			case "DoorMainHall2(Clone)":
-				player.transform.position = new Vector2 (-140f, -8f);
-				Camera.main.transform.position = new Vector3 (-140f, 3f, -10f);
+                    EnterDoor(-140);
 				break;
 			case "DoorBar1(Clone)":
-				player.transform.position = new Vector2 (-80f, -8f);
-				Camera.main.transform.position = new Vector3 (-80f, 3f, -10f);
+                    EnterDoor(-80);
 				break;
 			}
+        }
+
+        private void EnterDoor(float locationX)
+        {
+            player.transform.position = new Vector2(locationX, -8f);
+            Camera.main.transform.position = new Vector3(locationX, 3f, -10f);
         }
 
     }
