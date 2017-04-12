@@ -7,29 +7,40 @@ namespace Game
 {
     public class Teleport : MonoBehaviour
     {
-        GameObject dude;
-        Button tp;
-        Vector2 pos;
+        GameObject player;
+		CameraMovement cameraMovement;
 
+		void Start()
+		{
+			player = GameObject.Find("Player");
+			cameraMovement = FindObjectOfType<CameraMovement> ();
+		}
 
-        void Start()
+		public void Tele(NPC.Collision teleporter)
         {
-            tp = GameObject.Find("Teleporter").GetComponent<Button>();
-            dude = GameObject.Find("Player");
-            tp.onClick.AddListener(() => Tele());
-            pos = new Vector2(70f, 0f);
+			cameraMovement.moveRight = false;
+			cameraMovement.moveLeft = false;
+			string name = teleporter.GetName ();
+			switch (name)
+			{
+			case "DoorRWS1(Clone)":
+				player.transform.position = new Vector2 (-60f, -8f);
+				Camera.main.transform.position = new Vector3 (-60f, 3f, -10f);
+				break;
+			case "DoorMainHall1(Clone)":
+				player.transform.position = new Vector2 (20f, -8f);
+				Camera.main.transform.position = new Vector3 (20f, 3f, -10f);
+				break;
+			case "DoorMainHall2(Clone)":
+				player.transform.position = new Vector2 (-140f, -8f);
+				Camera.main.transform.position = new Vector3 (-140f, 3f, -10f);
+				break;
+			case "DoorBar1(Clone)":
+				player.transform.position = new Vector2 (-80f, -8f);
+				Camera.main.transform.position = new Vector3 (-80f, 3f, -10f);
+				break;
+			}
         }
 
-
-        void Update()
-        {
-
-        }
-
-        void Tele()
-        {
-            dude.transform.position = pos;
-            Camera.main.transform.position = new Vector3(70f, 3f, -10f);
-        }
     }
 }

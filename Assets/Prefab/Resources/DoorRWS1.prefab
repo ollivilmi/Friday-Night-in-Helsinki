@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1244146197773720}
+  m_RootGameObject: {fileID: 1819715071926026}
   m_IsPrefabParent: 1
---- !u!1 &1244146197773720
+--- !u!1 &1819715071926026
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4056147903367080}
-  - component: {fileID: 212246764169707290}
-  - component: {fileID: 61858750675291538}
-  - component: {fileID: 114054449338625638}
+  - component: {fileID: 4905672982912250}
+  - component: {fileID: 212026696907927432}
+  - component: {fileID: 61205237984872026}
+  - component: {fileID: 114792037240127078}
   m_Layer: 0
-  m_Name: DoorTrigger
+  m_Name: DoorRWS1
   m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4056147903367080
+--- !u!4 &4905672982912250
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244146197773720}
+  m_GameObject: {fileID: 1819715071926026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: -9.06, z: 24.132812}
-  m_LocalScale: {x: 1.6957932, y: 1.5218449, z: 1}
+  m_LocalPosition: {x: 19.55, y: -6.96, z: 24.132812}
+  m_LocalScale: {x: 15.588037, y: 7.356588, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61858750675291538
+--- !u!61 &61205237984872026
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244146197773720}
+  m_GameObject: {fileID: 1819715071926026}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -56,23 +56,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &114054449338625638
+--- !u!114 &114792037240127078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244146197773720}
+  m_GameObject: {fileID: 1819715071926026}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9148384826a7159409e0ccb8b6b5202d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &212246764169707290
+--- !u!212 &212026696907927432
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244146197773720}
+  m_GameObject: {fileID: 1819715071926026}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
