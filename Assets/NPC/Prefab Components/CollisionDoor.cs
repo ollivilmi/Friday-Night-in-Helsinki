@@ -22,7 +22,7 @@ namespace NPC
 			this.tp = FindObjectOfType<Teleport> ();
             this.events = controller.GetEvents();
             this.player = events.GetPlayer();
-			this.name = gameObject.transform.name;
+			this.objectName = gameObject.transform.name;
             collisionText = "Enter";
         }
 

@@ -7,23 +7,19 @@ namespace Game
 {
     public class Teleport : MonoBehaviour
     {
-		GameObject player, rws1, mh1, mh2, bar1;
-		CameraMovement camera;
+        GameObject player;
+		CameraMovement cameraMovement;
 
 		void Start()
 		{
 			player = GameObject.Find("Player");
-			camera = FindObjectOfType<CameraMovement> ();
-			rws1 = (GameObject)Resources.Load ("DoorRWS1", typeof(GameObject));
-			mh1 = (GameObject)Resources.Load ("DoorMainHall1", typeof(GameObject));
-			mh2 = (GameObject)Resources.Load ("DoorMainHall2", typeof(GameObject));
-			bar1 = (GameObject)Resources.Load ("DoorMainHall3", typeof(GameObject));
+			cameraMovement = FindObjectOfType<CameraMovement> ();
 		}
 
 		public void Tele(NPC.Collision teleporter)
         {
-			camera.moveRight = false;
-			camera.moveLeft = false;
+			cameraMovement.moveRight = false;
+			cameraMovement.moveLeft = false;
 			string name = teleporter.GetName ();
 			switch (name)
 			{

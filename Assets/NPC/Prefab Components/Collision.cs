@@ -18,11 +18,11 @@ namespace NPC
         protected GameController controller;
         protected GameEvents events;
 		protected string collisionText;
-		protected string name;
+		protected string objectName;
 
 		public string GetName()
 		{
-			return this.name;
+			return this.objectName;
 		}
    
         protected virtual void OnTriggerEnter2D(Collider2D col)
