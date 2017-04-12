@@ -16,12 +16,12 @@ namespace Game
 			from = GameObject.Find(door1).GetComponent<Button>();
 			to = GameObject.Find(door2).GetComponent<Button>();
 			player = GameObject.Find("Player");
+			from.onClick.AddListener(() => Tele());
 		}
 
         void Start()
         {
 			SetTP("Teleporter","Teleporter2");
-			from.onClick.AddListener(() => Tele());
         }
 
 		void Update()
