@@ -15,7 +15,7 @@ namespace Player
             this.minute = 0;
             this.special = "Could you spare some change?";
             this.name = "Jarno";
-            this.speed = 8f;
+            this.speed = 16f;
             this.likability = 100;
             this.money = 50;
             this.drunkLevel = 0;
