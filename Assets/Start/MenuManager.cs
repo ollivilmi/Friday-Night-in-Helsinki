@@ -13,4 +13,7 @@ public class MenuManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void GotoCharacterCreation(){
+	}
 }

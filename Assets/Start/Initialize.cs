@@ -39,14 +39,18 @@ public class Initialize : MonoBehaviour {
 		foreach(GameObject g in SceneManager.GetSceneAt(2).GetRootGameObjects()){
 			g.SetActive (false);
 		}
-
-
-
-
-
-		
+			
 	}
-	
+
+	public void GotoCharacterCreation(){
+		Char1.gameObject.SetActive(true);
+		Char2.gameObject.SetActive(true);
+		Char3.gameObject.SetActive(true);
+		CharCreation.gameObject.SetActive(false);
+		StartGame.gameObject.SetActive(true);
+		BackStory.gameObject.SetActive(true);
+		CharImage.gameObject.SetActive(true);
+	}
 	// Update is called once per frame
 	void Update () {
 		
