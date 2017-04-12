@@ -7,7 +7,8 @@ namespace Game
     public class CameraMovement : MonoBehaviour
     {
  
-        private bool moveRight, moveLeft;
+		public bool moveRight { get; set; }
+		public bool moveLeft { get; set; }
         private Vector2 pos;
         private Vector3 posCamera;
 
