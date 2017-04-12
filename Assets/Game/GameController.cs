@@ -32,6 +32,7 @@ namespace Game
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
             playerMovement = new Movement(player, iManager, character);
+			iManager.playerMovement = this.playerMovement;
 
             Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
