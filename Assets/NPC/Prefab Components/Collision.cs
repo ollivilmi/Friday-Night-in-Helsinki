@@ -17,7 +17,13 @@ namespace NPC
         protected Player.Player player;
         protected GameController controller;
         protected GameEvents events;
-        protected string collisionText;
+		protected string collisionText;
+		protected string name;
+
+		public string GetName()
+		{
+			return this.name;
+		}
    
         protected virtual void OnTriggerEnter2D(Collider2D col)
         {

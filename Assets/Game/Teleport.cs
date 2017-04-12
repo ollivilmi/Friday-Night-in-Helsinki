@@ -7,31 +7,25 @@ namespace Game
 {
     public class Teleport : MonoBehaviour
     {
-        GameObject player;
-        Button from;
-		Button to;
+		GameObject player, rws1;     
 
-		void SetTP(string door1, string door2)
+		void Start()
 		{
-			from = GameObject.Find(door1).GetComponent<Button>();
-			to = GameObject.Find(door2).GetComponent<Button>();
 			player = GameObject.Find("Player");
-			from.onClick.AddListener(() => Tele());
+			rws1 = (GameObject)Resources.Load ("DoorRWS1", typeof(GameObject));
 		}
 
-        void Start()
+		public void Tele(NPC.Collision teleporter)
         {
-			SetTP("Teleporter","Teleporter2");
-        }
-
-		void Update()
-		{
-		}
-
-        void Tele()
-        {
-			player.transform.position = new Vector2(to.transform.position.x, -8f);
-			Camera.main.transform.position = new Vector3(to.transform.position.x, 3f, -10f);
+			string name = teleporter.GetName ();
+			Debug.Log (name);
+			switch (name)
+			{
+			case "DoorRWS1(Clone)":
+				player.transform.position = new Vector2 (-60f, -8f);
+				Camera.main.transform.position = new Vector3 (-60f, 3f, -10f);
+				break;
+			}
         }
 
     }
