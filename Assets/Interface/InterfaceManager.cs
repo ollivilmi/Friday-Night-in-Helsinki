@@ -20,12 +20,7 @@ namespace Interface
         private DialogueHolder dHolder;
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private NPC.Collision target;
-<<<<<<< HEAD
-		public Game.Movement playerMovement{ get; set;}
-        private GameController controller;
-=======
         public Game.Movement playerMovement { get; set; }
->>>>>>> refs/remotes/origin/master
 
         private void Start()
         {
@@ -47,12 +42,6 @@ namespace Interface
             answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 }; 
             //For loop iteration
             CloseDialogue();
-<<<<<<< HEAD
-
-            this.controller = FindObjectOfType<GameController>();
-            
-=======
->>>>>>> refs/remotes/origin/master
         }
 
         /// <summary>

@@ -35,11 +35,8 @@ namespace Game
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
             playerMovement = new Movement(player, iManager, character);
-<<<<<<< HEAD
+
 			iManager.playerMovement = this.playerMovement;
-=======
-            iManager.playerMovement = playerMovement;
->>>>>>> refs/remotes/origin/master
 
             Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
