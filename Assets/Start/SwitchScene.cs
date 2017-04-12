@@ -30,6 +30,9 @@ public class SwitchScene : MonoBehaviour {
 		}
 
 	}
+	void GotoCharacterCreation(){
+	}
+
 	public void GotoScene(string Scenename){
 		
 		if (Input.GetMouseButtonUp(0)) { Application.LoadLevel (Scenename); }
