@@ -56,7 +56,7 @@ namespace Game
         {
             if (posCamera.x < pos.x)
             {
-                Camera.main.transform.Translate(9f * Time.deltaTime, 0f, 0f);
+                Camera.main.transform.Translate(15f * Time.deltaTime, 0f, 0f);
             }
             else if (posCamera.x > pos.x) moveRight = false;
         }
@@ -68,7 +68,7 @@ namespace Game
         {
             if (posCamera.x > pos.x)
             {
-                Camera.main.transform.Translate(-9f * Time.deltaTime, 0f, 0f);
+                Camera.main.transform.Translate(-15f * Time.deltaTime, 0f, 0f);
             }
             else if (posCamera.x < pos.x) moveLeft = false;
         }
