@@ -24,13 +24,13 @@ namespace Game
         {
             targetPos = new Vector3(Mathf.Clamp(player.position.x, xMin, xMax), transform.position.y, transform.position.z);
 
-            if (targetPos.x > transform.position.x)
+            if (targetPos.x-transform.position.x > 1)
             {
-                MoveCameraRight(11f);
+                MoveCameraRight(10f);
             }
-            else if (targetPos.x < transform.position.x)
+            else if (targetPos.x-transform.position.x < -1)
             {
-                MoveCameraLeft(-11f);
+                MoveCameraLeft(-10f);
             }
         }
 
