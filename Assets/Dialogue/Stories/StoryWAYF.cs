@@ -32,7 +32,7 @@ namespace Dialogue
             {
                 string item = "";
                 npc.ReturnItems(out item);
-                player.items.Add(item);
+                player.AddItem(item);
             }
 
             answerDialogue = reply[level];

@@ -12,7 +12,7 @@ namespace Player
         protected int likability, funLevel;
         public float speed { get; set; }
         public double money { get; set; }
-        public List<string> items { get; set; }
+        public List<Item> items { get; set; }
         public string name { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
@@ -24,7 +24,7 @@ namespace Player
 
         public Player()
         {
-            this.items = new List<string>();
+            this.items = new List<Item> { new Beer(), new Tobacco()};
         }
         /// <summary>
         /// Returns player's stats in a string format.
@@ -33,7 +33,7 @@ namespace Player
         public string UpdateStats()
         {
             return "Drunk: " + drunkLevel + " Money: " + money +
-                " Likability: " + likability + " Fun: " +getfunLevel() +" Items: " +GetItems();
+                " Likability: " + likability + " Fun: " + getfunLevel();
         }
         /// <summary>
         /// Add to fun level in the limits of -50 to 50. Adds a fun bonus for being drunk.
@@ -115,7 +115,18 @@ namespace Player
         /// <param name="item"></param>
         public void AddItem(string item)
         {
-            items.Add(item);
+            switch (item)
+            {
+                case "Beer":
+                    items[0].Add();
+                    break;
+                case "Tobacco":
+                    items[1].Add();
+                    break;
+                case "Quest Item":
+                    items[2].Add();
+                    break;
+            }
         }
         /// <summary>
         /// Returns all the items player has in a string.
@@ -124,9 +135,9 @@ namespace Player
         public string GetItems()
         {
             string AllItems = "";
-            foreach (string item in items)
+            foreach (Item item in items)
             {
-                AllItems += item+" ";
+                AllItems += item.GetName()+" ";
             }
             return AllItems;
         }

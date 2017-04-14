@@ -13,7 +13,7 @@ namespace NPC
         public NPCBar()
         {
             mood = random.Next(0, 101);
-            items = new List<string>() { "Love letter", "Phone number" };
+            items = new List<string>() { "Beer", "Tobacco" };
             x = items.Count - 1;
         }
         /// <summary>

@@ -53,7 +53,7 @@ namespace Dialogue
                     ReturnMoodChange();
                     string item = "";
                     barNPC.ReturnItems(out item); //Uses ReturnItems to check the mood level to give items if possible
-                    player.items.Add(item);
+                    player.AddItem(item);
                     break;
                 default:
                     break;

@@ -18,6 +18,7 @@ namespace Game
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
+        private Inventory playerInventory;
         private Text stats, info;
 
         private void Start()
@@ -26,6 +27,8 @@ namespace Game
             GetObjects();
             playerMovement = new Movement(player, iManager, character);
 			iManager.playerMovement = this.playerMovement;
+            playerInventory.playerMovement = this.playerMovement;
+            playerInventory.player = this.player;
             StartPrefabs();
         }
 
@@ -77,6 +80,7 @@ namespace Game
             info = GameObject.Find("Info").GetComponent<Text>();
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
+            playerInventory = FindObjectOfType<Inventory>();
         }
 
     }
