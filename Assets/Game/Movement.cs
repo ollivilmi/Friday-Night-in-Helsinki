@@ -12,7 +12,7 @@ namespace Game
     public class Movement
     {
         private bool moveRight, moveLeft;
-        private InterfaceManager iManager;
+        public bool Stop { get; set; }
         private Vector2 posMouse;
         public Vector2 posChar { get; set; }
         private Player.Player player;
@@ -24,13 +24,13 @@ namespace Game
         /// <param name="player">Uses player's speed</param>
         /// <param name="iManager">Doesn't move if dialogue is active</param>
         /// <param name="character">Character is used to get player sprite's position</param>
-        public Movement(Player.Player player, InterfaceManager iManager, GameObject character)
+        public Movement(Player.Player player, GameObject character)
         {
             this.player = player;
-            this.iManager = iManager;
             this.character = character;
             moveRight = false;
             moveLeft = false;
+            Stop = false;
         }
 
         /// <summary>
@@ -38,16 +38,16 @@ namespace Game
         /// </summary>
         public void LeftClick()
         {
-            if (moveRight && !iManager.dialogueActive) 
+            if (moveRight && !Stop) 
             {
                 CharacterMoveRight();
             }
-            else if (moveLeft && !iManager.dialogueActive) 
+            else if (moveLeft && !Stop) 
             {
                 CharacterMoveLeft();
             }
 
-            if (Input.GetMouseButtonDown(0) && !iManager.dialogueActive) //Prevents moving while in dialogue
+            if (Input.GetMouseButtonDown(0) && !Stop) //Prevents moving while in dialogue
             {
                 GetClick();
             }

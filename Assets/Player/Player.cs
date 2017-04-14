@@ -24,7 +24,6 @@ namespace Player
 
         public Player()
         {
-            this.items = new List<Item> { new Beer(), new Tobacco()};
         }
         /// <summary>
         /// Returns player's stats in a string format.

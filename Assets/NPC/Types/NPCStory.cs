@@ -13,7 +13,7 @@ namespace NPC
 
         public NPCStory()
         {
-            items = new List<string>() { "Quest item" };
+            items = new List<string>() { "Quest Item" };
             x = items.Count - 1;
         }
         /// <summary>

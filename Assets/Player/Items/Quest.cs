@@ -5,14 +5,13 @@ using System.Text;
 
 namespace Player
 {
-    public class Beer : Item
+    public class QuestItem : Item
     {
-        public Beer(Player player)
+        public QuestItem(Player player)
         {
             this.player = player;
-            this.price = 1.1f;
             this.amount = 0;
-            this.itemName = "Beer";
+            this.itemName = "Quest Item";
         }
 
         public override void UseItem()
@@ -20,7 +19,7 @@ namespace Player
             if (amount > 0)
             {
                 amount--;
-                player.drink(10);
+                player.useMoney(10);
             }
         }
     }

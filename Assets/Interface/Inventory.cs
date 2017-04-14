@@ -22,13 +22,13 @@ namespace Interface
             buttonOpenInventory.onClick.AddListener(() => openInventory());
 
             inventoryBeer = GameObject.Find("Beer").GetComponent<Button>();
-            inventoryBeer.onClick.AddListener(() => openInventory());
+            inventoryBeer.onClick.AddListener(() => useItem("Beer"));
 
             inventoryTobacco = GameObject.Find("Tobacco").GetComponent<Button>();
-            inventoryTobacco.onClick.AddListener(() => openInventory());
+            inventoryTobacco.onClick.AddListener(() => useItem("Tobacco"));
 
             inventoryQuest = GameObject.Find("QuestItem").GetComponent<Button>();
-            inventoryQuest.onClick.AddListener(() => openInventory());
+            inventoryQuest.onClick.AddListener(() => useItem("Quest Item"));
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
@@ -42,12 +42,13 @@ namespace Interface
         {
             if (panelInventory.activeInHierarchy == false)
             {
-                playerMovement.StopMovement();
+                playerMovement.Stop = true;
                 panelInventory.SetActive(true);
                 updateInventory();
             }
             else
             {
+                playerMovement.Stop = false;
                 playerMovement.StopMovement();
                 panelInventory.SetActive(false);
             }
@@ -57,7 +58,25 @@ namespace Interface
         {
             amountBeer.text = ""+player.items[0].amount;
             amountTobacco.text = "" + player.items[1].amount;
-            //amountQuestItem.text = "" + player.items[2].amount;
+            amountQuestItem.text = "" + player.items[2].amount;
+        }
+
+        private void useItem(string item)
+        {
+            switch (item) {
+                case "Beer":
+                    player.items[0].UseItem();
+                    updateInventory();
+                break;
+                case "Tobacco":
+                    player.items[1].UseItem();
+                    updateInventory();
+                    break;
+                case "Quest Item":
+                    player.items[2].UseItem();
+                    updateInventory();
+                    break;
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Game
         {
             events = new GameEvents();
             GetObjects();
-            playerMovement = new Movement(player, iManager, character);
+            playerMovement = new Movement(player, character);
 			iManager.playerMovement = this.playerMovement;
             playerInventory.playerMovement = this.playerMovement;
             playerInventory.player = this.player;

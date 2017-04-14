@@ -9,7 +9,6 @@ namespace Interface
 {
     public class InterfaceManager : MonoBehaviour
     {
-
         public bool dialogueActive { get; set; }
         public Button dBoxNPC { get; set; }
         public Button dBoxAnswer1 { get; set; }
@@ -39,8 +38,9 @@ namespace Interface
             buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
             buttonInteraction.onClick.AddListener(() => Interaction());
 
-            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 }; 
+            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 };
             //For loop iteration
+            dialogueActive = false;
             CloseDialogue();
         }
 
@@ -56,6 +56,12 @@ namespace Interface
         public void SetTarget(NPC.Collision target)
         {
             this.target = target;
+        }
+
+        public void SetDialogueActive(bool set)
+        {
+            dialogueActive = set;
+            playerMovement.Stop = set;
         }
 
         /// <summary>

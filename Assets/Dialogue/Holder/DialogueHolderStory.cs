@@ -13,7 +13,7 @@ namespace Dialogue
     {
         private StoryRandom randomStoryDialogue;
         private NPCStory npc;
-        private bool specialUsed;
+        private bool specialUsed, optionsActive;
 
         public DialogueHolderStory(Player.Player player, InterfaceManager iManager, NPCStory npc)
         {
@@ -24,6 +24,7 @@ namespace Dialogue
             this.randomStoryDialogue = new StoryRandom(player, npc);
             this.level = 0;
             this.specialUsed = false;
+            this.optionsActive = false;
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Dialogue
             {
                 InitializeDialogueOptions();
             }
-            if (level == 0 && iManager.dialogueActive) //TODO: don't use level, use a bool
+            if (optionsActive) //TODO: don't use level, use a bool
             {
                 DialogueOptions();
             }
@@ -70,12 +71,11 @@ namespace Dialogue
             iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Continue");
             iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
             iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
-            level++;
         }
 
         /// <summary>
         /// Initialize the following: a story dialogue option, Functionality option if one exists,
-        /// character special option. Set dialogueActive to true.
+        /// character special option.
         /// </summary>
         private void InitializeDialogueOptions()
         {
@@ -88,8 +88,8 @@ namespace Dialogue
 
             iManager.ShowBox(player.special, iManager.dBoxAnswer2, "Special");
             iManager.ShowBox(randomStoryDialogue.GetStoryName(), iManager.dBoxAnswer3, "Story");
-            iManager.dialogueActive = true;
             dialogueLength = randomStoryDialogue.GetStoryLength();
+            optionsActive = true;
         }
 
         /// <summary>
@@ -119,6 +119,7 @@ namespace Dialogue
                         iManager.ShowBox("Hey, we already talked.", iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
                         break;
                     }
+                    optionsActive = false;
                     InitializeStoryDialogue();
                     break;
                 case "Quit":
@@ -134,7 +135,26 @@ namespace Dialogue
             switch (selection)
             {
                 case "Continue":
+                    level++;
                     InitializeStoryDialogue();
+                    break;
+                case "Give beer":
+                    if (player.items[0].amount > 0)
+                    {
+                        player.items[0].amount--;
+                        level++;
+                        InitializeStoryDialogue();
+                    }
+                    else iManager.ShowBox("You don't have beer.", iManager.dBoxNPC, "Quit");
+                    break;
+                case "Give tobacco":
+                    if (player.items[1].amount > 0)
+                    {
+                        player.items[1].amount--;
+                        level++;
+                        InitializeStoryDialogue();
+                    }
+                    else iManager.ShowBox("You don't have tobacco.", iManager.dBoxNPC, "Quit");
                     break;
                 case "Quit":
                     QuitDialogue();

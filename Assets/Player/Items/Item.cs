@@ -10,6 +10,7 @@ namespace Player
         public float price { get; set; }
         public int amount { get; set; }
         protected string itemName;
+        protected Player player;
 
         public void Add()
         {
@@ -20,5 +21,7 @@ namespace Player
         {
             return itemName;
         }
+
+        abstract public void UseItem();
     }
 }

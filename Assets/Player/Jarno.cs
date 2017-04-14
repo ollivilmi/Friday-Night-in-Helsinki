@@ -48,12 +48,12 @@ namespace Player
                 "I suppose I'll give it a shot, since there is nothing to lose." };
             reply = new string[] { "Huh... That sucks. What happened?",
                 "Life can be pretty hard sometimes man... But you could still make it. Is there anything I could do to help?",
-                "Sure thing, it's the least I could do.",
+                "Give tobacco.",
                 "Wake up man. You can still turn your life around. You said you were unhappy with your job. What would you like to do?",
                 "Well, that's not really my expertise... But I know one guy.",
                 "Stop drinking. Give me all your booze. Get in touch with my friend Jarkko in Kontula.",
                 "I wish you the best, hopefully you can sort your life out." };
-            answer = new string[] { "Continue", "Continue", "Continue", "Continue", "Continue", "Continue", "Continue" };
+            answer = new string[] { "Continue", "Continue", "Give tobacco", "Continue", "Continue", "Continue", "Quit" };
         }
 
         override public void SetStoryWAYF()
@@ -69,12 +69,12 @@ namespace Player
             {
                 "Why yes, yes I am.",
                 "You don't seem like the rest of the people here.",
-                "I guess beer is the only way to get you to talk.",
+                "Give beer.",
                 "Doesn't seem like it was a good decision.",
                 "I didn't mean to offend. It just seems like you are on the edge.",
                 "It's a big city. We'll see if I run into him."
             };
-            answer = new string[] { "Continue", "Continue", "Continue", "Continue", "Continue", "Continue" };
+            answer = new string[] { "Continue", "Continue", "Give beer", "Continue", "Continue", "Quit" };
         }
     }
 }

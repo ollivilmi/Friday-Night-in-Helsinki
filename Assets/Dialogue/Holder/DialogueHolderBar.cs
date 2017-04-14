@@ -50,6 +50,7 @@ namespace Dialogue
                     break;
                 case 4:
                     QuitDialogue();
+                    level = 0;
                     ReturnMoodChange();
                     string item = "";
                     barNPC.ReturnItems(out item); //Uses ReturnItems to check the mood level to give items if possible
@@ -78,7 +79,6 @@ namespace Dialogue
         private void GetBarDialogue1()
         {
             dialogue = randomBarDialogue.startDialogue1(out answers); //Returns dialogue strings, out = which strings are +/n/-  
-            iManager.dialogueActive = true;
         }
         /// <summary>
         /// Starts the second level of dialogue by using the response from the player.
@@ -104,6 +104,7 @@ namespace Dialogue
                     break;
                 case "Quit":
                     QuitDialogue();
+                    level = 0;
                     break;
                 default:
                     break;
@@ -133,6 +134,7 @@ namespace Dialogue
                     break;
                 case "Quit":
                     QuitDialogue();
+                    level = 0;
                     break;
                 default:
                     break;

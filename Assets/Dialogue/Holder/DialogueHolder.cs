@@ -22,7 +22,6 @@ namespace Dialogue
         public int moodChange { get; set; }
         protected Player.Player player;
 
-
         /// <summary>
         /// Starts the dialogue if you click an NPC while on top of it.
         /// </summary>
@@ -31,6 +30,7 @@ namespace Dialogue
             if (!iManager.dialogueActive)
             {
                 DialogueLevel("");
+                iManager.SetDialogueActive(true);
             }
         }
 
@@ -45,9 +45,8 @@ namespace Dialogue
         protected void QuitDialogue()
         {
             iManager.CloseDialogue();
+            iManager.SetDialogueActive(false);
             iManager.ShowBox("Talk", iManager.buttonInteraction, "Start");
-            level = 0;
-            iManager.dialogueActive = false;
         }
 
         /// <summary>
