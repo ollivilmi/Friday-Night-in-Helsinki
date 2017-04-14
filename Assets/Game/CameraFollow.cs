@@ -12,12 +12,14 @@ namespace Game
         public float xMin { get; set; }
         private Transform player;
         private Vector3 targetPos;
+        private float speed;
 
         private void Start()
         {
             player = GameObject.Find("Player").transform;
             xMax = 140;
             xMin = 0;
+            speed = 10f;
         }
 
         private void LateUpdate()
@@ -26,11 +28,11 @@ namespace Game
 
             if (targetPos.x-transform.position.x > 1)
             {
-                MoveCameraRight(10f);
+                MoveCameraRight(speed);
             }
             else if (targetPos.x-transform.position.x < -1)
             {
-                MoveCameraLeft(-10f);
+                MoveCameraLeft(speed);
             }
         }
 
@@ -47,7 +49,7 @@ namespace Game
         /// </summary>
         private void MoveCameraLeft(float speed)
         {
-                Camera.main.transform.Translate(speed * Time.deltaTime, 0f, 0f);
+                Camera.main.transform.Translate(-speed * Time.deltaTime, 0f, 0f);
         }
     }
 }

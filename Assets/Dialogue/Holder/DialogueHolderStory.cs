@@ -68,7 +68,7 @@ namespace Dialogue
         {
             npcDialogue = randomStoryDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
-            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Continue");
+            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Quit");
             iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
             iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
         }
