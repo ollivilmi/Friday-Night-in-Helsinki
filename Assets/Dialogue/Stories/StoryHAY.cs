@@ -28,15 +28,12 @@ namespace Dialogue
 
         override public string GetDialogue(int level, out string answerDialogue, out string answer)
         {
-            if (level == 3)
-            {
-                player.useMoney(-5);
-            }
             if (level == story.Length-1)
             {
                 string item = "";
                 npc.ReturnItems(out item);
                 player.AddItem(item);
+                player.items[0].amount += 8;
             }
 
             answerDialogue = reply[level];

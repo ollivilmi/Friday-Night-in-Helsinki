@@ -24,10 +24,6 @@ namespace Dialogue
 
         override public string GetDialogue(int level, out string answerDialogue, out string answer)
         {
-            if (level == 3) //In this story, the player is asked for a cigarette at level 3.
-            {
-                player.useMoney(-5);
-            }
             if (level == story.Length - 1) //These can be used differently (or not at all) in every story.
             {
                 string item = "";

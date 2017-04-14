@@ -27,9 +27,16 @@ namespace Dialogue
 
         public override void DialogueLevel(string selection)
         {
-            level++;
-            this.selection = selection;
-            BarDialogue();
+            if (selection == "Quit")
+            {
+                QuitDialogue();
+            }
+            else
+            {
+                level++;
+                this.selection = selection;
+                BarDialogue();
+            }
         }
         /// <summary>
         /// Switch used to move the next level of dialogue.
@@ -49,12 +56,12 @@ namespace Dialogue
                     GetBarDialogue3();
                     break;
                 case 4:
-                    QuitDialogue();
                     level = 0;
                     ReturnMoodChange();
                     string item = "";
-                    barNPC.ReturnItems(out item); //Uses ReturnItems to check the mood level to give items if possible
+                    string result = barNPC.ReturnItems(out item); //Uses ReturnItems to check the mood level to give items if possible
                     player.AddItem(item);
+                    iManager.ShowBox(result, iManager.dBoxNPC, "Quit");
                     break;
                 default:
                     break;

@@ -20,45 +20,46 @@ namespace NPC
         /// Checks mood. If 100 and the NPC has items, return item.
         /// </summary>
         /// <param name="item"></param>
-        public void ReturnItems(out string item)
+        public string ReturnItems(out string item)
         {
+            item = "";
             if (mood == 100)
             {
                 if (items.Count > 0)
                 {
                     item = items[x];
+                    string temp = "You received " + items[x]+".";
                     items.Remove(items[x]); 
                     x--;
+                    return temp;
                 }
                 else
-                    item = "";
-                return;
+                {
+                    return "You're the best!";
+                }
+                    
             }
             else if (mood >= 80 && mood < 100)
             {
-                Debug.Log("80-99");
+                return "I like you a lot.";
             }
             else if (mood >= 60 && mood < 80)
             {
-                //TODO: NPC comment
-                Debug.Log("60-79");
+                return "You're cool.";
             }
             else if (mood >= 40 && mood < 60)
             {
-                //TODO: NPC comment
-                Debug.Log("40-59");
+                return "You're ok I guess.";
             }
             else if (mood >= 20 && mood < 40)
             {
-                //TODO: NPC comment
-                Debug.Log("20-39");
+                return "I don't like you.";
             }
             else if (mood < 20)
             {
-                //TODO: NPC comment
-                Debug.Log("1-19");
+                return "I hate you. Leave.";
             }
-            item = "";
+            return "";
         }
 
     }
