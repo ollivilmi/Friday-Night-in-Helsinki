@@ -58,7 +58,7 @@ namespace Game
         /// </summary>
         private void CharacterMoveLeft()
         {
-            character.transform.Translate(-player.speed * Time.deltaTime, 0f, 0f);
+            character.transform.Translate(player.speed * Time.deltaTime, 0f, 0f);
             if (moveLeft && posChar.x < posMouse.x)
             {
                 moveLeft = false;
@@ -86,10 +86,12 @@ namespace Game
             if (posMouse.x > posChar.x)
             {
                 moveRight = true;
+                character.transform.eulerAngles = new Vector2(0, 0);
             }
             else if (posMouse.x < posChar.x)
             {
                 moveLeft = true;
+                character.transform.eulerAngles = new Vector2(0, 180);
             }
         }
 
