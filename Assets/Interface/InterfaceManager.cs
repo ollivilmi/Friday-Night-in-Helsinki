@@ -17,6 +17,7 @@ namespace Interface
         public Button buttonInteraction { get; set; }
         public Button[] answerButtons { get; set; }
         private DialogueHolder dHolder;
+        private GameObject background;
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private NPC.Collision target;
         public Game.Movement playerMovement { get; set; }
@@ -38,9 +39,12 @@ namespace Interface
             buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
             buttonInteraction.onClick.AddListener(() => Interaction());
 
+            background = GameObject.Find("Dialogue Background");
+
             answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 };
             //For loop iteration
             dialogueActive = false;
+            background.SetActive(false);
             CloseDialogue();
         }
 
@@ -62,6 +66,7 @@ namespace Interface
         {
             dialogueActive = set;
             playerMovement.Stop = set;
+            background.SetActive(set);
         }
 
         /// <summary>
