@@ -10,8 +10,9 @@ namespace Game
         GameObject character;
         CameraFollow limits;
         public Player.Player player { get; set; }
+        public GameEvents events { get; set; }
 
-		void Start()
+        void Start()
 		{
 			character = GameObject.Find("Player");
 			limits = FindObjectOfType<CameraFollow> ();           
@@ -43,18 +44,28 @@ namespace Game
                 case "MetroHelsinki(Clone)":
                     if(player.money > 4.9)
                     {
-                    EnterDoor(-300, -320, -305);
-                    player.useMoney(-5);
+                        EnterDoor(-300, -320, -305);
+                        player.useMoney(-5);
+                        //spend time
+                        events.ChangeTime(10);
                     }
-                    else { }
+                    else
+                    {
+                        //not enough money
+                    }
                     break;
                 case "MetroSornainen(Clone)":
                     if (player.money > 4.9)
                     {
                         EnterDoor(-260, -250, -230);
                         player.useMoney(-5);
+                        //spend time
+                        events.ChangeTime(10);
                     }
-                    else { }
+                    else
+                    {
+                        //not enough money
+                    }
                     break;
             }
         }

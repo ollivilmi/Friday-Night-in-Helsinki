@@ -100,6 +100,7 @@ namespace Game
             playerInventory.playerMovement = this.playerMovement;
             playerInventory.player = this.player;
             door.player = this.player;
+            door.events = this.events;
         }
     }
 }
