@@ -9,9 +9,9 @@ public class NPCMovement : MonoBehaviour {
 	private Rigidbody2D theRigidbody;
 	public float speed;
 	public bool isMoving;
-	public float moveTime;
+	private float moveTime;
 	private float moveCounter;
-	public float waitTime;
+	private float waitTime;
 	private float waitCounter;
 	private int moveDirection;
     private InterfaceManager iManager;
@@ -22,7 +22,6 @@ public class NPCMovement : MonoBehaviour {
 
 		waitCounter = waitTime;
 		moveCounter = moveTime;
-
 		ChooseDirection();
 	}
 
@@ -43,7 +42,7 @@ public class NPCMovement : MonoBehaviour {
 			if(moveCounter < 0)
 			{
 				isMoving = false;
-				waitCounter = waitTime;
+                ChooseWaitTime();
 			}
 		}
 		else
@@ -56,13 +55,31 @@ public class NPCMovement : MonoBehaviour {
 			}
 		}
 	}
-
+    /// <summary>
+    /// Chooses randomly to move NPC left or right
+    /// </summary>
 	public void ChooseDirection()
 	{
 		moveDirection = Random.Range(0, 2);
 		isMoving = true;
-		moveCounter = moveTime;
+        ChooseMoveTime();
 	}
+    /// <summary>
+    /// Chooses randomly how long NPC stays still between movements.
+    /// </summary>
+    public void ChooseWaitTime()
+    {
+        waitTime = Random.Range(1, 4);
+        waitCounter = waitTime;
+    }
+    /// <summary>
+    /// Chooses randomly how long the NPCs next movement lasts.
+    /// </summary>
+    public void ChooseMoveTime()
+    {
+        moveTime = Random.Range(1, 4);
+        moveCounter = moveTime;
+    }
 }
 
 
