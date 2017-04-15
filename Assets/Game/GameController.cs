@@ -20,6 +20,7 @@ namespace Game
         private Movement playerMovement;
         private Inventory playerInventory;
         private Text stats, info;
+        private Door door;
 
         private void Start()
         {
@@ -79,6 +80,7 @@ namespace Game
             character = GameObject.Find("Player");
             stats = GameObject.Find("Stats").GetComponent<Text>();
             info = GameObject.Find("Info").GetComponent<Text>();
+            door = FindObjectOfType<Door>();
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();
@@ -93,6 +95,7 @@ namespace Game
             iManager.playerMovement = this.playerMovement;
             playerInventory.playerMovement = this.playerMovement;
             playerInventory.player = this.player;
+            door.player = this.player;
         }
     }
 }

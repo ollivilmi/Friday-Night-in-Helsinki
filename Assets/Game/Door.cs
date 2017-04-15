@@ -7,13 +7,14 @@ namespace Game
 {
     public class Door : MonoBehaviour
     {
-        GameObject player;
+        GameObject character;
         CameraFollow limits;
+        public Player.Player player { get; set; }
 
 		void Start()
 		{
-			player = GameObject.Find("Player");
-			limits = FindObjectOfType<CameraFollow> ();
+			character = GameObject.Find("Player");
+			limits = FindObjectOfType<CameraFollow> ();           
 		}
 
 		public void Enter(NPC.Collision teleporter)
@@ -44,7 +45,7 @@ namespace Game
 
         private void EnterDoor(float xLocation, float xMin, float xMax)
         {
-            player.transform.position = new Vector2(xLocation, -8f);
+            character.transform.position = new Vector2(xLocation, -8f);
             Camera.main.transform.position = new Vector3(xLocation, 3f, -10f);
             limits.xMin = xMin;
             limits.xMax = xMax;
