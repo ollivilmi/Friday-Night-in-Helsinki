@@ -40,7 +40,23 @@ namespace Game
                 case "DoorMetroHelsinki1(Clone)":
                     EnterDoor(-125, -105, -68);
                     break;
-			}
+                case "MetroHelsinki(Clone)":
+                    if(player.money > 4.9)
+                    {
+                    EnterDoor(-300, -320, -305);
+                    player.useMoney(-5);
+                    }
+                    else { }
+                    break;
+                case "MetroSornainen(Clone)":
+                    if (player.money > 4.9)
+                    {
+                        EnterDoor(-260, -250, -230);
+                        player.useMoney(-5);
+                    }
+                    else { }
+                    break;
+            }
         }
 
         private void EnterDoor(float xLocation, float xMin, float xMax)
