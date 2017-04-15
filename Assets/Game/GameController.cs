@@ -25,10 +25,7 @@ namespace Game
         {
             events = new GameEvents();
             GetObjects();
-            playerMovement = new Movement(player, character);
-			iManager.playerMovement = this.playerMovement;
-            playerInventory.playerMovement = this.playerMovement;
-            playerInventory.player = this.player;
+            SetUpScripts();
             StartPrefabs();
         }
 
@@ -83,5 +80,15 @@ namespace Game
             playerInventory = FindObjectOfType<Inventory>();
         }
 
+        /// <summary>
+        /// Creates an instance of movement, sets up script variables.
+        /// </summary>
+        private void SetUpScripts()
+        {
+            playerMovement = new Movement(player, character);
+            iManager.playerMovement = this.playerMovement;
+            playerInventory.playerMovement = this.playerMovement;
+            playerInventory.player = this.player;
+        }
     }
 }

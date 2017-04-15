@@ -25,7 +25,7 @@ namespace Dialogue
         /// <summary>
         /// Starts the dialogue if you click an NPC while on top of it.
         /// </summary>
-        public void StartDialogue()
+        public virtual void StartDialogue()
         {
             if (!iManager.dialogueActive)
             {
