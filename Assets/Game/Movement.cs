@@ -47,7 +47,7 @@ namespace Game
                 CharacterMoveLeft();
             }
 
-            if (Input.GetMouseButtonDown(0) && !Stop) //Prevents moving while in dialogue
+            if (Input.GetMouseButtonDown(0) && !Stop)
             {
                 GetClick();
             }
@@ -82,16 +82,17 @@ namespace Game
         /// </summary>
         private void GetClick()
         {
+            StopMovement();
             posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (posMouse.x > posChar.x)
             {
-                moveRight = true;
                 character.transform.eulerAngles = new Vector2(0, 0);
+                moveRight = true;
             }
             else if (posMouse.x < posChar.x)
             {
-                moveLeft = true;
                 character.transform.eulerAngles = new Vector2(0, 180);
+                moveLeft = true;
             }
         }
 

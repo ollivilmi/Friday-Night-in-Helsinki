@@ -14,12 +14,9 @@ namespace NPC
     {
         private NPCBouncer npc;
 
-        void Start()
+        override protected void Start()
         {
-            controller = FindObjectOfType<GameController>();
-            iManager = FindObjectOfType<InterfaceManager>();
-            events = controller.GetEvents();
-            player = events.GetPlayer();
+            base.Initialization();
             npc = new NPCBouncer();
             dHolder = new DialogueHolderStory(player, iManager, npc);
             collisionText = "Talk";
@@ -44,6 +41,7 @@ namespace NPC
         override public void Interaction()
         {
             dHolder.StartDialogue();
+            iManager.SetNPCImage(image);
         }
     }
 }

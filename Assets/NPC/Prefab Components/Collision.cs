@@ -17,13 +17,28 @@ namespace NPC
         protected Player.Player player;
         protected GameController controller;
         protected GameEvents events;
-		protected string collisionText;
-		protected string objectName;
+        protected string collisionText, objectName;
+        protected Sprite image;
 
 		public string GetName()
 		{
 			return this.objectName;
 		}
+
+        protected virtual void Start()
+        {
+            Initialization();
+        }
+
+        protected void Initialization()
+        {
+            controller = FindObjectOfType<GameController>();
+            iManager = FindObjectOfType<InterfaceManager>();
+            image = gameObject.GetComponent<SpriteRenderer>().sprite;
+            events = controller.GetEvents();
+            player = events.GetPlayer();
+            objectName = this.gameObject.name;
+        }
    
         protected virtual void OnTriggerEnter2D(Collider2D col)
         {

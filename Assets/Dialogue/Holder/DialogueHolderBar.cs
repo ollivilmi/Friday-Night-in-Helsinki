@@ -25,6 +25,12 @@ namespace Dialogue
             moodChange = 0;
         }
 
+        public override void StartDialogue()
+        {
+            level = 0;
+            base.StartDialogue();
+        }
+
         public override void DialogueLevel(string selection)
         {
             if (selection == "Quit")
