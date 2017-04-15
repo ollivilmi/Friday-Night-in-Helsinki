@@ -10,11 +10,12 @@ namespace Interface
 {
     public class Inventory : MonoBehaviour
     {
-        private Button buttonOpenInventory, inventoryBeer, inventoryTobacco, inventoryQuest;
-        private GameObject panelInventory;
-        private Text amountBeer, amountTobacco, amountQuestItem;
+        private Button buttonOpenInventory, inventoryBeer, inventoryTobacco, inventoryQuest, inventoryInfo;
+        private GameObject panelInventory, panelInformation;
+        private Text amountBeer, amountTobacco, amountQuestItem, info, infoUse;
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
+        private string active;
 
         private void Start()
         {
@@ -22,20 +23,26 @@ namespace Interface
             buttonOpenInventory.onClick.AddListener(() => openInventory());
 
             inventoryBeer = GameObject.Find("Beer").GetComponent<Button>();
-            inventoryBeer.onClick.AddListener(() => useItem("Beer"));
+            inventoryBeer.onClick.AddListener(() => infoPanel("Beer"));
 
             inventoryTobacco = GameObject.Find("Tobacco").GetComponent<Button>();
-            inventoryTobacco.onClick.AddListener(() => useItem("Tobacco"));
+            inventoryTobacco.onClick.AddListener(() => infoPanel("Tobacco"));
 
             inventoryQuest = GameObject.Find("QuestItem").GetComponent<Button>();
-            inventoryQuest.onClick.AddListener(() => useItem("Quest Item"));
+            inventoryQuest.onClick.AddListener(() => infoPanel("Quest Item"));
+
+            inventoryInfo = GameObject.Find("Item info").GetComponent<Button>();
+            inventoryInfo.onClick.AddListener(() => CloseInfo());
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
             amountQuestItem = GameObject.Find("QuestItem amount").GetComponent<Text>();
+            info = GameObject.Find("Info text").GetComponent<Text>();
 
             panelInventory = GameObject.Find("Inventory panel");
+            panelInformation = GameObject.Find("Info panel");
             panelInventory.SetActive(false);
+            panelInformation.SetActive(false);
         }
 
         private void openInventory()
@@ -61,6 +68,12 @@ namespace Interface
             amountQuestItem.text = "" + player.items[2].amount;
         }
 
+        private void CloseInfo()
+        {
+            panelInformation.SetActive(false);
+            active = null;
+        }
+
         private void useItem(string item)
         {
             switch (item) {
@@ -75,6 +88,46 @@ namespace Interface
                 case "Quest Item":
                     player.items[2].UseItem();
                     updateInventory();
+                    break;
+            }
+        }
+
+        private void infoPanel(string item)
+        {
+            panelInformation.SetActive(true);
+            switch (item)
+            {
+                case "Beer":
+                    if (active == "Beer")
+                    {
+                        useItem(item);
+                        break;
+                    }
+                    info.text = "Good ol' warm pocket beer. Drinking one increases your drunk level by 10"
+                        + " but also decreases your likability. \n\nClick the icon again to drink.";
+                    active = item;
+                    break;
+
+                case "Tobacco":
+                    if (active == "Tobacco")
+                    {
+                        useItem(item);
+                        break;
+                    }
+                    info.text = "The package has a picture of a black lung. The text reads: 'Smoking causes cancer'."
+                        + "\n\nClick the icon again to smoke.";
+                    active = item;
+                    break;
+
+                case "Quest Item":
+                    if (active == "Quest Item")
+                    {
+                        useItem(item);
+                        break;
+                    }
+                    info.text = "Placeholder text. This text can be used to tell what quest items the player has."
+                        + " The button could be used to scroll between all the items.";
+                    active = item;
                     break;
             }
         }

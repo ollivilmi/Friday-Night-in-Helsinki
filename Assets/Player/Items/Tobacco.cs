@@ -7,10 +7,10 @@ namespace Player
 {
     public class Tobacco : Item
     {
-        public Tobacco(Player player)
+        public Tobacco(Player player, int amount)
         {
             this.price = 0.2f;
-            this.amount = 0;
+            this.amount = amount;
             this.itemName = "Tobacco";
             this.player = player;
         }

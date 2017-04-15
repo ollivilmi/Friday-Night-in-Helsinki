@@ -24,7 +24,7 @@ namespace Player
 
         public Player()
         {
-            this.items = new List<Item> { new Beer(this), new Tobacco(this), new QuestItem(this)};
+            this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20), new QuestItem(this)};
         }
         /// <summary>
         /// Returns player's stats in a string format.
@@ -33,7 +33,7 @@ namespace Player
         public string UpdateStats()
         {
             return "Drunk: " + drunkLevel + " Money: " + money +
-                " Likability: " + likability + " Fun: " + getfunLevel();
+                " Likability: " + getLikability() + " Fun: " + getfunLevel();
         }
         /// <summary>
         /// Add to fun level in the limits of -50 to 50. Adds a fun bonus for being drunk.
