@@ -14,7 +14,7 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, barNPC, storyNPC, doorRWS1, doorMainHall1, doorMainHall2, doorBar;
+        private GameObject character, barNPC, storyNPC, doorRWS1, doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1;
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
@@ -60,14 +60,18 @@ namespace Game
             doorRWS1 = (GameObject)Resources.Load("DoorRWS1", typeof(GameObject));
             doorMainHall1 = (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject));
             doorMainHall2 = (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject));
+            doorMainHall3 = (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject));
             doorBar = (GameObject)Resources.Load("DoorBar1", typeof(GameObject));
+            doorMetroHelsinki1 = (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject));
 
             Instantiate(storyNPC, storyNPC.transform.position, storyNPC.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
             Instantiate(doorRWS1, doorRWS1.transform.position, doorRWS1.transform.rotation);
             Instantiate(doorMainHall1, doorMainHall1.transform.position, doorMainHall1.transform.rotation);
             Instantiate(doorMainHall2, doorMainHall2.transform.position, doorMainHall2.transform.rotation);
+            Instantiate(doorMainHall3, doorMainHall3.transform.position, doorMainHall3.transform.rotation);
             Instantiate(doorBar, doorBar.transform.position, doorBar.transform.rotation);
+            Instantiate(doorMetroHelsinki1, doorMetroHelsinki1.transform.position, doorMetroHelsinki1.transform.rotation);
         }
 
         /// <summary>

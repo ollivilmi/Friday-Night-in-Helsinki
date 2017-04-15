@@ -21,18 +21,24 @@ namespace Game
 			string name = teleporter.GetName ();
 			switch (name)
 			{
-			case "DoorRWS1(Clone)":
+			    case "DoorRWS1(Clone)":
                     EnterDoor(-60, -105, -68);
-				break;
-			case "DoorMainHall1(Clone)":
+				    break;
+			    case "DoorMainHall1(Clone)":
                     EnterDoor(20, 0, 140);
-				break;
-			case "DoorMainHall2(Clone)":
+				    break;
+			    case "DoorMainHall2(Clone)":
                     EnterDoor(-140, -182, -161);
-				break;
-			case "DoorBar1(Clone)":
+				    break;
+			    case "DoorBar1(Clone)":
                     EnterDoor(-80, -105, -68);
-				break;
+				    break;
+                case "DoorMainHall3(Clone)":
+                    EnterDoor(-225, -250, -230);
+                    break;
+                case "DoorMetroHelsinki1(Clone)":
+                    EnterDoor(-125, -105, -68);
+                    break;
 			}
         }
 
