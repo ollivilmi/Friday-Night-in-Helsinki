@@ -21,14 +21,11 @@ namespace Player
         public string[] reply { get; set; }
         public string[] answer { get; set; }
         public string special { get; set; }
-        private Sprite guitar;
-
 
         public Player()
         {
             this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
-            guitar = Resources.Load<Sprite>("guitar");
-            this.itemsQuest = new List<QuestItem> { new QuestItem(guitar, "Your very own guitar.") };
+            this.itemsQuest = new List<QuestItem>();
         }
         /// <summary>
         /// Returns player's stats in a string format.

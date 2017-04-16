@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
     public class Jarno : Player
     {
+        private Sprite guitar;
 
         public Jarno()
         {
@@ -20,6 +23,8 @@ namespace Player
             this.money = 50;
             this.drunkLevel = 0;
             this.funLevel = 20;
+            guitar = Resources.Load<Sprite>("guitar");
+            itemsQuest.Add(new QuestItem(guitar, "Your very own guitar."));
         }
 
         override public string Think()

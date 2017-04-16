@@ -49,6 +49,9 @@ namespace Interface
             panelInformation.SetActive(false);
         }
 
+        /// <summary>
+        /// Opens or closes Inventory. Stops player movement.
+        /// </summary>
         private void openInventory()
         {
             if (panelInventory.activeInHierarchy == false)
@@ -65,6 +68,9 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Updates the amount of items and active Quest item image.
+        /// </summary>
         private void updateInventory()
         {
             amountBeer.text = ""+player.items[0].amount;
@@ -73,12 +79,19 @@ namespace Interface
             imageQuestItem.sprite = player.itemsQuest[i].image;
         }
 
+        /// <summary>
+        /// Closes item information panel.
+        /// </summary>
         private void CloseInfo()
         {
             panelInformation.SetActive(false);
             active = null;
         }
 
+        /// <summary>
+        /// Uses item or changes Quest item.
+        /// </summary>
+        /// <param name="item"></param>
         private void useItem(string item)
         {
             switch (item) {
@@ -96,13 +109,16 @@ namespace Interface
                     {
                         i = 0;
                     }
-                    imageQuestItem.sprite = player.itemsQuest[i].image;
                     info.text = player.itemsQuest[i].description;
                     updateInventory();
                     break;
             }
         }
 
+        /// <summary>
+        /// Opens the item's description. If the item is already active, uses it.
+        /// </summary>
+        /// <param name="item"></param>
         private void infoPanel(string item)
         {
             panelInformation.SetActive(true);
