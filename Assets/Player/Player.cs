@@ -21,15 +21,14 @@ namespace Player
         public string[] reply { get; set; }
         public string[] answer { get; set; }
         public string special { get; set; }
-        private Sprite guitar, phone;
+        private Sprite guitar;
 
 
         public Player()
         {
             this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
             guitar = Resources.Load<Sprite>("guitar");
-            phone = Resources.Load<Sprite>("phone");
-            this.itemsQuest = new List<QuestItem> { new QuestItem(guitar, "Your very own guitar."), new QuestItem(phone, "Perhaps it could use an upgrade.") };
+            this.itemsQuest = new List<QuestItem> { new QuestItem(guitar, "Your very own guitar.") };
         }
         /// <summary>
         /// Returns player's stats in a string format.
@@ -127,9 +126,6 @@ namespace Player
                     break;
                 case "Tobacco":
                     items[1].Add();
-                    break;
-                case "Quest Item":
-                    items[2].Add();
                     break;
             }
         }

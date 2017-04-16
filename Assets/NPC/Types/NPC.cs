@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Player;
 
 namespace NPC
 
@@ -12,7 +13,9 @@ namespace NPC
     {
         protected int mood;
         protected List<string> items;
+        protected List<QuestItem> itemsQuest;
         protected System.Random random = new System.Random();
+        protected Player.Player player;
 
         /// <summary>
         /// Add to NPCs mood level. Mood is limited to 0-100.

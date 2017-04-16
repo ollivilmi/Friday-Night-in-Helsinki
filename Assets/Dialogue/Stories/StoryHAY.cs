@@ -31,7 +31,7 @@ namespace Dialogue
             if (level == story.Length-1)
             {
                 string item = "";
-                npc.ReturnItems(out item);
+                npc.ReturnItems();
                 player.AddItem(item);
                 player.items[0].amount += 8;
             }

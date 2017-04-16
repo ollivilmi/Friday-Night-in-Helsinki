@@ -7,7 +7,7 @@ namespace NPC
 {
     public class NPCBouncer : NPCStory
     {
-        public NPCBouncer() : base()
+        public NPCBouncer(Player.Player player) : base(player)
         {
             Functionality = "Can I buy a ticket?";
         }

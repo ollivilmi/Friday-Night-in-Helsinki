@@ -27,7 +27,7 @@ namespace Dialogue
             if (level == story.Length - 1) //These can be used differently (or not at all) in every story.
             {
                 string item = "";
-                npc.ReturnItems(out item);
+                npc.ReturnItems();
                 player.AddItem(item);
             }
 

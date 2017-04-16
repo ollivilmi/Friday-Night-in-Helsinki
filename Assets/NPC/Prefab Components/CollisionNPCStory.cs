@@ -17,7 +17,7 @@ namespace NPC
         override protected void Start()
         {
             base.Initialization();
-            npc = new NPCBouncer();
+            npc = new NPCBouncer(player);
             dHolder = new DialogueHolderStory(player, iManager, npc);
             collisionText = "Talk";
         }

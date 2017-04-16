@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
+using Player;
 
 namespace NPC
 {
     public class NPCStory : NPC
     {
-        private int x;
+        private int i;
+        private Sprite phone;
         public string Functionality { get; set; }
 
-        public NPCStory()
+        public NPCStory(Player.Player player)
         {
-            items = new List<string>() { "Quest Item" };
-            x = items.Count - 1;
+            this.player = player;
+            phone = Resources.Load<Sprite>("phone");
+            itemsQuest = new List<QuestItem>() { new QuestItem(phone, "Perhaps it could use an upgrade.") };
+            i = itemsQuest.Count - 1;
         }
         /// <summary>
         /// Returns an item when called if the NPC has an item to give.
         /// </summary>
         /// <param name="item"></param>
-        public void ReturnItems(out string item)
+        public void ReturnItems()
         {
-            if (items.Count > 0)
+            if (itemsQuest.Count > 0)
             {
-                item = items[x];
-                items.Remove(items[x]);
-                x--;
+                player.itemsQuest.Add(itemsQuest[i]);
+                itemsQuest.Remove(itemsQuest[i]);
+                i--;
             }
-            else item = "";
         }
            
     }
