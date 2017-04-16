@@ -12,10 +12,12 @@ namespace Interface
     {
         private Button buttonOpenInventory, inventoryBeer, inventoryTobacco, inventoryQuest, inventoryInfo;
         private GameObject panelInventory, panelInformation;
-        private Text amountBeer, amountTobacco, amountQuestItem, info, infoUse;
+        private Text amountBeer, amountTobacco, amountQuestItem, info;
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
         private string active;
+        private Image imageQuestItem;
+        private int i;
 
         private void Start()
         {
@@ -33,6 +35,8 @@ namespace Interface
 
             inventoryInfo = GameObject.Find("Item info").GetComponent<Button>();
             inventoryInfo.onClick.AddListener(() => CloseInfo());
+
+            imageQuestItem = GameObject.Find("QuestItem").GetComponent<Image>();
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
@@ -65,7 +69,8 @@ namespace Interface
         {
             amountBeer.text = ""+player.items[0].amount;
             amountTobacco.text = "" + player.items[1].amount;
-            amountQuestItem.text = "" + player.items[2].amount;
+            amountQuestItem.text = ""+player.itemsQuest.Count;
+            imageQuestItem.sprite = player.itemsQuest[i].image;
         }
 
         private void CloseInfo()
@@ -86,7 +91,13 @@ namespace Interface
                     updateInventory();
                     break;
                 case "Quest Item":
-                    player.items[2].UseItem();
+                    i++;
+                    if (i >= player.itemsQuest.Count)
+                    {
+                        i = 0;
+                    }
+                    imageQuestItem.sprite = player.itemsQuest[i].image;
+                    info.text = player.itemsQuest[i].description;
                     updateInventory();
                     break;
             }
@@ -125,8 +136,7 @@ namespace Interface
                         useItem(item);
                         break;
                     }
-                    info.text = "Placeholder text. This text can be used to tell what quest items the player has."
-                        + " The button could be used to scroll between all the items.";
+                    info.text = player.itemsQuest[i].description;
                     active = item;
                     break;
             }

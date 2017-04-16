@@ -13,6 +13,7 @@ namespace Player
         public float speed { get; set; }
         public double money { get; set; }
         public List<Item> items { get; set; }
+        public List<QuestItem> itemsQuest { get; set; }
         public string name { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
@@ -20,11 +21,15 @@ namespace Player
         public string[] reply { get; set; }
         public string[] answer { get; set; }
         public string special { get; set; }
+        private Sprite guitar, phone;
 
 
         public Player()
         {
-            this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20), new QuestItem(this)};
+            this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
+            guitar = Resources.Load<Sprite>("guitar");
+            phone = Resources.Load<Sprite>("phone");
+            this.itemsQuest = new List<QuestItem> { new QuestItem(guitar, "Your very own guitar."), new QuestItem(phone, "Perhaps it could use an upgrade.") };
         }
         /// <summary>
         /// Returns player's stats in a string format.
