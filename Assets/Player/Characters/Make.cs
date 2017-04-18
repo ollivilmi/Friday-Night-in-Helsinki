@@ -41,7 +41,7 @@ namespace Player
             return "Stop bothering me with your gibberish.";
         }
 
-        override public void SetStoryHAY()
+        override public void StoryPetri()
         {
             story = new string[] { "Well, I lost my job, wife and kids, but at least I have booze I guess.",
                 "You beat me to the punch. Yep, seems like the only thing women care about is money.",
@@ -60,7 +60,7 @@ namespace Player
             answer = new string[] { "Continue", "Continue", "Give tobacco", "Continue", "Continue", "Continue", "Quit" };
         }
 
-        override public void SetStoryWAYF()
+        override public void StoryMatti()
         {
             story = new string[] {
             "Kuopio, why?",

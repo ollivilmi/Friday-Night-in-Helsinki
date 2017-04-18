@@ -148,12 +148,12 @@ namespace Player
         /// Sets the characters story variables to HAY so that the NPC can
         /// use them.
         /// </summary>
-        public abstract void SetStoryHAY();
+        public abstract void StoryPetri();
         /// <summary>
         /// Sets the characters story variables to WAYF so that the NPC can
         /// use them.
         /// </summary>
-        public abstract void SetStoryWAYF();
+        public abstract void StoryMatti();
         /// <summary>
         /// Character specific request option to story npcs.
         /// </summary>
@@ -164,5 +164,17 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
+        public void SetStory(string name)
+        {
+            switch (name)
+            {
+                case "How are you?":
+                    StoryPetri();
+                    break;
+                case "Where are you from?":
+                    StoryMatti();
+                    break;
+            }
+        }
     }
 }

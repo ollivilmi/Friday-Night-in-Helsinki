@@ -43,10 +43,10 @@ namespace Game
 
         private void Update()
         {
-            playerMovement.posChar = character.transform.position;
-            playerMovement.LeftClick();
-            info.text = events.UpdateEvents();
-            stats.text = player.UpdateStats();
+                playerMovement.posChar = character.transform.position;
+                playerMovement.LeftClick();
+                info.text = events.UpdateEvents();
+                stats.text = player.UpdateStats();
         }
 
         /// <summary>

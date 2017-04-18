@@ -27,14 +27,14 @@ namespace NPC
             switch (npcname)
             {
                 case "Petri":
-                    story = new StoryHAY(player, this);
+                    story = new Story(player, this, "How are you?");
                     break;
                 case "Matti":
-                    story = new StoryWAYF(player, this);
+                    story = new Story(player, this, "Where are you from?");
                     itemsQuest.Add(new QuestItem(phone, "Careful! This is almost antique."));
                     break;
                 default:
-                    story = new StoryWAYF(player, this);
+                    story = new Story(player, this, "Where are you from?");
                     break;
             }
         }

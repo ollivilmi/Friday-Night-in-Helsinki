@@ -41,7 +41,7 @@ namespace Player
             return "Are you trying to humiliate me? I don't want your money.";
         }
 
-        override public void SetStoryHAY()
+        override public void StoryPetri()
         {
             story = new string[] { "Well, I lost my job, wife and kids, but at least I have booze I guess.",
                 "I was stuck in a dead end job that I absolutely could care less about and I had had enough. Turns out the only reason I was still married was money.",
@@ -60,7 +60,7 @@ namespace Player
             answer = new string[] { "Continue", "Continue", "Give tobacco", "Continue", "Continue", "Continue", "Quit" };
         }
 
-        override public void SetStoryWAYF()
+        override public void StoryMatti()
         {
             story = new string[] {
             "Ehh, me?",

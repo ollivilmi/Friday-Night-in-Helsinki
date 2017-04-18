@@ -133,6 +133,7 @@ namespace Interface
         /// </summary>
         private void Interaction()
         {
+            playerMovement.StopMovement();
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
         }
