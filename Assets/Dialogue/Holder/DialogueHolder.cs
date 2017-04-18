@@ -19,6 +19,7 @@ namespace Dialogue
         public int level { get; set; }
         protected int dialogueLength;
         public string selection { get; set; }
+        public StoryHolder storyDialogue { get; set; }
         public int moodChange { get; set; }
         protected Player.Player player;
 

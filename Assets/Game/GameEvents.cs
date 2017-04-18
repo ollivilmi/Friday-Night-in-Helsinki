@@ -22,7 +22,9 @@ namespace Game
         /// </summary>
         public GameEvents()
         {
-            player = new Jarno();
+            //player = new Jarno();
+            player = new Teddy();
+            //player = new Make();
             this.hour = player.hour;
             this.minute = player.minute;
         }
