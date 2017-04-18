@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour {
+public class Character : MonoBehaviour {
+
+	public Image CharImage{ get; set;}
+
 
 	// Use this for initialization
 	void Start () {
@@ -11,10 +15,6 @@ public class MenuManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-	void ChooseCharacter(){
 		
 	}
 }

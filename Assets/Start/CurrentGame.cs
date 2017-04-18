@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour {
-
+public class CurrentGame : MonoBehaviour {
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -11,10 +11,6 @@ public class MenuManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-	void ChooseCharacter(){
 		
 	}
 }

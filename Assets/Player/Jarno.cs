@@ -23,8 +23,15 @@ namespace Player
             this.money = 50;
             this.drunkLevel = 0;
             this.funLevel = 20;
+<<<<<<< Updated upstream
             guitar = Resources.Load<Sprite>("guitar");
             itemsQuest.Add(new QuestItem(guitar, "Your very own guitar."));
+=======
+
+			//changes by paul
+			this.backStory= "";
+
+>>>>>>> Stashed changes
         }
 
         override public string Think()
@@ -81,5 +88,15 @@ namespace Player
             };
             answer = new string[] { "Continue", "Continue", "Give beer", "Continue", "Continue", "Quit" };
         }
+
+		// changes by paul
+		 public void SetBackStory(){
+			backStory = "Jarno plays the guitar";
+		}
+
+		public string getBackStory(){
+			SetBackStory();
+			return backStory;
+		}
     }
 }

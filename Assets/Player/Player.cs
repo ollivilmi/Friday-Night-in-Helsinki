@@ -22,6 +22,15 @@ namespace Player
         public string[] answer { get; set; }
         public string special { get; set; }
 
+<<<<<<< Updated upstream
+=======
+		//changes by paul
+		public string backStory;
+		public Sprite playerSprite;
+
+
+
+>>>>>>> Stashed changes
         public Player()
         {
             this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
@@ -164,5 +173,17 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
+
+		//changes by paul
+		//public abstract void SetBackStory();
+		//tra
+		//public abstract string GetBackStory();
+		//tra
+		//public abstract void SetSprite ();
+		//tra
+		//public abstract Sprite GetSprite();
+		//tra
     }
+
+
 }
