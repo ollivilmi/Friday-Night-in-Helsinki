@@ -9,7 +9,7 @@ namespace NPC
 {
     public class NPCStory : NPC
     {
-        private int i;
+        private int itemIndex;
         private Sprite phone;
         public string Functionality { get; set; }
         protected Story story;
@@ -23,7 +23,6 @@ namespace NPC
             this.player = player;
             phone = Resources.Load<Sprite>("phone");
             itemsQuest = new List<QuestItem>();
-            i = itemsQuest.Count - 1;
             switch (npcname)
             {
                 case "Petri":
@@ -32,6 +31,7 @@ namespace NPC
                 case "Matti":
                     story = new Story(player, this, "Where are you from?");
                     itemsQuest.Add(new QuestItem(phone, "Careful! This is almost antique."));
+                    itemIndex = itemsQuest.Count - 1;
                     break;
                 default:
                     story = new Story(player, this, "Where are you from?");
@@ -51,9 +51,9 @@ namespace NPC
         {
             if (itemsQuest.Count > 0)
             {
-                player.itemsQuest.Add(itemsQuest[i]);
-                itemsQuest.Remove(itemsQuest[i]);
-                i--;
+                player.itemsQuest.Add(itemsQuest[itemIndex]);
+                itemsQuest.Remove(itemsQuest[itemIndex]);
+                itemIndex--;
             }
         }
            

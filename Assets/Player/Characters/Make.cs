@@ -23,6 +23,7 @@ namespace Player
             this.money = 200;
             this.drunkLevel = 30;
             this.funLevel = 0;
+            items[1].amount = 20;
             knife = Resources.Load<Sprite>("Chef_Knife");
             itemsQuest.Add(new QuestItem(knife, "In case of emergency."));
         }

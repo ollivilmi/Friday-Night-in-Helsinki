@@ -23,6 +23,8 @@ namespace Player
             this.money = 50;
             this.drunkLevel = 0;
             this.funLevel = 20;
+            items[0].amount = 2;
+            items[1].amount = 20;
             guitar = Resources.Load<Sprite>("guitar");
             itemsQuest.Add(new QuestItem(guitar, "Your very own guitar."));
         }

@@ -24,7 +24,7 @@ namespace Player
 
         public Player()
         {
-            this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
+            this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
         }
         /// <summary>
@@ -164,6 +164,7 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
+
         public void SetStory(string name)
         {
             switch (name)
