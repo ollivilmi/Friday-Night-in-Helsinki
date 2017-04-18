@@ -69,7 +69,8 @@ namespace Player
             "Jumalauta you are insistent. If you give me a beer I'll tell you.",
             "I was born in Kuopio but I moved here because of my job.",
             "Unlike you, I actually pay my taxes and give something back to the society.",
-            "Thanks for the beer I guess. I've seen you before playing guitar, if you want you could ask my friend Tommi for a place in his band." };
+            "Thanks for the beer I guess. I've seen you before playing guitar, if you want you " +
+            "could ask my friend Tommi for a place in his band. Oh and take this old phone, it's from his grandma." };
             reply = new string[]
             {
                 "Why yes, yes I am.",

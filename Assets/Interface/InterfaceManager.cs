@@ -88,6 +88,7 @@ namespace Interface
         {
             dialogueActive = set;
             playerMovement.Stop = set;
+            playerMovement.StopMovement();
             background.SetActive(set);
         }
 
@@ -134,7 +135,6 @@ namespace Interface
         {
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
-            playerMovement.StopMovement();
         }
     }
 }

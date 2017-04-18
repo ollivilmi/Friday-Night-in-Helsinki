@@ -41,7 +41,7 @@ namespace Game
             return playerMovement;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             playerMovement.posChar = character.transform.position;
             playerMovement.LeftClick();

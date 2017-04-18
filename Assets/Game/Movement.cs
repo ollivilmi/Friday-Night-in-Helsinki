@@ -96,6 +96,9 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Stops current movement.
+        /// </summary>
         public void StopMovement()
         {
             moveRight = false;
