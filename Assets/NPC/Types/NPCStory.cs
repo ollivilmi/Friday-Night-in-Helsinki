@@ -4,6 +4,7 @@ using Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
 using Player;
+using Game;
 
 namespace NPC
 {
@@ -18,23 +19,24 @@ namespace NPC
         /// </summary>
         /// <param name="player"></param>
         /// <param name="npcname"></param>
-        public NPCStory(Player.Player player, string npcname)
+        public NPCStory(Player.Player player, string npcname, GameEvents events)
         {
             this.player = player;
+            this.events = events;
             phone = Resources.Load<Sprite>("phone");
             itemsQuest = new List<QuestItem>();
             switch (npcname)
             {
                 case "Petri":
-                    story = new Story(player, this, "How are you?");
+                    story = new Story(player, this, "How are you?", events);
                     break;
                 case "Matti":
-                    story = new Story(player, this, "Where are you from?");
+                    story = new Story(player, this, "Where are you from?", events);
                     itemsQuest.Add(new QuestItem(phone, "Careful! This is almost antique."));
                     itemIndex = itemsQuest.Count - 1;
                     break;
                 default:
-                    story = new Story(player, this, "Where are you from?");
+                    story = new Story(player, this, "Where are you from?", events);
                     break;
             }
         }

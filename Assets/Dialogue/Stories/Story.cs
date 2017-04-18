@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NPC;
+using Game;
+using UnityEngine;
 
 namespace Dialogue
 {
@@ -13,12 +15,14 @@ namespace Dialogue
         public bool finished { get; set; }
         private Player.Player player;
         private NPCStory npc;
+        private GameEvents events;
 
-        public Story(Player.Player player, NPCStory npc, string name)
+        public Story(Player.Player player, NPCStory npc, string name, GameEvents events)
         {
-            this.name = name;
             this.player = player;
             this.npc = npc;
+            this.name = name;
+            this.events = events;
             this.finished = false;
             this.player.SetStory(name);
             this.story = player.story;
@@ -26,13 +30,20 @@ namespace Dialogue
             this.answer = player.answer;
         }
 
+        /// <summary>
+        /// Advances story dialogue by accessing the story from the player class.
+        /// </summary>
+        /// <param name="level">How far into the story</param>
+        /// <param name="answerDialogue">Contains player's answer</param>
+        /// <param name="answer">What choosing the answer does</param>
+        /// <returns></returns>
         public string GetDialogue(int level, out string answerDialogue, out string answer)
         {
             if (level == story.Length - 1)
             {
                 StoryEnding(name);
             }
-
+            events.ChangeTime(2);
             answerDialogue = reply[level];
             answer = this.answer[level];
             return story[level];
@@ -42,7 +53,10 @@ namespace Dialogue
         {
             return story.Length;
         }
-
+        /// <summary>
+        /// The result of completing a story
+        /// </summary>
+        /// <param name="name">Opening line of the story dialogue, "How are you?" for example</param>
         private void StoryEnding(string name)
         {
             switch (name)

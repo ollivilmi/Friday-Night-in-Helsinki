@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Dialogue;
+using Game;
 
 namespace NPC
 {
@@ -10,17 +11,17 @@ namespace NPC
     {
         public Player.Player player { get; set; }
 
-        public NPCStory GetType(Collision npc)
+        public NPCStory GetType(Collision npc, GameEvents events)
         {
             string name = npc.GetName();
             switch (name)
             {
                 case "NPCPetri(Clone)":
-                    return new NPCStory(player, "Petri");
+                    return new NPCStory(player, "Petri", events);
                 case "NPCMatti(Clone)":
-                    return new NPCStory(player, "Matti");
+                    return new NPCStory(player, "Matti", events);
             default:
-                return new NPCStory(player, "Default");
+                return new NPCStory(player, "Default", events);
             }
         }
     }

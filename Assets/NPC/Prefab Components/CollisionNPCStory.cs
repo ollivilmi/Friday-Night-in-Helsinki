@@ -19,7 +19,7 @@ namespace NPC
         {
             base.Initialization();
             npcType = FindObjectOfType<NPCType>();
-            npc = npcType.GetType(this);
+            npc = npcType.GetType(this, events);
             dHolder = new DialogueHolderStory(player, iManager, npc);
             collisionText = "Talk";
         }

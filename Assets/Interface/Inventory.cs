@@ -17,7 +17,7 @@ namespace Interface
         public Player.Player player { get; set; }
         private string active;
         private Image imageQuestItem;
-        private int i;
+        private int index;
 
         private void Start()
         {
@@ -34,7 +34,7 @@ namespace Interface
             inventoryQuest.onClick.AddListener(() => infoPanel("Quest Item"));
 
             inventoryInfo = GameObject.Find("Item info").GetComponent<Button>();
-            inventoryInfo.onClick.AddListener(() => CloseInfo());
+            inventoryInfo.onClick.AddListener(() => closeInfo());
 
             imageQuestItem = GameObject.Find("QuestItem").GetComponent<Image>();
 
@@ -76,13 +76,13 @@ namespace Interface
             amountBeer.text = ""+player.items[0].amount;
             amountTobacco.text = "" + player.items[1].amount;
             amountQuestItem.text = ""+player.itemsQuest.Count;
-            imageQuestItem.sprite = player.itemsQuest[i].image;
+            imageQuestItem.sprite = player.itemsQuest[index].image;
         }
 
         /// <summary>
         /// Closes item information panel.
         /// </summary>
-        private void CloseInfo()
+        private void closeInfo()
         {
             panelInformation.SetActive(false);
             active = null;
@@ -104,12 +104,12 @@ namespace Interface
                     updateInventory();
                     break;
                 case "Quest Item":
-                    i++;
-                    if (i >= player.itemsQuest.Count)
+                    index++;
+                    if (index >= player.itemsQuest.Count)
                     {
-                        i = 0;
+                        index = 0;
                     }
-                    info.text = player.itemsQuest[i].description;
+                    info.text = player.itemsQuest[index].description;
                     updateInventory();
                     break;
             }
@@ -152,7 +152,7 @@ namespace Interface
                         useItem(item);
                         break;
                     }
-                    info.text = player.itemsQuest[i].description;
+                    info.text = player.itemsQuest[index].description;
                     active = item;
                     break;
             }

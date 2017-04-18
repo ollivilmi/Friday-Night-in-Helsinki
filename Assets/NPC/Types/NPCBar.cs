@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
 
 namespace NPC
 {
@@ -10,8 +11,9 @@ namespace NPC
     {
         private int itemIndex;
 
-        public NPCBar()
+        public NPCBar(GameEvents events)
         {
+            this.events = events;
             mood = random.Next(0, 101);
             items = new List<string>() { "Beer", "Tobacco" };
             itemIndex = items.Count - 1;
@@ -22,6 +24,7 @@ namespace NPC
         /// <param name="item"></param>
         public string ReturnItems(out string item)
         {
+            events.ChangeTime(3);
             item = "";
             if (mood == 100)
             {

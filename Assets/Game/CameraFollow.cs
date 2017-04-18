@@ -21,7 +21,9 @@ namespace Game
             xMin = 0;
             speed = 10f;
         }
-
+        /// <summary>
+        /// Restricts camera movement to xMin and xMax, follows player.
+        /// </summary>
         private void LateUpdate()
         {
             targetPos = new Vector3(Mathf.Clamp(player.position.x, xMin, xMax), transform.position.y, transform.position.z);
