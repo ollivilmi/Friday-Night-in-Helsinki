@@ -8,13 +8,13 @@ namespace NPC
 {
     public class NPCBar : NPC
     {
-        private int x;
+        private int itemIndex;
 
         public NPCBar()
         {
             mood = random.Next(0, 101);
             items = new List<string>() { "Beer", "Tobacco" };
-            x = items.Count - 1;
+            itemIndex = items.Count - 1;
         }
         /// <summary>
         /// Checks mood. If 100 and the NPC has items, return item.
@@ -27,10 +27,10 @@ namespace NPC
             {
                 if (items.Count > 0)
                 {
-                    item = items[x];
-                    string temp = "You received " + items[x]+".";
-                    items.Remove(items[x]); 
-                    x--;
+                    item = items[itemIndex];
+                    string temp = "You received " + items[itemIndex]+".";
+                    items.Remove(items[itemIndex]); 
+                    itemIndex--;
                     return temp;
                 }
                 else
