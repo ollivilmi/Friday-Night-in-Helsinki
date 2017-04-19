@@ -28,7 +28,7 @@ public class Initialize : MonoBehaviour {
 	public  string backStory;
 	//public Player.Jarno jarno;
 
-	public DataSaver dataSaver;
+	private DataSaver dataSaver;
 
 	public Player.Player jarno;
 	public Player.Player make;
@@ -41,13 +41,11 @@ public class Initialize : MonoBehaviour {
 		make = new Make();
 		teddy = new Teddy();
 
-
-		//print (dataSaver);
-
 		ActivePlayer = GameObject.Find("ActivePlayer");
+        dataSaver = FindObjectOfType<DataSaver>();
 
-		// Find UI elements
-		Char1 = GameObject.Find("Character 1").GetComponent<Button>();
+        // Find UI elements
+        Char1 = GameObject.Find("Character 1").GetComponent<Button>();
 		Char2 = GameObject.Find("Character 2").GetComponent<Button>();
 		Char3 = GameObject.Find("Character 3").GetComponent<Button>();
 		CharCreation = GameObject.Find("Character Creation").GetComponent<Button>();
@@ -99,8 +97,6 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Jarno's back story and picture (sprite) to corresponding elements
-		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
-
 		backStory = jarno.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
 		text.text = backStory;
@@ -110,7 +106,6 @@ public class Initialize : MonoBehaviour {
 		playerImage.sprite = playerSprite;
 
 		dataSaver.character = "Jarno";
-		print (dataSaver);
 
 	}
 
@@ -126,9 +121,6 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Make's back story and picture (sprite) to corresponding elements
-
-		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
-
 		backStory = make.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
 		text.text = backStory;
@@ -154,8 +146,6 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Teddy's back story and picture (sprite) to corresponding elements
-		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
-
 		backStory = teddy.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
 		text.text = backStory;
