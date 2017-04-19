@@ -11,7 +11,6 @@ namespace NPC
     public class NPCStory : NPC
     {
         private int itemIndex;
-        private Sprite phone;
         public string Functionality { get; set; }
         protected Story story;
         /// <summary>
@@ -23,7 +22,6 @@ namespace NPC
         {
             this.player = player;
             this.events = events;
-            phone = Resources.Load<Sprite>("phone");
             itemsQuest = new List<QuestItem>();
             switch (npcname)
             {
@@ -32,11 +30,12 @@ namespace NPC
                     break;
                 case "Matti":
                     story = new Story(player, this, "Where are you from?", events);
+                    Sprite phone = Resources.Load<Sprite>("phone");
                     itemsQuest.Add(new QuestItem(phone, "Careful! This is almost antique."));
                     itemIndex = itemsQuest.Count - 1;
                     break;
                 default:
-                    story = new Story(player, this, "Where are you from?", events);
+                    story = new Story(player, this, "Hello.", events);
                     break;
             }
         }

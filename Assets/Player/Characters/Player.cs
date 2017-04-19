@@ -21,9 +21,11 @@ namespace Player
         public string[] reply { get; set; }
         public string[] answer { get; set; }
         public string special { get; set; }
+        protected System.Random random;
 
         public Player()
         {
+            random = new System.Random();
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
         }
@@ -144,15 +146,7 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string Think();
-        /// <summary>
-        /// Sets the characters story variables to HAY so that the NPC can
-        /// use them.
-        /// </summary>
         public abstract void StoryPetri();
-        /// <summary>
-        /// Sets the characters story variables to WAYF so that the NPC can
-        /// use them.
-        /// </summary>
         public abstract void StoryMatti();
         /// <summary>
         /// Character specific request option to story npcs.
@@ -164,6 +158,24 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
+        public void StoryFiller()
+        {
+            string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
+            string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me english very small.", "¿Hablas español?", "I'm doing just great." };
+            story = new string[]
+            {
+                fillerStory1[random.Next(0,5)],
+                fillerStory2[random.Next(0,6)]
+            };
+            reply = new string[] {
+                "Hello. How are you?",
+                "Good bye."
+            };
+            answer = new string[]
+            {
+                "Continue", "Quit"
+            };
+        }
 
         public void SetStory(string name)
         {
@@ -174,6 +186,9 @@ namespace Player
                     break;
                 case "Where are you from?":
                     StoryMatti();
+                    break;
+                case "Hello.":
+                    StoryFiller();
                     break;
             }
         }

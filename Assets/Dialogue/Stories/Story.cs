@@ -17,14 +17,14 @@ namespace Dialogue
         private NPCStory npc;
         private GameEvents events;
 
-        public Story(Player.Player player, NPCStory npc, string name, GameEvents events)
+        public Story(Player.Player player, NPCStory npc, string storyName, GameEvents events)
         {
             this.player = player;
             this.npc = npc;
-            this.name = name;
+            this.name = storyName;
             this.events = events;
             this.finished = false;
-            this.player.SetStory(name);
+            this.player.SetStory(storyName);
             this.story = player.story;
             this.reply = player.reply;
             this.answer = player.answer;

@@ -14,7 +14,9 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, barNPC, npcPetri, npcMatti, doorRWS1, doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1, metroHelsinki, metroSornainen;
+        private GameObject character, barNPC, npcPetri, npcMatti, doorRWS1,
+        doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1,
+        metroHelsinki, metroSornainen, npcFiller;
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
@@ -57,6 +59,7 @@ namespace Game
             barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
             npcPetri = (GameObject)Resources.Load("NPCPetri", typeof(GameObject));
             npcMatti = (GameObject)Resources.Load("NPCMatti", typeof(GameObject));
+            npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
             doorRWS1 = (GameObject)Resources.Load("DoorRWS1", typeof(GameObject));
             doorMainHall1 = (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject));
             doorMainHall2 = (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject));
@@ -69,6 +72,8 @@ namespace Game
             Instantiate(npcPetri, npcPetri.transform.position, npcPetri.transform.rotation);
             Instantiate(npcMatti, npcMatti.transform.position, npcMatti.transform.rotation);
             Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
+            Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
+            Instantiate(npcFiller, new Vector3(-90f,-8f), npcFiller.transform.rotation);
             Instantiate(doorRWS1, doorRWS1.transform.position, doorRWS1.transform.rotation);
             Instantiate(doorMainHall1, doorMainHall1.transform.position, doorMainHall1.transform.rotation);
             Instantiate(doorMainHall2, doorMainHall2.transform.position, doorMainHall2.transform.rotation);
