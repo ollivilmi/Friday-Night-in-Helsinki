@@ -62,20 +62,33 @@ namespace Interface
             this.dHolder = dHolder;
         }
 
+        /// <summary>
+        /// Sets collision target so that Interaction() can be used.
+        /// </summary>
+        /// <param name="target"></param>
         public void SetTarget(NPC.Collision target)
         {
             this.target = target;
         }
 
+        /// <summary>
+        /// Changes NPC image in the dialogue system.
+        /// </summary>
+        /// <param name="imageNPC"></param>
         public void SetNPCImage(Sprite imageNPC)
         {
             this.imageNPC.sprite = imageNPC;
         }
 
+        /// <summary>
+        /// Enables/disables dialogue UI and player movement.
+        /// </summary>
+        /// <param name="set"></param>
         public void SetDialogueActive(bool set)
         {
             dialogueActive = set;
             playerMovement.Stop = set;
+            playerMovement.StopMovement();
             background.SetActive(set);
         }
 
@@ -120,9 +133,9 @@ namespace Interface
         /// </summary>
         private void Interaction()
         {
+            playerMovement.StopMovement();
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
-            playerMovement.StopMovement();
         }
     }
 }

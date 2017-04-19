@@ -12,12 +12,14 @@ namespace NPC
 {
     public class CollisionNPCStory : Collision
     {
-        private NPCBouncer npc;
+        private NPCStory npc;
+        private NPCType npcType;
 
         override protected void Start()
         {
             base.Initialization();
-            npc = new NPCBouncer(player);
+            npcType = FindObjectOfType<NPCType>();
+            npc = npcType.GetType(this, events);
             dHolder = new DialogueHolderStory(player, iManager, npc);
             collisionText = "Talk";
         }
@@ -40,6 +42,7 @@ namespace NPC
 
         override public void Interaction()
         {
+            dHolder.storyDialogue.SetStory(npc.GetStory());
             dHolder.StartDialogue();
             iManager.SetNPCImage(image);
         }

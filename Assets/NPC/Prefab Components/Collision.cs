@@ -29,7 +29,9 @@ namespace NPC
         {
             Initialization();
         }
-
+        /// <summary>
+        /// Finds objects and instances of player
+        /// </summary>
         protected void Initialization()
         {
             controller = FindObjectOfType<GameController>();

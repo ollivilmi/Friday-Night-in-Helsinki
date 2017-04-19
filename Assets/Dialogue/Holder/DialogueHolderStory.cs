@@ -11,7 +11,6 @@ namespace Dialogue
 {
     public class DialogueHolderStory : DialogueHolder
     {
-        private StoryRandom randomStoryDialogue;
         private NPCStory npc;
         private bool specialUsed, optionsActive;
 
@@ -21,7 +20,7 @@ namespace Dialogue
             this.iManager = iManager;
             iManager.SetHolder(this);
             this.npc = npc;
-            this.randomStoryDialogue = new StoryRandom(player, npc);
+            this.storyDialogue = new StoryHolder(player, npc);
             this.level = 0;
             this.specialUsed = false;
             this.optionsActive = false;
@@ -66,7 +65,7 @@ namespace Dialogue
         /// </summary>
         private void InitializeStoryDialogue()
         {
-            npcDialogue = randomStoryDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
+            npcDialogue = storyDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
             iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Quit");
             iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
@@ -79,7 +78,7 @@ namespace Dialogue
         /// </summary>
         private void InitializeDialogueOptions()
         {
-            iManager.ShowBox(randomStoryDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
+            iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
 
             if (npc.Functionality != null)
             {
@@ -87,8 +86,8 @@ namespace Dialogue
             }
 
             iManager.ShowBox(player.special, iManager.dBoxAnswer2, "Special");
-            iManager.ShowBox(randomStoryDialogue.GetStoryName(), iManager.dBoxAnswer3, "Story");
-            dialogueLength = randomStoryDialogue.GetStoryLength();
+            iManager.ShowBox(storyDialogue.GetStoryName(), iManager.dBoxAnswer3, "Story");
+            dialogueLength = storyDialogue.GetStoryLength();
             optionsActive = true;
         }
 
@@ -114,7 +113,7 @@ namespace Dialogue
                     }
                     break;
                 case "Story": //Character specific
-                    if (randomStoryDialogue.finished)
+                    if (storyDialogue.finished)
                     {
                         iManager.ShowBox("Hey, we already talked.", iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
                         break;

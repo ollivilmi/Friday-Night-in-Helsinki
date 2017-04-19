@@ -16,7 +16,7 @@ namespace NPC {
         override protected void Start()
         {
             base.Initialization();
-            npc = new NPCBar();
+            npc = new NPCBar(events);
             dHolder = new DialogueHolderBar(player, iManager, npc);
             collisionText = "Talk";
         }

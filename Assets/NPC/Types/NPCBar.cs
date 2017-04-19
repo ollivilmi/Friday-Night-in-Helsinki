@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
 
 namespace NPC
 {
     public class NPCBar : NPC
     {
-        private int x;
+        private int itemIndex;
 
-        public NPCBar()
+        public NPCBar(GameEvents events)
         {
+            this.events = events;
             mood = random.Next(0, 101);
             items = new List<string>() { "Beer", "Tobacco" };
-            x = items.Count - 1;
+            itemIndex = items.Count - 1;
         }
         /// <summary>
         /// Checks mood. If 100 and the NPC has items, return item.
@@ -22,15 +24,16 @@ namespace NPC
         /// <param name="item"></param>
         public string ReturnItems(out string item)
         {
+            events.ChangeTime(3);
             item = "";
             if (mood == 100)
             {
                 if (items.Count > 0)
                 {
-                    item = items[x];
-                    string temp = "You received " + items[x]+".";
-                    items.Remove(items[x]); 
-                    x--;
+                    item = items[itemIndex];
+                    string temp = "You received " + items[itemIndex]+".";
+                    items.Remove(items[itemIndex]); 
+                    itemIndex--;
                     return temp;
                 }
                 else

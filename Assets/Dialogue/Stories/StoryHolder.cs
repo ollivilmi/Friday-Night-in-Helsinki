@@ -6,28 +6,22 @@ using NPC;
 
 namespace Dialogue
 {
-    public class StoryRandom
+    public class StoryHolder
     {
         private string[] dialogueOpener;
         private Random random;
         private Story story;
         public bool finished { get; set; }
 
-        public StoryRandom(Player.Player player, NPCStory npc)
+        public StoryHolder(Player.Player player, NPCStory npc)
         {
             random = new Random();
             this.dialogueOpener = new string[] { "Hey.", "Hello.", "Greetings.", "Yes?", "Sup." };
-            switch (random.Next(1, 3))
-            {
-                case 1:
-                    this.story = new StoryHAY(player, npc);
-                    finished = false;
-                    break;
-                case 2:
-                    this.story = new StoryWAYF(player, npc);
-                    finished = false;
-                    break;
-          }
+        }
+
+        public void SetStory(Story story)
+        {
+            this.story = story;
         }
 
         /// <summary>
