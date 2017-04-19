@@ -28,15 +28,22 @@ public class Initialize : MonoBehaviour {
 	public  string backStory;
 	//public Player.Jarno jarno;
 
-	//public Jarno jarno;
+	public DataSaver dataSaver;
 
-	public Initialize (){
-		//Image playerImage = playerImage;
-	}
+	public Player.Player jarno;
+	public Player.Player make;
+	public Player.Player teddy;
+
 
 	// Use this for initialization
 	void Start () {
-		//SceneManager.LoadScene(1, LoadSceneMode.Single);
+		jarno = new Jarno();
+		make = new Make();
+		teddy = new Teddy();
+
+
+		//print (dataSaver);
+
 		ActivePlayer = GameObject.Find("ActivePlayer");
 
 		// Find UI elements
@@ -92,7 +99,7 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Jarno's back story and picture (sprite) to corresponding elements
-		Jarno jarno = new Jarno();
+		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
 
 		backStory = jarno.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
@@ -101,6 +108,9 @@ public class Initialize : MonoBehaviour {
 		playerSprite = jarno.GetPlayerSprite();
 		Image playerImage = CharImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
+
+		dataSaver.character = "Jarno";
+		print (dataSaver);
 
 	}
 
@@ -116,7 +126,8 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Make's back story and picture (sprite) to corresponding elements
-		Make make = new Make();
+
+		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
 
 		backStory = make.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
@@ -125,6 +136,10 @@ public class Initialize : MonoBehaviour {
 		playerSprite = make.GetPlayerSprite();
 		Image playerImage = CharImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
+
+		dataSaver.character = "Make";
+
+
 
 	}
 	public void ChooseTeddy (){
@@ -139,7 +154,7 @@ public class Initialize : MonoBehaviour {
 		CharImage.gameObject.SetActive(true);
 
 		// insert Teddy's back story and picture (sprite) to corresponding elements
-		Teddy teddy = new Teddy();
+		DataSaver dataSaver = FindObjectOfType<DataSaver> ();
 
 		backStory = teddy.GetBackStory();
 		Text text = BackStory.GetComponentInChildren<Text>();
@@ -148,6 +163,8 @@ public class Initialize : MonoBehaviour {
 		playerSprite = teddy.GetPlayerSprite();
 		Image playerImage = CharImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
+
+		dataSaver.character = "Teddy";
 
 	}
 }

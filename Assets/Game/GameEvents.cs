@@ -20,11 +20,23 @@ namespace Game
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
         /// </summary>
-        public GameEvents()
+		public GameEvents(string selectedCharacter)
         {
-            //player = new Jarno();
-            player = new Teddy();
-            //player = new Make();
+			switch (selectedCharacter) {
+
+			case "Jarno": 
+            
+				player = new Jarno ();
+				break;
+
+			case "Make":
+				player = new Make ();
+				break;
+
+			case "Teddy":
+				player = new Teddy ();
+				break;
+			}
             this.hour = player.hour;
             this.minute = player.minute;
         }

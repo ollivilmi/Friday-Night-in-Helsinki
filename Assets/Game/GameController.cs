@@ -24,10 +24,14 @@ namespace Game
         private Text stats, info;
         private Door door;
         private NPCType npcType;
+		private DataSaver dataSaver;
+		private string selectedCharacter;
 
         private void Start()
         {
-            events = new GameEvents();
+			dataSaver = FindObjectOfType<DataSaver> ();
+			selectedCharacter = dataSaver.character;
+            events = new GameEvents(selectedCharacter);
             GetObjects();
             SetUpScripts();
             StartPrefabs();
