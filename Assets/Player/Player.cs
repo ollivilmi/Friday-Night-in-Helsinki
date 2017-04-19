@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
-    public abstract class Player
+	public abstract class Player 
     {
         public int drunkLevel { get; set; }
         protected int likability, funLevel;
@@ -22,15 +23,9 @@ namespace Player
         public string[] answer { get; set; }
         public string special { get; set; }
 
-<<<<<<< Updated upstream
-=======
-		//changes by paul
-		public string backStory;
 		public Sprite playerSprite;
+		public String backStory;
 
-
-
->>>>>>> Stashed changes
         public Player()
         {
             this.items = new List<Item> { new Beer(this, 3), new Tobacco(this, 20)};
@@ -174,16 +169,10 @@ namespace Player
         /// <returns></returns>
         public abstract string SpecialUsed();
 
-		//changes by paul
-		//public abstract void SetBackStory();
-		//tra
-		//public abstract string GetBackStory();
-		//tra
-		//public abstract void SetSprite ();
-		//tra
-		//public abstract Sprite GetSprite();
-		//tra
+
     }
+
+
 
 
 }

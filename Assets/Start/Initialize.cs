@@ -1,8 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Player;
+
+using System;
+
+using System.Linq;
+using System.Text;
+using Game;
+using Dialogue;
+
 
 public class Initialize : MonoBehaviour {
 
@@ -12,13 +20,26 @@ public class Initialize : MonoBehaviour {
 	public Button CharCreation{ get; set;}
 	public Button StartGame { get; set; }
 	public Text BackStory { get; set;}
-	public Image CharImage{ get; set;}
+	public Image CharImage { get; set;}
 
+	public GameObject ActivePlayer;
+	//public Image playerImage;
+	public Sprite playerSprite;
+	public  string backStory;
+	//public Player.Jarno jarno;
+
+	//public Jarno jarno;
+
+	public Initialize (){
+		//Image playerImage = playerImage;
+	}
 
 	// Use this for initialization
 	void Start () {
 		//SceneManager.LoadScene(1, LoadSceneMode.Single);
+		ActivePlayer = GameObject.Find("ActivePlayer");
 
+		// Find UI elements
 		Char1 = GameObject.Find("Character 1").GetComponent<Button>();
 		Char2 = GameObject.Find("Character 2").GetComponent<Button>();
 		Char3 = GameObject.Find("Character 3").GetComponent<Button>();
@@ -27,6 +48,7 @@ public class Initialize : MonoBehaviour {
 		BackStory = GameObject.Find("Back Story").GetComponent<Text>();
 		CharImage = GameObject.Find("Character Image").GetComponent<Image>();
 
+		// set UI elements on/off
 		Char1.gameObject.SetActive(false);
 		Char2.gameObject.SetActive(false);
 		Char3.gameObject.SetActive(false);
@@ -39,10 +61,28 @@ public class Initialize : MonoBehaviour {
 		foreach(GameObject g in SceneManager.GetSceneAt(2).GetRootGameObjects()){
 			g.SetActive (false);
 		}
-			
+
 	}
 
 	public void GotoCharacterCreation(){
+
+		// set UI elements on/off
+		Char1.gameObject.SetActive(true);
+		Char2.gameObject.SetActive(true);
+		Char3.gameObject.SetActive(true);
+		CharCreation.gameObject.SetActive(false);
+		StartGame.gameObject.SetActive(false);
+		BackStory.gameObject.SetActive(true);
+		CharImage.gameObject.SetActive(true);
+	}
+	// Update is called once per frame
+	void Update () {
+
+	}
+
+	public void ChooseJarno (){
+
+		// set UI elements on/off
 		Char1.gameObject.SetActive(true);
 		Char2.gameObject.SetActive(true);
 		Char3.gameObject.SetActive(true);
@@ -50,9 +90,64 @@ public class Initialize : MonoBehaviour {
 		StartGame.gameObject.SetActive(true);
 		BackStory.gameObject.SetActive(true);
 		CharImage.gameObject.SetActive(true);
+
+		// insert Jarno's back story and picture (sprite) to corresponding elements
+		Jarno jarno = new Jarno();
+
+		backStory = jarno.GetBackStory();
+		Text text = BackStory.GetComponentInChildren<Text>();
+		text.text = backStory;
+
+		playerSprite = jarno.GetPlayerSprite();
+		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		playerImage.sprite = playerSprite;
+
 	}
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void ChooseMake (){
+
+		// set UI elements on/off
+		Char1.gameObject.SetActive(true);
+		Char2.gameObject.SetActive(true);
+		Char3.gameObject.SetActive(true);
+		CharCreation.gameObject.SetActive(false);
+		StartGame.gameObject.SetActive(true);
+		BackStory.gameObject.SetActive(true);
+		CharImage.gameObject.SetActive(true);
+
+		// insert Make's back story and picture (sprite) to corresponding elements
+		Make make = new Make();
+
+		backStory = make.GetBackStory();
+		Text text = BackStory.GetComponentInChildren<Text>();
+		text.text = backStory;
+
+		playerSprite = make.GetPlayerSprite();
+		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		playerImage.sprite = playerSprite;
+
+	}
+	public void ChooseTeddy (){
+
+		// set UI elements on/off
+		Char1.gameObject.SetActive(true);
+		Char2.gameObject.SetActive(true);
+		Char3.gameObject.SetActive(true);
+		CharCreation.gameObject.SetActive(false);
+		StartGame.gameObject.SetActive(true);
+		BackStory.gameObject.SetActive(true);
+		CharImage.gameObject.SetActive(true);
+
+		// insert Teddy's back story and picture (sprite) to corresponding elements
+		Teddy teddy = new Teddy();
+
+		backStory = teddy.GetBackStory();
+		Text text = BackStory.GetComponentInChildren<Text>();
+		text.text = backStory;
+
+		playerSprite = teddy.GetPlayerSprite();
+		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		playerImage.sprite = playerSprite;
+
 	}
 }
