@@ -13,9 +13,11 @@ namespace Dialogue
     {
         private NPCStory npc;
         private bool specialUsed, optionsActive;
+        private string[] finishDialogue;
 
         public DialogueHolderStory(Player.Player player, InterfaceManager iManager, NPCStory npc)
         {
+            this.random = new System.Random();
             this.player = player;
             this.iManager = iManager;
             iManager.SetHolder(this);
@@ -24,6 +26,7 @@ namespace Dialogue
             this.level = 0;
             this.specialUsed = false;
             this.optionsActive = false;
+            this.finishDialogue = new string[] { "Hey, we already talked.", "Yes? We talked already, didn't we?", "You again?", "Oh hello... Again." };
         }
 
         /// <summary>
@@ -115,7 +118,7 @@ namespace Dialogue
                 case "Story": //Character specific
                     if (storyDialogue.finished)
                     {
-                        iManager.ShowBox("Hey, we already talked.", iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
+                        iManager.ShowBox(finishDialogue[random.Next(0,4)], iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
                         break;
                     }
                     optionsActive = false;

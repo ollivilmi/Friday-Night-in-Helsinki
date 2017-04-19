@@ -35,12 +35,32 @@ namespace Player
 
         override public string Special()
         {
-            useMoney(-10);
-            return "What? Thanks I guess... You're still an asshole.";
+            switch (random.Next(0, 4))
+            {
+                case 0:
+                    useMoney(-10);
+                    return "What? Thanks I guess... You're still an asshole.";
+                case 1:
+                    useMoney(-10);
+                    haveFun(10);
+                    return "Ohh, thank you!";
+                case 2:
+                    useMoney(-10);
+                    haveFun(5);
+                    return "Thanks... I guess?";
+                case 3:
+                    haveFun(-10);
+                    return "Do I look like I need your money? Get out of my face.";
+                default:
+                    return "";
+            }
         }
         override public string SpecialUsed()
         {
-            return "Are you trying to humiliate me? I don't want your money.";
+            string[] randomAnswer = { "Are you trying to humiliate me? I don't want your money.",
+                "Thanks, but I don't think should take more money from you...", "Uhh... Do I look that poor to you?",
+                "Do you think money will make me like you?", "Did you know you can't buy friends?" };
+            return randomAnswer[random.Next(0, randomAnswer.Length)];
         }
 
         override public void StoryPetri()
@@ -49,8 +69,8 @@ namespace Player
                 "I was stuck in a dead end job that I absolutely could care less about and I had had enough. Turns out the only reason I was still married was money.",
                 "Could you pass me a cigarette?",
                 "I'm just contemplating to end it all... I still have money, but at this rate not for long.",
-                "Fuck off, I've already contributed more than you have as a father to society.",
-                "I could bash your head to pieces in 5 seconds. Do you want that?",
+                "Fuck off, I've already contributed more than you have to society. I'm a father of 3 children.",
+                "I could bash your head to pieces in 5 seconds. Would you like that?",
                 "You know what? What ever. I'm done with you." };
             reply = new string[] { "I like your attitude.",
                 "Well, money really is the only thing that matters. Everyone needs to contribute to society.",
@@ -77,7 +97,7 @@ namespace Player
                 "I knew it. I know some people from Kuopio.",
                 "Ahh yes, do I know you?",
                 "Ahh... What are you up to?",
-                "I know, I've been one myself.",
+                "I know, I've been one myself. Are you with someone?",
                 "Sure thing. See you around."
             };
             answer = new string[] { "Continue", "Continue", "Continue", "Continue", "Continue", "Quit" };

@@ -169,8 +169,8 @@ namespace Player
             string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me english very small.", "¿Hablas español?", "I'm doing just great." };
             story = new string[]
             {
-                fillerStory1[random.Next(0,5)],
-                fillerStory2[random.Next(0,6)]
+                fillerStory1[random.Next(0,fillerStory1.Length)],
+                fillerStory2[random.Next(0,fillerStory2.Length)]
             };
             reply = new string[] {
                 "Hello. How are you?",
