@@ -118,7 +118,7 @@ namespace Dialogue
                 case "Story": //Character specific
                     if (storyDialogue.finished)
                     {
-                        iManager.ShowBox(finishDialogue[random.Next(0,4)], iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
+                        iManager.ShowBox(finishDialogue[random.Next(0,finishDialogue.Length)], iManager.dBoxNPC, "Quit"); //After completing the story dialogue, you can't talk through it again.
                         break;
                     }
                     optionsActive = false;

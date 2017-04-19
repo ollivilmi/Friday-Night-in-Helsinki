@@ -42,11 +42,11 @@ namespace Player
                     return "What? Thanks I guess... You're still an asshole.";
                 case 1:
                     useMoney(-10);
-                    haveFun(10);
+                    haveFun(7);
                     return "Ohh, thank you!";
                 case 2:
                     useMoney(-10);
-                    haveFun(5);
+                    haveFun(4);
                     return "Thanks... I guess?";
                 case 3:
                     haveFun(-10);
