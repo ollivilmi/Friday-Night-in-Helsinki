@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
-    public abstract class Player
+	public abstract class Player 
     {
         public int drunkLevel { get; set; }
         protected int likability, funLevel;
@@ -22,6 +23,9 @@ namespace Player
         public string[] answer { get; set; }
         public string special { get; set; }
         protected System.Random random;
+
+		public Sprite playerSprite;
+		public String backStory;
 
         public Player()
         {
@@ -158,6 +162,10 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
+<<<<<<< HEAD:Assets/Player/Player.cs
+
+
+=======
         public void StoryFiller()
         {
             string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
@@ -192,5 +200,10 @@ namespace Player
                     break;
             }
         }
+>>>>>>> master:Assets/Player/Characters/Player.cs
     }
+
+
+
+
 }
