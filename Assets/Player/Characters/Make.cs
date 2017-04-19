@@ -26,6 +26,8 @@ namespace Player
             items[1].amount = 20;
             knife = Resources.Load<Sprite>("Chef_Knife");
             itemsQuest.Add(new QuestItem(knife, "In case of emergency."));
+			this.playerSprite = Resources.Load<Sprite> ("Character2");
+			this.backStory = "MAKE IS A MAN";
         }
 
         override public string Think()
@@ -74,5 +76,7 @@ namespace Player
             };
             answer = new string[] { "Continue", "Quit" };
         }
+
+
     }
 }

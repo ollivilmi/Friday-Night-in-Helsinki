@@ -24,6 +24,8 @@ namespace Player
             this.funLevel = -20;
             phone = Resources.Load<Sprite>("iphone");
             itemsQuest.Add(new QuestItem(phone, "Your mobile phone. It's turned off today."));
+			this.playerSprite = Resources.Load<Sprite> ("Character3");
+			this.backStory = "Teddy has money";
         }
 
         override public string Think()
@@ -80,5 +82,7 @@ namespace Player
             };
             answer = new string[] { "Continue", "Continue", "Continue", "Continue", "Continue", "Quit" };
         }
+
+
     }
 }

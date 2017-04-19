@@ -162,10 +162,7 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public abstract string SpecialUsed();
-<<<<<<< HEAD:Assets/Player/Player.cs
 
-
-=======
         public void StoryFiller()
         {
             string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
@@ -200,10 +197,14 @@ namespace Player
                     break;
             }
         }
->>>>>>> master:Assets/Player/Characters/Player.cs
+
+		public String GetBackStory(){
+			return this.backStory;
+		}
+
+		public Sprite GetPlayerSprite()
+		{
+			return this.playerSprite;
+		}
     }
-
-
-
-
 }

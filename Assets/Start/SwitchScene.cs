@@ -19,7 +19,7 @@ public class SwitchScene : MonoBehaviour {
 	}
 
 
-	public void ChangeScene () {
+	public void Change () {
 
 		SceneManager.SetActiveScene (SceneManager.GetSceneAt (2));
 		foreach(GameObject g in SceneManager.GetSceneAt(2).GetRootGameObjects()){
