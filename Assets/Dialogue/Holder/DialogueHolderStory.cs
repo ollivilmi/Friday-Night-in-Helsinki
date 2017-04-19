@@ -6,6 +6,7 @@ using NPC;
 using UnityEngine;
 using UnityEngine.UI;
 using Interface;
+using Player;
 
 namespace Dialogue
 {
@@ -83,9 +84,9 @@ namespace Dialogue
         {
             iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
 
-            if (npc.Functionality != null)
+            if (npc.functionality != null)
             {
-                iManager.ShowBox(npc.Functionality, iManager.dBoxAnswer1, "Functionality");
+                iManager.ShowBox(npc.functionality, iManager.dBoxAnswer1, "Functionality");
             }
 
             iManager.ShowBox(player.special, iManager.dBoxAnswer2, "Special");
@@ -102,7 +103,8 @@ namespace Dialogue
             switch (selection)
             {
                 case "Functionality": //NPC Specific
-                    iManager.ShowBox(npc.Functionality, iManager.dBoxNPC, "Quit"); 
+                    selection = npc.functionality;
+                    StoryOptions();                  
                     break;                                                             
                 case "Special": //Character specific
                     if (!specialUsed)
@@ -159,6 +161,16 @@ namespace Dialogue
                     else iManager.ShowBox("You don't have tobacco.", iManager.dBoxNPC, "Quit");
                     break;
                 case "Quit":
+                    QuitDialogue();
+                    break;
+                case "Is this your phone?":
+                    iManager.ShowBox("Oh, yes! Did you meet my friend Matti? I've been looking for this phone for weeks.", iManager.dBoxNPC, "Quit");
+                    player.haveFun(15);
+                    player.useMoney(20);
+                    player.RemoveQuestItem("Old phone");
+                    npc.functionality = null;
+                    break;
+                default:
                     QuitDialogue();
                     break;
             }

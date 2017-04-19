@@ -71,6 +71,8 @@ namespace Dialogue
                     if (player.name != "Make")
                     {
                         npc.ReturnItems();
+                        CollisionNPCStory tommi = GameObject.Find("NPCTommi(Clone)").GetComponent<CollisionNPCStory>();
+                        tommi.SetFunctionality("Is this your phone?");
                     }
                     break;
             }

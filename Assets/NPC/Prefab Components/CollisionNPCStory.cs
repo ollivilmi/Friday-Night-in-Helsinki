@@ -14,6 +14,7 @@ namespace NPC
     {
         private NPCStory npc;
         private NPCType npcType;
+        private string functionality;
 
         override protected void Start()
         {
@@ -45,6 +46,17 @@ namespace NPC
             dHolder.storyDialogue.SetStory(npc.GetStory());
             dHolder.StartDialogue();
             iManager.SetNPCImage(image);
+        }
+
+        public string GetFunctionality()
+        {
+            return this.functionality;
+        }
+
+        public void SetFunctionality(string func)
+        {
+            this.functionality = func;
+            npc.functionality = this.functionality;
         }
     }
 }

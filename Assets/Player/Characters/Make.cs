@@ -10,7 +10,6 @@ namespace Player
 {
     public class Make : Player
     {
-        private Sprite knife;
         private string[] specialDialogue;
 
         public Make()
@@ -31,8 +30,8 @@ namespace Player
             this.drunkLevel = 30;
             this.funLevel = 0;
             items[1].amount = 20;
-            knife = Resources.Load<Sprite>("Chef_Knife");
-            itemsQuest.Add(new QuestItem(knife, "In case of emergency."));
+            Sprite knife = Resources.Load<Sprite>("Chef_Knife");
+            itemsQuest.Add(new QuestItem("Knife", knife, "In case of emergency."));
 			this.playerSprite = Resources.Load<Sprite> ("Character2");
 			this.backStory = "MAKE IS A MAN";
         }

@@ -10,7 +10,6 @@ namespace Player
 {
     public class Teddy : Player
     {
-        Sprite phone;
         public Teddy()
         {
             this.hour = 17;
@@ -22,8 +21,8 @@ namespace Player
             this.money = 1000;
             this.drunkLevel = 0;
             this.funLevel = -20;
-            phone = Resources.Load<Sprite>("iphone");
-            itemsQuest.Add(new QuestItem(phone, "Your mobile phone. It's turned off today."));
+            Sprite phone = Resources.Load<Sprite>("iphone");
+            itemsQuest.Add(new QuestItem("iPhone", phone, "Your mobile phone. It's turned off today."));
 			this.playerSprite = Resources.Load<Sprite> ("Character3");
 			this.backStory = "Teddy has money";
         }

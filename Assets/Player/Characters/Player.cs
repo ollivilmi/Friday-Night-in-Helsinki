@@ -9,7 +9,7 @@ namespace Player
 {
 	public abstract class Player 
     {
-        public int drunkLevel { get; set; }
+        public double drunkLevel { get; set; }
         protected int likability, funLevel;
         public float speed { get; set; }
         public double money { get; set; }
@@ -39,7 +39,7 @@ namespace Player
         /// <returns></returns>
         public string UpdateStats()
         {
-            return "Drunk: " + drunkLevel + " Money: " + money +
+            return "Drunk: " + (int)drunkLevel + " Money: " + money +
                 " Likability: " + getLikability() + " Fun: " + getfunLevel();
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Player
         /// Drink alcohol. Amount of 1 equals 10/100 drunk level.
         /// </summary>
         /// <param name="amount"></param>
-        public void drink(int amount)
+        public void drink(double amount)
         {
             drunkLevel += amount;
             if (drunkLevel > 100)
@@ -89,7 +89,7 @@ namespace Player
         /// <returns></returns>
         public double drunkFun()
         {
-            return 0.1 * (double)drunkLevel;
+            return 0.1 * drunkLevel;
         }
         /// <summary>
         /// A general method for manipulating player's money. Gives player money when positive,
@@ -114,7 +114,7 @@ namespace Player
         /// <returns></returns>
         public int getLikability()
         {
-            return likability - (drunkLevel / 3);
+            return (int)(likability - (drunkLevel / 3));
         }
         /// <summary>
         /// Adds an item to the player's inventory.
@@ -163,10 +163,11 @@ namespace Player
         /// <returns></returns>
         public abstract string SpecialUsed();
 
+
         public void StoryFiller()
         {
             string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
-            string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me english very small.", "¿Hablas español?", "I'm doing just great." };
+            string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me finnish very small.", "¿Hablas español?", "I'm doing just great." };
             story = new string[]
             {
                 fillerStory1[random.Next(0,fillerStory1.Length)],
@@ -179,6 +180,28 @@ namespace Player
             answer = new string[]
             {
                 "Continue", "Quit"
+            };
+        }
+
+        public void StoryTommi()
+        {
+            story = new string[]
+            {
+                "Hey. I don't know if we've met, I come here almost every week.",
+                "Yes, as a telemarketer. Some days it's actually a very fulfilling job... But in reality I'm just counting days to Friday.",
+                "My name's Tommi, nice to meet you. What's your phone number?",
+                "Hah, I understand. See you around."
+            };
+            reply = new string[]
+            {
+                "Do you work in Helsinki?",
+                "Yeah, that's understandable. It's not a job I could see myself in. What's your name?",
+                "I think I'd rather not give it to you.",
+                "See you."
+            };
+            answer = new string[]
+            {
+                "Continue", "Continue", "Continue", "Quit"
             };
         }
 
@@ -195,6 +218,9 @@ namespace Player
                 case "Hello.":
                     StoryFiller();
                     break;
+                case "Hey, what's up?":
+                    StoryTommi();
+                    break;
             }
         }
 
@@ -206,5 +232,17 @@ namespace Player
 		{
 			return this.playerSprite;
 		}
+
+        public void RemoveQuestItem(string item)
+        {
+            foreach (QuestItem qi in itemsQuest)
+            {
+                if (qi.name == item)
+                {
+                    itemsQuest.Remove(qi);
+                    break;
+                }
+            }
+        }
     }
 }

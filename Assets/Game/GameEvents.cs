@@ -54,9 +54,9 @@ namespace Game
         public void ChangeTime(int minute)
         {
             this.minute += minute;
-            player.drink(-(int)((double)minute * 1 / 6)); //Drunk level decreases by the amount of minutes passed
+            player.drink(-((double)minute * 1 / 6)); //Drunk level decreases by the amount of minutes passed
             while (this.minute >= 60 || this.hour == 24)
-            { //!Note! If only 5 minutes passes it doesnt decrease.
+            {
                 if (this.minute >= 60)
                 {
                     this.minute -= 60;          //Every hour in Africa an hour passes
