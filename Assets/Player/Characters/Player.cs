@@ -186,24 +186,7 @@ namespace Player
 
         public void StoryTommi()
         {
-            story = new string[]
-            {
-                "Hey. I don't know if we've met, I come here almost every week.",
-                "Yes, as a telemarketer. Some days it's actually a very fulfilling job... But in reality I'm just counting days to Friday.",
-                "My name's Tommi, nice to meet you. What's your phone number?",
-                "Hah, I understand. See you around."
-            };
-            reply = new string[]
-            {
-                "Do you work in Helsinki?",
-                "Yeah, that's understandable. It's not a job I could see myself in. What's your name?",
-                "I think I'd rather not give it to you.",
-                "See you."
-            };
-            answer = new string[]
-            {
-                "Continue", "Continue", "Continue", "Quit"
-            };
+            ReadStoryFile("StoryTommi");
         }
 
         public void SetStory(string name)
@@ -234,6 +217,10 @@ namespace Player
 			return this.playerSprite;
 		}
 
+        /// <summary>
+        /// Removes quest item from player's inventory that has the name of the parameter.
+        /// </summary>
+        /// <param name="item">Compared to QuestItem variable "name"</param>
         public void RemoveQuestItem(string item)
         {
             foreach (QuestItem qi in itemsQuest)
@@ -245,7 +232,10 @@ namespace Player
                 }
             }
         }
-
+        /// <summary>
+        /// Reads story file from Resources folder, sets string[] story, reply and answer from it.
+        /// </summary>
+        /// <param name="textFile">Name of the file to read.</param>
         protected void ReadStoryFile(string textFile)
         {
             TextAsset storyTxt = (TextAsset)Resources.Load(textFile);
