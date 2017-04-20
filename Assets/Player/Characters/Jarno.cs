@@ -14,11 +14,8 @@ namespace Player
 {
 	public class Jarno : Player  
 	{
-		private Sprite guitar;
-		//public static Sprite playerImage;
-		//public string backStory;
-
-
+        //public static Sprite playerImage;
+        //public string backStory;
 
         public Jarno()
         {
@@ -33,8 +30,8 @@ namespace Player
             this.funLevel = 20;
             items[0].amount = 2;
             items[1].amount = 20;
-            guitar = Resources.Load<Sprite>("guitar");
-            itemsQuest.Add(new QuestItem(guitar, "Your very own guitar."));
+            Sprite guitar = Resources.Load<Sprite>("guitar");
+            itemsQuest.Add(new QuestItem("Guitar", guitar, "Your very own guitar."));
 			this.playerSprite = Resources.Load<Sprite> ("Character1");
 			this.backStory = "Jarno plays the guitar, drinks beer occasionaly, and is a nice guy in general";
         }
@@ -46,12 +43,30 @@ namespace Player
 
 		override public string Special()
 		{
-			useMoney (5);
-			return "I usually never give money to beggars, but this time I'll make an exception just for you.";
-		}
+            switch (random.Next(0, 4))
+            {
+                case 0:
+                    useMoney(10);
+                    haveFun(3);
+                    return "Well, you don't look like someone who would use it on alcohol so I guess I'll make an exception.";
+                case 1:
+                    useMoney(10);
+                    haveFun(3);
+                    return "I usually don't give anything to beggars... But you're pretty cool.";
+                case 2:
+                    haveFun(-2);
+                    return "No. Why would I give money to you and not African children?";
+                case 3:
+                    haveFun(-6);
+                    return "Begging should be made illegal. People like you make me sick.";
+                default:
+                    return "";
+            }
+        }
 		override public string SpecialUsed()
 		{
-			return "Hey, I already gave you some change.";
+            string[] specialAnswer = new string[] { "What? You're asking me again?", "Please, you asked me already.", "Go bother someone else." };
+            return specialAnswer[random.Next(0, specialAnswer.Length)];
 		}
 			
 	

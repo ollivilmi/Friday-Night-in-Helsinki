@@ -10,10 +10,16 @@ namespace Player
 {
     public class Make : Player
     {
-        private Sprite knife;
+        private string[] specialDialogue;
 
         public Make()
         {
+            specialDialogue = new string[]
+            {
+                "Käytsä usein täällä?", "Jou, mikä meno?",
+                "Kuis menee?", "Mikä svengi?"
+            };
+            this.special = specialDialogue[random.Next(0, specialDialogue.Length)];
             this.hour = 17;
             this.minute = 0;
             this.special = "Käytsä usein täällä?";
@@ -24,8 +30,8 @@ namespace Player
             this.drunkLevel = 30;
             this.funLevel = 0;
             items[1].amount = 20;
-            knife = Resources.Load<Sprite>("Chef_Knife");
-            itemsQuest.Add(new QuestItem(knife, "In case of emergency."));
+            Sprite knife = Resources.Load<Sprite>("Chef_Knife");
+            itemsQuest.Add(new QuestItem("Knife", knife, "In case of emergency."));
 			this.playerSprite = Resources.Load<Sprite> ("Character2");
 			this.backStory = "MAKE IS A MAN";
         }
@@ -37,11 +43,16 @@ namespace Player
 
         override public string Special()
         {
-            return "What? What does that even mean?";
+            this.special = specialDialogue[random.Next(0, specialDialogue.Length)];
+            string[] specialAnswer = new string[] { "What? What does that even mean?", "Could you speak Finnish, please?", "...What?",
+            "Oh... You were talking to me?", "Dear god. You're so drunk you are incomprehensible.", "Did you have something more than just alcohol?" };
+            return specialAnswer[random.Next(0, specialAnswer.Length)];
         }
         override public string SpecialUsed()
         {
-            return "Stop bothering me with your gibberish.";
+            string[] specialAnswer = new string[] { "Stop bothering me with your gibberish.", "I still can't understand you.", "What?",
+            "Someday we'll get rid of foreigners like you.", "Go back to your home country.", "Do you need help? Should I call an ambulance?" };
+            return specialAnswer[random.Next(0, specialAnswer.Length)];
         }
 
         override public void StoryPetri()

@@ -22,6 +22,7 @@ namespace Dialogue
         public StoryHolder storyDialogue { get; set; }
         public int moodChange { get; set; }
         protected Player.Player player;
+        protected System.Random random;
 
         /// <summary>
         /// Starts the dialogue if you click an NPC while on top of it.

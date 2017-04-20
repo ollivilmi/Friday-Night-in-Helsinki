@@ -11,9 +11,11 @@ namespace Player
     {
         public string description { get; set; }
         public Sprite image { get; set; }
+        public string name { get; set; }
 
-        public QuestItem(Sprite image, string description)
+        public QuestItem(string name, Sprite image, string description)
         {
+            this.name = name;
             this.image = image;
             this.description = description;
         }
