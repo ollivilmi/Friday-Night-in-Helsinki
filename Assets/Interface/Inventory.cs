@@ -64,6 +64,9 @@ namespace Interface
             {
                 playerMovement.Stop = false;
                 playerMovement.StopMovement();
+                panelInformation.SetActive(false);
+                index = 0;
+                active = null;
                 panelInventory.SetActive(false);
             }
         }

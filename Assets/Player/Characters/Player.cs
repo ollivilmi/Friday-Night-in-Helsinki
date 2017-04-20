@@ -23,12 +23,13 @@ namespace Player
         public string[] answer { get; set; }
         public string special { get; set; }
         protected System.Random random;
-
+        protected char[] delimiter;
 		public Sprite playerSprite;
 		public String backStory;
 
         public Player()
         {
+            delimiter = new char[] {'/'};
             random = new System.Random();
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
@@ -243,6 +244,15 @@ namespace Player
                     break;
                 }
             }
+        }
+
+        protected void ReadStoryFile(string textFile)
+        {
+            TextAsset storyTxt = (TextAsset)Resources.Load(textFile);
+            string[] storyTemp = storyTxt.text.Split("\n"[0]);
+            story = storyTemp[0].Split(delimiter);
+            reply = storyTemp[1].Split(delimiter);
+            answer = storyTemp[2].Split(delimiter);
         }
     }
 }
