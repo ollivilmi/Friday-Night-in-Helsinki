@@ -167,16 +167,18 @@ namespace Player
 
         public void StoryFiller()
         {
-            string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
-            string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me finnish very small.", "¿Hablas español?", "I'm doing just great." };
+            string[] fillerStory1 = { "Uhh... Me? Just fine.", "I'm doing just great.", "I'm fine I guess.", "Nothing much, really.", "Are you talking to me?" };
+            string[] fillerStory2 = { "Sorry, I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Go bother someone else.", "That was a great conversation. I'm glad we're over it." };
             story = new string[]
             {
                 fillerStory1[random.Next(0,fillerStory1.Length)],
                 fillerStory2[random.Next(0,fillerStory2.Length)]
             };
+            string[] fillerReply1 = { "What brings you here?", "What's your name?", "Where are you from?", "Do you work here?", "What do you think about the weather?", "Have I seen you before?" };
+            string[] fillerReply2 = { "Oh okay, good bye then.", "Okay, bye.", "Okay.", "I see... Good bye.", "Maybe some other time.", "Good bye." };
             reply = new string[] {
-                "Hello. How are you?",
-                "Good bye."
+                fillerReply1[random.Next(0,fillerReply1.Length)],
+                fillerReply2[random.Next(0,fillerReply2.Length)],
             };
             answer = new string[]
             {
@@ -199,11 +201,11 @@ namespace Player
                 case "Where are you from?":
                     StoryMatti();
                     break;
-                case "Hello.":
-                    StoryFiller();
-                    break;
                 case "Hey, what's up?":
                     StoryTommi();
+                    break;
+                default:
+                    StoryFiller();
                     break;
             }
         }

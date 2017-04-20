@@ -57,7 +57,7 @@ namespace Player
         override public string SpecialUsed()
         {
             string[] randomAnswer = { "Are you trying to humiliate me? I don't want your money.",
-                "Thanks, but I don't think should take more money from you...", "Uhh... Do I look that poor to you?",
+                "Thanks, but I don't think should take money from you...", "Uhh... Do I look that poor to you?",
                 "Do you think money will make me like you?", "Did you know you can't buy friends?" };
             return randomAnswer[random.Next(0, randomAnswer.Length)];
         }

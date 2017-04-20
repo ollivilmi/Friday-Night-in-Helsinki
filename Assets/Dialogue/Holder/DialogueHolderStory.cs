@@ -72,7 +72,6 @@ namespace Dialogue
             npcDialogue = storyDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
             iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Quit");
-            iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
             iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
         }
 
@@ -164,14 +163,14 @@ namespace Dialogue
                     QuitDialogue();
                     break;
                 case "Is this your phone?":
-                    iManager.ShowBox("Oh, yes! Did you meet my friend Matti? I've been looking for this phone for weeks.", iManager.dBoxNPC, "Quit");
+                    iManager.ShowBox("Oh, yes! Seems like you met my friend Matti? I've been waiting to get my hands on this phone for weeks.", iManager.dBoxNPC, "Quit");
                     player.haveFun(15);
                     player.useMoney(20);
                     player.RemoveQuestItem("Old phone");
                     npc.functionality = null;
                     break;
                 case "What do you have for sale?":
-                    iManager.ShowBox("I can practically make everything, but honestly you and me both know you just want beer or tobacco.", iManager.dBoxNPC, "Quit");
+                    iManager.ShowBox("Honestly, you and me both know you just want beer or cigarettes...", iManager.dBoxNPC, "Quit");
                     iManager.OpenShop();
                     iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit");
                     break;

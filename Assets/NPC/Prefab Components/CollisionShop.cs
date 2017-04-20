@@ -20,7 +20,7 @@ namespace NPC
             base.Initialization();
             npc = new NPCStory(player, "Shop", events);
             dHolder = new DialogueHolderStory(player, iManager, npc);
-            collisionText = "Shop";
+            collisionText = "Bartender";
             npc.functionality = "What do you have for sale?";
         }
 
