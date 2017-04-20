@@ -20,7 +20,7 @@ namespace Player
             if (amount > 0)
             {
                 amount--;
-                player.haveFun(10);
+                player.haveFun(2);
             }
         }
     }

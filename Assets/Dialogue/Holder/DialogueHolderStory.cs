@@ -50,7 +50,7 @@ namespace Dialogue
             {
                 InitializeDialogueOptions();
             }
-            if (optionsActive) //TODO: don't use level, use a bool
+            if (optionsActive)
             {
                 DialogueOptions();
             }
@@ -169,6 +169,11 @@ namespace Dialogue
                     player.useMoney(20);
                     player.RemoveQuestItem("Old phone");
                     npc.functionality = null;
+                    break;
+                case "What do you have for sale?":
+                    iManager.ShowBox("I can practically make everything, but honestly you and me both know you just want beer or tobacco.", iManager.dBoxNPC, "Quit");
+                    iManager.OpenShop();
+                    iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit");
                     break;
                 default:
                     QuitDialogue();

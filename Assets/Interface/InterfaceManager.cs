@@ -16,8 +16,9 @@ namespace Interface
         public Button dBoxAnswer3 { get; set; }
         public Button buttonInteraction { get; set; }
         public Button[] answerButtons { get; set; }
+        private Button buttonBeer, buttonTobacco;
         private DialogueHolder dHolder;
-        private GameObject background;
+        private GameObject background, panelShop;
         private Image imageNPC, imagePlayer;
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private NPC.Collision target;
@@ -39,6 +40,13 @@ namespace Interface
 
             buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
             buttonInteraction.onClick.AddListener(() => Interaction());
+
+            buttonBeer = GameObject.Find("BeerBuy").GetComponent<Button>();
+            buttonBeer.onClick.AddListener(() => BuyItem("Beer"));
+            buttonTobacco = GameObject.Find("TobaccoBuy").GetComponent<Button>();
+            buttonTobacco.onClick.AddListener(() => BuyItem("Tobacco"));
+
+            panelShop = GameObject.Find("Shop panel");
 
             background = GameObject.Find("Dialogue Background");
             imagePlayer = GameObject.Find("Player image").GetComponent<Image>();
@@ -106,6 +114,18 @@ namespace Interface
             selectedAnswer.Add(box, answer);
         }
         /// <summary>
+        /// Changes button's dialogue without changing what clicking it does
+        /// </summary>
+        /// <param name="dialogue"></param>
+        /// <param name="box"></param>
+        public void ShowBox(string dialogue, Button box)
+        {
+            box.gameObject.SetActive(true);
+            Text text = box.GetComponentInChildren<Text>();
+            text.text = dialogue;
+        }
+
+        /// <summary>
         /// Returns which button was clicked to the DialogueHolder.
         /// </summary>
         /// <param name="answer">Which button is pressed</param>
@@ -125,6 +145,7 @@ namespace Interface
             dBoxAnswer2.gameObject.SetActive(false);
             dBoxAnswer3.gameObject.SetActive(false);
             buttonInteraction.gameObject.SetActive(false);
+            panelShop.gameObject.SetActive(false);
             selectedAnswer.Clear();
         }
         /// <summary>
@@ -136,6 +157,24 @@ namespace Interface
             playerMovement.StopMovement();
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
+        }
+        
+        public void OpenShop()
+        {
+            if (panelShop.activeInHierarchy == false)
+            {
+                playerMovement.Stop = true;
+                panelShop.SetActive(true);
+            }
+            else
+            {
+                panelShop.SetActive(false);
+            }
+        }
+
+        private void BuyItem(string item)
+        {
+            dHolder.BuyItem(item);
         }
     }
 }
