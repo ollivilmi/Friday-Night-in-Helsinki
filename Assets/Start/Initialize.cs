@@ -23,12 +23,12 @@ public class Initialize : MonoBehaviour {
 	public Image CharImage { get; set;}
 
 	public GameObject ActivePlayer;
-	//public Image playerImage;
+
 	public Sprite playerSprite;
 	public  string backStory;
-	//public Player.Jarno jarno;
 
-	public DataSaver dataSaver;
+
+	private DataSaver dataSaver;
 
 	public Player.Player jarno;
 	public Player.Player make;
