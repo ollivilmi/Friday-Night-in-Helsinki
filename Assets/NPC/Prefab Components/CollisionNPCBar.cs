@@ -37,8 +37,9 @@ namespace NPC {
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collision)
+        override protected void OnTriggerStay2D(Collider2D collision)
         {
+            base.OnTriggerStay2D(collision);
             if (dHolder.moodChange != 0)
             {
                 npc.changeMood(dHolder.ReturnMoodChange());

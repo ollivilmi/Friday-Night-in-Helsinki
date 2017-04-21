@@ -46,10 +46,30 @@ namespace NPC
         {
             if (col.gameObject.tag == "Player")
             {
+                if (!player.interacting)
+                {
+                    iManager.SetTarget(this);
+                    try
+                    {
+                        iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                        player.interacting = true;
+                    }
+                     catch (System.ArgumentException)
+                    {
+                    }
+                }
+            }
+        }
+
+        protected virtual void OnTriggerStay2D(Collider2D col)
+        {
+            if (!player.interacting)
+            {
                 iManager.SetTarget(this);
                 try
                 {
                     iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                    player.interacting = true;
                 }
                 catch (System.ArgumentException)
                 {
@@ -62,6 +82,7 @@ namespace NPC
             if (col.gameObject.tag == "Player")
             {
                 iManager.CloseDialogue();
+                player.interacting = false;
             }
         }
 

@@ -26,6 +26,7 @@ namespace Player
         protected char[] delimiter;
 		public Sprite playerSprite;
 		public String backStory;
+        public bool interacting { get; set; }
 
         public Player()
         {
