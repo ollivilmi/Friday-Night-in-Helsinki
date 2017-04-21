@@ -5,19 +5,21 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 using Game;
+using System.Collections;
 
 namespace Interface
 {
     public class Inventory : MonoBehaviour
     {
         private Button buttonOpenInventory, inventoryBeer, inventoryTobacco, inventoryQuest, inventoryInfo;
-        private GameObject panelInventory, panelInformation;
+        private GameObject panelInventory, panelInformation, cutscene;
         private Text amountBeer, amountTobacco, amountQuestItem, info;
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
         private string active;
-        private Image imageQuestItem;
+        private Image imageQuestItem, cutsceneItem;
         private int index;
+        private Sprite[] beerCutscene;
 
         private void Start()
         {
@@ -37,6 +39,7 @@ namespace Interface
             inventoryInfo.onClick.AddListener(() => closeInfo());
 
             imageQuestItem = GameObject.Find("QuestItem").GetComponent<Image>();
+            cutsceneItem = GameObject.Find("CutsceneItem").GetComponent<Image>();
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
@@ -45,8 +48,13 @@ namespace Interface
 
             panelInventory = GameObject.Find("Inventory panel");
             panelInformation = GameObject.Find("Info panel");
+            cutscene = GameObject.Find("Cutscene");
+            cutscene.SetActive(false);
             panelInventory.SetActive(false);
             panelInformation.SetActive(false);
+
+            beerCutscene = new Sprite[] { Resources.Load<Sprite>("phbeer1"),
+                Resources.Load<Sprite>("phbeer2"), Resources.Load<Sprite>("phbeer3") };
         }
 
         /// <summary>
@@ -99,11 +107,14 @@ namespace Interface
         {
             switch (item) {
                 case "Beer":
-                    player.items[0].UseItem();
+                    if (player.items[0].UseItem())
+                    {
+                        StartCoroutine(Cutscene(beerCutscene));
+                    }
                     updateInventory();
                 break;
                 case "Tobacco":
-                    player.items[1].UseItem();
+                    player.items[1].UseItem();                  
                     updateInventory();
                     break;
                 case "Quest Item":
@@ -159,6 +170,18 @@ namespace Interface
                     active = item;
                     break;
             }
+        }
+
+        IEnumerator Cutscene(Sprite[] images)
+        {
+            cutscene.SetActive(true);
+            cutsceneItem.sprite = images[0];
+            yield return new WaitForSeconds(1f);
+            cutsceneItem.sprite = images[1];
+            yield return new WaitForSeconds(1f);
+            cutsceneItem.sprite = images[2];
+            yield return new WaitForSeconds(1f);
+            cutscene.SetActive(false);
         }
     }
 }
