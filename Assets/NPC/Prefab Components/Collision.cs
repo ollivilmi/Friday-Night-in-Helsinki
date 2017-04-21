@@ -41,38 +41,23 @@ namespace NPC
             player = events.GetPlayer();
             objectName = this.gameObject.name;
         }
-   
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+
+        protected virtual void OnTriggerStay2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
                 if (!player.interacting)
                 {
                     iManager.SetTarget(this);
+                    iManager.SetHolder(dHolder);
                     try
                     {
                         iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
                         player.interacting = true;
                     }
-                     catch (System.ArgumentException)
+                    catch (System.ArgumentException)
                     {
                     }
-                }
-            }
-        }
-
-        protected virtual void OnTriggerStay2D(Collider2D col)
-        {
-            if (!player.interacting)
-            {
-                iManager.SetTarget(this);
-                try
-                {
-                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
-                    player.interacting = true;
-                }
-                catch (System.ArgumentException)
-                {
                 }
             }
         }

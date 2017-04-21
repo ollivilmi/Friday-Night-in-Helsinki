@@ -25,20 +25,9 @@ namespace NPC
             collisionText = "Talk";
         }
 
-        override protected void OnTriggerEnter2D(Collider2D col)
+        override protected void OnTriggerStay2D(Collider2D col)
         {
-            if (col.gameObject.tag == "Player")
-            {
-                iManager.SetTarget(this);
-                iManager.SetHolder(dHolder);
-                try
-                {
-                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
-                }
-                catch (System.ArgumentException)
-                {
-                }
-            }
+            base.OnTriggerStay2D(col);
         }
 
         override public void Interaction()
