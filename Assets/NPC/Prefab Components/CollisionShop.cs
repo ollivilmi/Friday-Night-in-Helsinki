@@ -24,12 +24,19 @@ namespace NPC
             npc.functionality = "What do you have for sale?";
         }
 
-        protected override void OnTriggerStay2D(Collider2D col)
+        override protected void OnTriggerEnter2D(Collider2D col)
         {
-            base.OnTriggerStay2D(col);
-            if (!player.interacting)
+            if (col.gameObject.tag == "Player")
             {
+                iManager.SetTarget(this);
                 iManager.SetHolder(dHolder);
+                try
+                {
+                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                }
+                catch (System.ArgumentException)
+                {
+                }
             }
         }
 
