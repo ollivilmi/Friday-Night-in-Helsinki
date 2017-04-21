@@ -42,7 +42,7 @@ namespace NPC
             objectName = this.gameObject.name;
         }
    
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+        /*protected virtual void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
@@ -59,20 +59,23 @@ namespace NPC
                     }
                 }
             }
-        }
+        }*/
 
         protected virtual void OnTriggerStay2D(Collider2D col)
         {
-            if (!player.interacting)
+            if (col.gameObject.tag == "Player")
             {
-                iManager.SetTarget(this);
-                try
+                if (!player.interacting)
                 {
-                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
-                    player.interacting = true;
-                }
-                catch (System.ArgumentException)
-                {
+                    iManager.SetTarget(this);
+                    try
+                    {
+                        iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                        player.interacting = true;
+                    }
+                    catch (System.ArgumentException)
+                    {
+                    }
                 }
             }
         }
