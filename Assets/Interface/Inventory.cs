@@ -17,7 +17,7 @@ namespace Interface
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
         private string active;
-        private Image imageQuestItem, cutsceneItem;
+        private Image imageQuestItem;
         private int index;
         private Sprite[] beerCutscene;
 
@@ -39,7 +39,6 @@ namespace Interface
             inventoryInfo.onClick.AddListener(() => closeInfo());
 
             imageQuestItem = GameObject.Find("QuestItem").GetComponent<Image>();
-            cutsceneItem = GameObject.Find("CutsceneItem").GetComponent<Image>();
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
@@ -175,12 +174,7 @@ namespace Interface
         IEnumerator Cutscene(Sprite[] images)
         {
             cutscene.SetActive(true);
-            cutsceneItem.sprite = images[0];
-            yield return new WaitForSeconds(1f);
-            cutsceneItem.sprite = images[1];
-            yield return new WaitForSeconds(1f);
-            cutsceneItem.sprite = images[2];
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             cutscene.SetActive(false);
         }
     }
