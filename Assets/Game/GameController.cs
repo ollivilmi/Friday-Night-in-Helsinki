@@ -66,6 +66,8 @@ namespace Game
                 (GameObject)Resources.Load("NPCFiller", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCTommi", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorCasino", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject)),
