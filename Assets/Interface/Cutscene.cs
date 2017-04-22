@@ -25,7 +25,7 @@ namespace Interface
             metro = Resources.Load<Sprite>("metro");
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
-                cutscene, spritePlayer };
+                spritePlayer, cutscene };
 
             foreach (GameObject element in cutsceneObjects)
             {

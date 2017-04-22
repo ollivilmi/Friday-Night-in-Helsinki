@@ -14,9 +14,11 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, barNPC, npcPetri, npcMatti, doorRWS1,
+        private GameObject character, npcFiller;
+        private List<GameObject> triggerObjects;
+           /* barNPC, npcPetri, npcMatti, doorRWS1,
         doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1,
-        metroHelsinki, metroSornainen, npcFiller, npcTommi;
+        metroHelsinki, metroSornainen, , npcTommi;*/
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
@@ -60,34 +62,29 @@ namespace Game
         /// </summary>
         private void StartPrefabs()
         {
-            barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
-            npcPetri = (GameObject)Resources.Load("NPCPetri", typeof(GameObject));
-            npcMatti = (GameObject)Resources.Load("NPCMatti", typeof(GameObject));
-            npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
-            npcTommi = (GameObject)Resources.Load("NPCTommi", typeof(GameObject));
-            doorRWS1 = (GameObject)Resources.Load("DoorRWS1", typeof(GameObject));
-            doorMainHall1 = (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject));
-            doorMainHall2 = (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject));
-            doorMainHall3 = (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject));
-            doorBar = (GameObject)Resources.Load("DoorBar1", typeof(GameObject));
-            doorMetroHelsinki1 = (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject));
-            metroHelsinki = (GameObject)Resources.Load("MetroHelsinki", typeof(GameObject));
-            metroSornainen = (GameObject)Resources.Load("MetroSornainen", typeof(GameObject));
+            triggerObjects = new List<GameObject> {
+                (GameObject)Resources.Load("BarNPC", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCPetri", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCMatti", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCFiller", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCTommi", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorBar1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject)),
+                (GameObject)Resources.Load("MetroHelsinki", typeof(GameObject)),
+                (GameObject)Resources.Load("MetroSornainen", typeof(GameObject))
+            };
 
-            Instantiate(npcPetri, npcPetri.transform.position, npcPetri.transform.rotation);
-            Instantiate(npcMatti, npcMatti.transform.position, npcMatti.transform.rotation);
-            Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
-            Instantiate(npcTommi, npcTommi.transform.position, npcTommi.transform.rotation);
-            Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
-            Instantiate(npcFiller, new Vector3(-90f,-8.3f), npcFiller.transform.rotation);
-            Instantiate(doorRWS1, doorRWS1.transform.position, doorRWS1.transform.rotation);
-            Instantiate(doorMainHall1, doorMainHall1.transform.position, doorMainHall1.transform.rotation);
-            Instantiate(doorMainHall2, doorMainHall2.transform.position, doorMainHall2.transform.rotation);
-            Instantiate(doorMainHall3, doorMainHall3.transform.position, doorMainHall3.transform.rotation);
-            Instantiate(doorBar, doorBar.transform.position, doorBar.transform.rotation);
-            Instantiate(doorMetroHelsinki1, doorMetroHelsinki1.transform.position, doorMetroHelsinki1.transform.rotation);
-            Instantiate(metroHelsinki, metroHelsinki.transform.position, metroHelsinki.transform.rotation);
-            Instantiate(metroSornainen, metroSornainen.transform.position, metroSornainen.transform.rotation);
+            foreach (GameObject element in triggerObjects)
+            {
+                Instantiate(element, element.transform.position, element.transform.rotation);
+            }
+
+            npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
+            Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
         }
 
         /// <summary>
