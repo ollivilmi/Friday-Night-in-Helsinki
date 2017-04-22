@@ -28,6 +28,7 @@ namespace Player
 		public String backStory;
         public bool interacting { get; set; }
 		protected SpriteRenderer character;
+		public Animator playerAnimator;
 
         public Player()
         {
@@ -36,6 +37,7 @@ namespace Player
             random = new System.Random();
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
+			this.playerAnimator = GameObject.Find ("Player").GetComponent<Animator> ();
 
         }
         /// <summary>

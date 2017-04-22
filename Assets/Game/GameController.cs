@@ -26,6 +26,7 @@ namespace Game
         private NPCType npcType;
 		private DataSaver dataSaver;
 		private string selectedCharacter;
+		public bool moving;
 
         private void Start()
         {
@@ -35,6 +36,7 @@ namespace Game
             GetObjects();
             SetUpScripts();
             StartPrefabs();
+
         }
 
         public GameEvents GetEvents()
@@ -53,6 +55,11 @@ namespace Game
                 playerMovement.LeftClick();
                 info.text = events.UpdateEvents();
                 stats.text = player.UpdateStats();
+			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) {
+				player.playerAnimator.SetBool ("moving", true);
+			} else {
+				player.playerAnimator.SetBool ("moving", false);
+			}
         }
 
         /// <summary>
