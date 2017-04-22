@@ -10,17 +10,27 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco;
+        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, spritePlayer;
+        private List<GameObject> cutsceneObjects;
+        private Sprite alley, metro;
 
         private void Start()
-        {
+        {          
             animationBeer = GameObject.Find("CutsceneBeer");
             animationTobacco = GameObject.Find("CutsceneTobacco");
+            animationMetro = GameObject.Find("CutsceneMetro");
             cutscene = GameObject.Find("Cutscene");
+            spritePlayer = GameObject.Find("CutscenePlayer");
+            alley = Resources.Load<Sprite>("darkalley");
+            metro = Resources.Load<Sprite>("metro");
 
-            animationBeer.SetActive(false);
-            animationTobacco.SetActive(false);
-            cutscene.SetActive(false);
+            cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
+                cutscene, spritePlayer };
+
+            foreach (GameObject element in cutsceneObjects)
+            {
+                element.SetActive(false);
+            }
         }
 
         public void StartCutsceneItem(string item)
@@ -36,12 +46,25 @@ namespace Interface
             }
         }
 
+        public IEnumerator CutsceneMetro()
+        {
+            cutscene.GetComponent<Image>().sprite = metro;
+            animationMetro.SetActive(true);
+            cutscene.SetActive(true);
+            yield return new WaitForSeconds(5f);
+            animationMetro.SetActive(false);
+            cutscene.SetActive(false);
+        }
+
         private IEnumerator CutsceneItem(GameObject item)
         {
+            cutscene.GetComponent<Image>().sprite = alley;
             cutscene.SetActive(true);
             item.SetActive(true);
+            spritePlayer.SetActive(true);
             yield return new WaitForSeconds(3f);
             item.SetActive(false);
+            spritePlayer.SetActive(false);
             cutscene.SetActive(false);
         }
     }

@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Game
 {
     public class Door : MonoBehaviour
     {
-        GameObject character;
-        CameraFollow limits;
+        private GameObject character;
+        private CameraFollow limits;
+        private Cutscene cutscene;
         public Player.Player player { get; set; }
         public GameEvents events { get; set; }
 
         void Start()
 		{
 			character = GameObject.Find("Player");
-			limits = FindObjectOfType<CameraFollow> ();           
+			limits = FindObjectOfType<CameraFollow> ();
+            cutscene = FindObjectOfType<Cutscene>();      
 		}
 
 		public void Enter(NPC.Collision teleporter)
@@ -47,6 +50,7 @@ namespace Game
                         EnterDoor(-300, -320, -315, -315);
                         player.useMoney(-5);
                         events.ChangeTime(10);
+                        StartCoroutine(cutscene.CutsceneMetro());
                     }
                     else
                     {
@@ -59,6 +63,7 @@ namespace Game
                         EnterDoor(-260, -250, -240, -250);
                         player.useMoney(-5);
                         events.ChangeTime(10);
+                        StartCoroutine(cutscene.CutsceneMetro());
                     }
                     else
                     {

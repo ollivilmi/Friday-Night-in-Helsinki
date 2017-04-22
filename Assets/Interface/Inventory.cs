@@ -105,7 +105,6 @@ namespace Interface
                 case "Beer":
                     if (player.items[0].UseItem())
                     {
-                        print("Lol");
                         cutscene.StartCutsceneItem("Beer");
                     }
                     updateInventory();
@@ -113,7 +112,6 @@ namespace Interface
                 case "Tobacco":
                     if (player.items[1].UseItem())
                     {
-                        print("Lol");
                         cutscene.StartCutsceneItem("Tobacco");
                     }
                     updateInventory();
