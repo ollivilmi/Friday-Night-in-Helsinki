@@ -12,10 +12,11 @@ namespace Interface
     public class Inventory : MonoBehaviour
     {
         private Button buttonOpenInventory, inventoryBeer, inventoryTobacco, inventoryQuest, inventoryInfo;
-        private GameObject panelInventory, panelInformation, cutscene, animationBeer, animationTobacco;
+        private GameObject panelInventory, panelInformation;
         private Text amountBeer, amountTobacco, amountQuestItem, info;
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
+        private Cutscene cutscene;
         private string active;
         private Image imageQuestItem;
         private int index;
@@ -38,23 +39,18 @@ namespace Interface
             inventoryInfo.onClick.AddListener(() => closeInfo());
 
             imageQuestItem = GameObject.Find("QuestItem").GetComponent<Image>();
-            animationBeer = GameObject.Find("CutsceneBeer");
-            animationTobacco = GameObject.Find("CutsceneTobacco");
 
             amountBeer = GameObject.Find("Beer amount").GetComponent<Text>();
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
             amountQuestItem = GameObject.Find("QuestItem amount").GetComponent<Text>();
             info = GameObject.Find("Info text").GetComponent<Text>();
+            cutscene = FindObjectOfType<Cutscene>();
 
             panelInventory = GameObject.Find("Inventory panel");
             panelInformation = GameObject.Find("Info panel");
-            cutscene = GameObject.Find("Cutscene");
-            animationBeer.SetActive(false);
-            animationTobacco.SetActive(false);
-            cutscene.SetActive(false);
+
             panelInventory.SetActive(false);
             panelInformation.SetActive(false);
-
         }
 
         /// <summary>
@@ -109,14 +105,16 @@ namespace Interface
                 case "Beer":
                     if (player.items[0].UseItem())
                     {
-                        StartCoroutine(Cutscene(animationBeer));
+                        print("Lol");
+                        cutscene.StartCutsceneItem("Beer");
                     }
                     updateInventory();
                 break;
                 case "Tobacco":
                     if (player.items[1].UseItem())
                     {
-                        StartCoroutine(Cutscene(animationTobacco));
+                        print("Lol");
+                        cutscene.StartCutsceneItem("Tobacco");
                     }
                     updateInventory();
                     break;
@@ -173,15 +171,6 @@ namespace Interface
                     active = item;
                     break;
             }
-        }
-
-        IEnumerator Cutscene(GameObject item)
-        {
-            cutscene.SetActive(true);
-            item.SetActive(true);
-            yield return new WaitForSeconds(3f);
-            item.SetActive(false);
-            cutscene.SetActive(false);
         }
     }
 }
