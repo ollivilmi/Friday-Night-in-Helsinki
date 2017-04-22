@@ -27,13 +27,16 @@ namespace Player
 		public Sprite playerSprite;
 		public String backStory;
         public bool interacting { get; set; }
+		protected SpriteRenderer character;
 
         public Player()
         {
+			this.character = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             delimiter = new char[] {'/'};
             random = new System.Random();
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
+
         }
         /// <summary>
         /// Returns player's stats in a string format.
