@@ -16,9 +16,6 @@ namespace Game
         private Player.Player player;
         private GameObject character, npcFiller;
         private List<GameObject> triggerObjects;
-           /* barNPC, npcPetri, npcMatti, doorRWS1,
-        doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1,
-        metroHelsinki, metroSornainen, , npcTommi;*/
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;

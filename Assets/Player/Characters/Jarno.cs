@@ -14,9 +14,6 @@ namespace Player
 {
 	public class Jarno : Player  
 	{
-        //public static Sprite playerImage;
-        //public string backStory;
-
         public Jarno()
         {
             this.hour = 17;

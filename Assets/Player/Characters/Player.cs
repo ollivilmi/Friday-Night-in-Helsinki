@@ -25,7 +25,7 @@ namespace Player
         protected System.Random random;
         protected char[] delimiter;
 		public Sprite playerSprite;
-		public String backStory;
+		public string backStory;
         public bool interacting { get; set; }
 
         public Player()
