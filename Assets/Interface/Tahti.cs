@@ -54,7 +54,6 @@ namespace Interface
             };
 
             fruitLocks = new Dictionary<Button, int>();
-
             for (int i = 0; i < 3; i++)
             {
                 fruitLocks.Add(buttonsLock[i], i);
@@ -115,7 +114,12 @@ namespace Interface
             info2 = GameObject.Find("LastWin").GetComponent<Text>();
             tahti = GameObject.Find("Tahti");
         }
-
+        /// <summary>
+        /// Clicking a lock while playing stops the animation, randomizes
+        /// a result, changes sprite to result and saves it.
+        /// Sets bool clicked to true so that it can't be clicked again.
+        /// </summary>
+        /// <param name="button">Which lock was pressed, uses dictionary to translate it into an integer.</param>
         private void lockClicked(Button button)
         {
             if (playing)
@@ -135,9 +139,9 @@ namespace Interface
             try
             {
                 info1.text = "Money: " + player.money + " Bet size: " + bet;
-            } catch (NullReferenceException)
-            { }
+            } catch (NullReferenceException) { }
 
+            // If playing and all locks have been clicked, checks the result
             if (locksClicked[0] && locksClicked[1] && locksClicked[2] && playing)
             {
                 playing = false;
@@ -145,6 +149,10 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Checks whether the player's win conditions. Checks them in order
+        /// from biggest to smallest and returns if the condition is met.
+        /// </summary>
         private void checkResults()
         {
             if (results[0] == 2)
@@ -152,8 +160,7 @@ namespace Interface
                 if (results[1] == 2 && results[2] == 2)
                 {
                     lastWin = 2 * bet;
-                    player.useMoney(lastWin);
-                    info2.text = "You won " + lastWin + "!" +" Double or nothing?";
+                    payPlayer();
                     return;
                 }
             }
@@ -163,8 +170,7 @@ namespace Interface
                 if (results[1] == 1 && results[2] == 1)
                 {
                     lastWin = 3 * bet;
-                    player.useMoney(lastWin);
-                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
+                    payPlayer();
                     return;
                 }
             }
@@ -174,8 +180,7 @@ namespace Interface
                 if (results[1] == 0 && results[2] == 0)
                 {
                     lastWin = 4 * bet;
-                    player.useMoney(lastWin);
-                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
+                    payPlayer();
                     return;
                 }
             }
@@ -185,14 +190,17 @@ namespace Interface
                 if (results[i] == 0)
                 {
                     lastWin = bet;
-                    player.useMoney(lastWin);
-                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
+                    payPlayer();
                     return;
                 }
             }
             info2.text = "";
         }
 
+        /// <summary>
+        /// Clicking the play button starts a game with the active bet size, if the
+        /// player can afford it. Starts fruit animations.
+        /// </summary>
         private void playClicked()
         {
             if (!playing)
@@ -215,6 +223,9 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Changes bet size to the next one on the betSize list.
+        /// </summary>
         private void betClicked()
         {
             if (!playing)
@@ -228,6 +239,11 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// If last game resulted in a win, clicking double starts
+        /// the coin animation which lasts 3 seconds and randomizes 
+        /// 50/50 if you win or lose.
+        /// </summary>
         private void doubleClicked()
         {
             if (!playing)
@@ -240,6 +256,19 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Called when win conditions are met. The machine congratulates
+        /// the player for the win and aks if the player wants to double.
+        /// </summary>
+        private void payPlayer()
+        {
+            player.useMoney(lastWin);
+            info2.text = "You won " + lastWin + "!" + " Double or nothing?";
+        }
+
+        /// <summary>
+        /// Exits the slot machine and enables player movement.
+        /// </summary>
         private void quitClicked()
         {
             if (!playing)
@@ -250,6 +279,12 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Animation that plays coin's swapping for 3 seconds,
+        /// then randomizes the result. If the result is a win,
+        /// the player may double again.
+        /// </summary>
+        /// <returns></returns>
         IEnumerator CoinAnimation()
         {
             info2.text = "Heads wins, tails loses.";
