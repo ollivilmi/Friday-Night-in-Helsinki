@@ -23,6 +23,7 @@ namespace Game
         private Text stats, info;
         private Door door;
         private NPCType npcType;
+        private Tahti tahti;
 		private DataSaver dataSaver;
 		private string selectedCharacter;
 
@@ -44,6 +45,11 @@ namespace Game
         public Movement GetMovement()
         {
             return playerMovement;
+        }
+
+        public Player.Player GetPlayer()
+        {
+            return player;
         }
 
         private void Update()
@@ -74,7 +80,7 @@ namespace Game
                 (GameObject)Resources.Load("DoorBar1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject)),
                 (GameObject)Resources.Load("MetroHelsinki", typeof(GameObject)),
-                (GameObject)Resources.Load("MetroSornainen", typeof(GameObject))
+                (GameObject)Resources.Load("MetroSornainen", typeof(GameObject)),
             };
 
             foreach (GameObject element in triggerObjects)
@@ -96,6 +102,7 @@ namespace Game
             info = GameObject.Find("Info").GetComponent<Text>();
             door = FindObjectOfType<Door>();
             npcType = FindObjectOfType<NPCType>();
+            tahti = FindObjectOfType<Tahti>();
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();

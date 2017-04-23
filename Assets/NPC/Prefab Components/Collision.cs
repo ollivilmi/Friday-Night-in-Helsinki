@@ -15,6 +15,7 @@ namespace NPC
         protected DialogueHolder dHolder;
         protected InterfaceManager iManager;
         protected Player.Player player;
+        protected Movement playerMovement;
         protected GameController controller;
         protected GameEvents events;
         protected string collisionText, objectName;
@@ -39,6 +40,7 @@ namespace NPC
             image = gameObject.GetComponent<SpriteRenderer>().sprite;
             events = controller.GetEvents();
             player = events.GetPlayer();
+            playerMovement = controller.GetMovement();
             objectName = this.gameObject.name;
         }
 
