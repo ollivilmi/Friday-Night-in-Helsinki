@@ -120,6 +120,8 @@ namespace Game
             door.player = this.player;
             door.events = this.events;
             npcType.player = this.player;
+            tahti.player = this.player;
+            tahti.playerMovement = this.playerMovement;
         }
     }
 }

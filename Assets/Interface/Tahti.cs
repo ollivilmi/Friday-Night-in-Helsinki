@@ -27,9 +27,8 @@ namespace Interface
         private bool playing;
         private int bet, index, lastWin;
         private Text infoBet;
-        private Player.Player player;
-        private Movement playerMovement;
-        private GameController controller;
+        public Player.Player player { get; set; }
+        public Movement playerMovement { get; set; }
         private CollisionTahti col;
 
         private void Start()
@@ -42,9 +41,6 @@ namespace Interface
             index = 0;
             lastWin = 0;
 
-            controller = GameObject.Find("GameController").GetComponent<GameController>();
-            player = controller.GetPlayer();
-            playerMovement = controller.GetMovement();
             col = FindObjectOfType<CollisionTahti>();
 
             buttonsLock = new List<Button>()
