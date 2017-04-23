@@ -51,15 +51,11 @@ namespace Game
 
         private void Update()
         {
-                playerMovement.posChar = character.transform.position;
-                playerMovement.LeftClick();
-                info.text = events.UpdateEvents();
-                stats.text = player.UpdateStats();
-			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) {
-				player.playerAnimator.SetBool ("moving", true);
-			} else {
-				player.playerAnimator.SetBool ("moving", false);
-			}
+            playerMovement.posChar = character.transform.position;
+            playerMovement.LeftClick();
+            info.text = events.UpdateEvents();
+            stats.text = player.UpdateStats();
+			HandleAnimations ();
         }
 
         /// <summary>
@@ -125,5 +121,21 @@ namespace Game
             door.events = this.events;
             npcType.player = this.player;
         }
+
+		void HandleAnimations()
+		{
+			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 
+			{
+				player.playerAnimator.SetBool ("moving", true);
+			} 
+			else 
+			{
+				player.playerAnimator.SetBool ("moving", false);
+			}
+			if (player.name == "Make") 
+			{
+				player.playerAnimator.SetBool ("isMake", true);
+			}
+		}
     }
 }
