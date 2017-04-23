@@ -121,7 +121,11 @@ namespace Interface
 
         private void LateUpdate()
         {
-            infoBet.text = "Money: " + player.money + " Bet: " + bet +" Last win: " +lastWin;
+            try
+            {
+                infoBet.text = "Money: " + player.money + " Bet: " + bet + " Last win: " + lastWin;
+            } catch (NullReferenceException)
+            { }
 
             if (locksClicked[0] && locksClicked[1] && locksClicked[2] && playing)
             {
