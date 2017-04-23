@@ -19,14 +19,17 @@ namespace Interface
         private Dictionary<Button, int> fruitLocks;
         private List<Image> fruitImages;
         private List<Sprite> fruitSprites;
+        private List<Sprite> coinSprites;
         private List<int> results;
         private List<bool> locksClicked;
         private List<int> betSize;
         private GameObject tahti;
+        private Animator coinAnimation;
+        private Image coinImage;
         private System.Random random;
         private bool playing;
         private int bet, index, lastWin;
-        private Text infoBet;
+        private Text info1, info2;
         public Player.Player player { get; set; }
         public Movement playerMovement { get; set; }
         private CollisionTahti col;
@@ -74,6 +77,7 @@ namespace Interface
             {
                 fruitImages.Add(fruitObjects[i].GetComponent<Image>());
             }
+            coinImage = GameObject.Find("Coin").GetComponent<Image>();
 
             fruitSprites = new List<Sprite>
             {
@@ -81,12 +85,19 @@ namespace Interface
                 Resources.Load<Sprite>("strawberry"),
                 Resources.Load<Sprite>("banana")
             };
+            coinSprites = new List<Sprite>
+            {
+                Resources.Load<Sprite>("heads"),
+                Resources.Load<Sprite>("tails")
+            };
 
             fruitAnimations = new List<Animator>();
             for (int i = 0; i < 3; i++)
             {
                 fruitAnimations.Add(fruitObjects[i].GetComponent<Animator>());
             }
+            coinAnimation = GameObject.Find("Coin").GetComponent<Animator>();
+            coinAnimation.enabled = false;
 
             buttonPlay = GameObject.Find("TahtiPlay").GetComponent<Button>();
             buttonPlay.onClick.AddListener(() => playClicked());
@@ -97,7 +108,11 @@ namespace Interface
             buttonQuit = GameObject.Find("TahtiQuit").GetComponent<Button>();
             buttonQuit.onClick.AddListener(() => quitClicked());
 
-            infoBet = GameObject.Find("BetInfo").GetComponent<Text>();
+            buttonDouble = GameObject.Find("TahtiDouble").GetComponent<Button>();
+            buttonDouble.onClick.AddListener(() => doubleClicked());
+
+            info1 = GameObject.Find("BetInfo").GetComponent<Text>();
+            info2 = GameObject.Find("LastWin").GetComponent<Text>();
             tahti = GameObject.Find("Tahti");
         }
 
@@ -119,7 +134,7 @@ namespace Interface
         {
             try
             {
-                infoBet.text = "Money: " + player.money + " Bet: " + bet + " Last win: " + lastWin;
+                info1.text = "Money: " + player.money + " Bet size: " + bet;
             } catch (NullReferenceException)
             { }
 
@@ -138,6 +153,7 @@ namespace Interface
                 {
                     lastWin = 2 * bet;
                     player.useMoney(lastWin);
+                    info2.text = "You won " + lastWin + "!" +" Double or nothing?";
                     return;
                 }
             }
@@ -148,6 +164,7 @@ namespace Interface
                 {
                     lastWin = 3 * bet;
                     player.useMoney(lastWin);
+                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
                     return;
                 }
             }
@@ -158,6 +175,7 @@ namespace Interface
                 {
                     lastWin = 4 * bet;
                     player.useMoney(lastWin);
+                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
                     return;
                 }
             }
@@ -166,10 +184,13 @@ namespace Interface
             {
                 if (results[i] == 0)
                 {
-                    player.useMoney(bet);
-                    break;
+                    lastWin = bet;
+                    player.useMoney(lastWin);
+                    info2.text = "You won " + lastWin + "!" + " Double or nothing?";
+                    return;
                 }
             }
+            info2.text = "";
         }
 
         private void playClicked()
@@ -207,6 +228,18 @@ namespace Interface
             }
         }
 
+        private void doubleClicked()
+        {
+            if (!playing)
+            {
+                if (lastWin > 0)
+                {
+                    player.useMoney(-lastWin);
+                    StartCoroutine(CoinAnimation());
+                }
+            }
+        }
+
         private void quitClicked()
         {
             if (!playing)
@@ -214,6 +247,28 @@ namespace Interface
                 tahti.SetActive(false);
                 playerMovement.Stop = false;
                 col.ShowInteraction();
+            }
+        }
+
+        IEnumerator CoinAnimation()
+        {
+            info2.text = "Heads wins, tails loses.";
+            coinAnimation.enabled = true;
+            yield return new WaitForSeconds(3f);
+            coinAnimation.enabled = false;
+            int selection = random.Next(0, 2);
+            if (selection == 0)
+            {
+                coinImage.sprite = coinSprites[0];
+                lastWin *= 2;
+                info2.text = "You doubled to " + lastWin + "!";
+                player.useMoney(lastWin);
+            }
+            else if (selection == 1)
+            {
+                info2.text = "You lost.";
+                coinImage.sprite = coinSprites[1];
+                lastWin = 0;
             }
         }
     }
