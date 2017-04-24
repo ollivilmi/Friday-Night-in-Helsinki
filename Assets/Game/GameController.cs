@@ -125,6 +125,8 @@ namespace Game
             npcType.player = this.player;
             tahti.player = this.player;
             tahti.playerMovement = this.playerMovement;
+            FindObjectOfType<Cutscene>().player.GetComponent<Image>().sprite = player.GetPlayerSprite();
+            iManager.imagePlayer.sprite = player.GetPlayerSprite();
         }
 
 		void HandleAnimations()

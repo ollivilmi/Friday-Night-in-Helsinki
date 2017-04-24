@@ -10,7 +10,8 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, spritePlayer;
+        private GameObject cutscene, animationBeer, animationTobacco, animationMetro;
+        public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private Sprite alley, metro;
 
@@ -20,12 +21,12 @@ namespace Interface
             animationTobacco = GameObject.Find("CutsceneTobacco");
             animationMetro = GameObject.Find("CutsceneMetro");
             cutscene = GameObject.Find("Cutscene");
-            spritePlayer = GameObject.Find("CutscenePlayer");
+            player = GameObject.Find("CutscenePlayer");
             alley = Resources.Load<Sprite>("darkalley");
             metro = Resources.Load<Sprite>("metro");
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
-                spritePlayer, cutscene };
+            player, cutscene };
 
             foreach (GameObject element in cutsceneObjects)
             {
@@ -61,10 +62,10 @@ namespace Interface
             cutscene.GetComponent<Image>().sprite = alley;
             cutscene.SetActive(true);
             item.SetActive(true);
-            spritePlayer.SetActive(true);
+            player.SetActive(true);
             yield return new WaitForSeconds(3f);
             item.SetActive(false);
-            spritePlayer.SetActive(false);
+            player.SetActive(false);
             cutscene.SetActive(false);
         }
     }

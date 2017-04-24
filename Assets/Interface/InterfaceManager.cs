@@ -19,7 +19,8 @@ namespace Interface
         private Button buttonBeer, buttonTobacco;
         private DialogueHolder dHolder;
         private GameObject background, panelShop;
-        private Image imageNPC, imagePlayer;
+        private Image imageNPC;
+        public Image imagePlayer { get; set; }
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private List<GameObject> dialogueElements;
         private NPC.Collision target;
