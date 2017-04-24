@@ -136,15 +136,16 @@ namespace Interface
 
         private void LateUpdate()
         {
-            try
-            {
-                info1.text = "Money: " + player.money + " Bet size: " + bet;
-            } catch (NullReferenceException) { }
+            info1.text = "Money: " + player.money + " Bet size: " + bet;
 
             // If playing and all locks have been clicked, checks the result
             if (locksClicked[0] && locksClicked[1] && locksClicked[2] && playing)
             {
                 playing = false;
+                for (int i = 0; i < 3; i++)
+                {
+                    locksClicked[i] = false;
+                }
                 checkResults();
             }
         }
@@ -209,10 +210,6 @@ namespace Interface
                 {
                     player.useMoney(-bet);
                     playing = true;
-                    for (int i = 0; i < 3; i++)
-                    {
-                        locksClicked[i] = false;
-                    }
                     foreach (Animator fruit in fruitAnimations)
                     {
 
@@ -273,6 +270,7 @@ namespace Interface
         {
             if (!playing)
             {
+                lastWin = 0;
                 tahti.SetActive(false);
                 playerMovement.Stop = false;
                 col.ShowInteraction();
