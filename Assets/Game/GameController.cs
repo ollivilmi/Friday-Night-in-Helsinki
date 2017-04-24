@@ -138,6 +138,7 @@ namespace Game
 		/// </summary>
 		void HandleAnimations()
 		{
+			//checks if player is moving
 			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 
 			{
 				player.playerAnimator.SetBool ("moving", true);
@@ -146,17 +147,32 @@ namespace Game
 			{
 				player.playerAnimator.SetBool ("moving", false);
 			}
-			if (player.name == "Make") 
-			{
+
+			//checks if player is Make
+			if (player.name == "Make") {
 				player.playerAnimator.SetBool ("isMake", true);
+			} 
+			else 
+			{
+				player.playerAnimator.SetBool ("isMake", false);
 			}
+			//checks if player is Jarno
 			if (player.name == "Jarno") 
 			{
 				player.playerAnimator.SetBool ("isJarno", true);
 			}
+			else 
+			{
+				player.playerAnimator.SetBool ("isJarno", false);
+			}
+			//checks if player is Teddy
 			if (player.name == "Teddy") 
 			{
 				player.playerAnimator.SetBool ("isTeddy", true);
+			}
+			else 
+			{
+				player.playerAnimator.SetBool ("isTeddy", false);
 			}
 		}
     }
