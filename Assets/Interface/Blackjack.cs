@@ -62,6 +62,11 @@ namespace Interface
             cardDealerCurrent = GameObject.Find("CardDealerCurrent").GetComponent<Image>();
             cardDealerPrevious = GameObject.Find("CardDealerPrevious").GetComponent<Image>();
 
+            cardPlayerCurrent.sprite = cards[random.Next(0, 14)];
+            cardPlayerPrevious.sprite = cards[random.Next(0, 14)];
+            cardDealerCurrent.sprite = cards[random.Next(0, 14)];
+            cardDealerPrevious.sprite = cards[random.Next(0, 14)];
+
             cardcountPlayer = GameObject.Find("CardCountPlayer").GetComponent<Text>();
             cardcountDealer = GameObject.Find("CardCountDealer").GetComponent<Text>();
             infoBlackjack = GameObject.Find("BlackjackInfo").GetComponent<Text>();
@@ -77,6 +82,11 @@ namespace Interface
             resultPanel.SetActive(false);
         }
 
+        /// <summary>
+        /// Adds a random card to the target's current card count.
+        /// Swaps card sprites and moves current card sprite to previous card sprite.
+        /// </summary>
+        /// <param name="target">"Player" or "Dealer", otherwise does nothing.</param>
         private void dealCard(string target)
         {
             int card = cardInts[random.Next(0, 13)];
@@ -120,6 +130,10 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Resets game state by setting all counters to 0 and
+        /// dealerPlaying to false to hide dealer's true card count.
+        /// </summary>
         private void resetGame()
         {
             playerCount = 0;
@@ -130,6 +144,10 @@ namespace Interface
             dealerPlaying = false;
         }
 
+        /// <summary>
+        /// Hides menu buttons, resets game and deals cards.
+        /// Dealer's first card image or count is not shown.
+        /// </summary>
         private void startNewGame()
         {
             controlButtons(true, false);
@@ -145,6 +163,10 @@ namespace Interface
             checkCount("Player");       
         }
 
+        /// <summary>
+        /// Sets playing to false, resets bet size in case that it was doubled, disabled play buttons
+        /// and enables menu buttons. Opens result panel for 2 seconds.
+        /// </summary>
         private void endGame()
         {
             bet = betSize[index];
@@ -153,14 +175,23 @@ namespace Interface
             StartCoroutine(openResultPanel());
         }
 
+        /// <summary>
+        /// Opens result panel for 1 second.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator openResultPanel()
         {   
             resultPanel.SetActive(true);
             resultPanelText.text = resultText;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             resultPanel.SetActive(false);
         }
 
+        /// <summary>
+        /// Can be used to toggle between playing buttons and menu buttons.
+        /// </summary>
+        /// <param name="playingButtons">Double, hit, stand</param>
+        /// <param name="menuButtons">Quit, play, bet</param>
         private void controlButtons(bool playingButtons, bool menuButtons)
         {
             objectPlay.SetActive(menuButtons);
@@ -171,6 +202,11 @@ namespace Interface
             objectStand.SetActive(playingButtons);
         }
 
+        /// <summary>
+        /// Checks target's card count to check winning
+        /// and losing conditions.
+        /// </summary>
+        /// <param name="target">"Player" or "Dealer", otherwise does nothing.</param>
         private void checkCount (string target)
         {
             switch (target)
@@ -216,30 +252,48 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Dealer uses dealCard("Dealer") until a winning or losing
+        /// condition is met and then ends the game.
+        /// </summary>
         private void dealerPlay()
         {
             dealerPlaying = true;
             while (playing)
             {
-                if (dealerCount < playerCount || dealerCount < 17)
+                if (dealerCount >= 17)
+                {
+                    if (playerCount > dealerCount)
+                    {
+                        resultText = "Player wins!";
+                        endGame();
+
+                    }
+                    else if (playerCount < dealerCount)
+                    {
+                        resultText = "Dealer wins.";
+                        endGame();
+                    }
+                    else if (dealerCount == playerCount)
+                    {
+                        player.useMoney(bet);
+                        resultText = "Push, your bet has been returned.";
+                        endGame();
+                    }
+                }
+                else if (dealerCount < 17)
                 {
                     dealCard("Dealer");
-                }
-                else if (dealerCount == playerCount)
-                {
-                    player.useMoney(bet);
-                    resultText = "Push, your bet has been returned.";
-                    endGame();
-                }
-                else if (dealerCount > playerCount)
-                {
-                    resultText = "Dealer wins.";
-                    endGame();
                 }
                 checkCount("Dealer");
             }
         }
 
+        /// <summary>
+        /// Information, card counters for player and dealer are updated,
+        /// however while playing only updates the card which is face
+        /// up for the dealer.
+        /// </summary>
         private void LateUpdate()
         {
             if (dealerPlaying)
@@ -251,9 +305,12 @@ namespace Interface
                 cardcountDealer.text = "" + dealerCard;
             }
             cardcountPlayer.text = "" + playerCount;
-            infoBlackjack.text = "Player money: "+player.money + " Current bet: " + bet;
+            infoBlackjack.text = "Money: "+player.money + " Bet: " + bet;
         }
 
+        /// <summary>
+        /// Starts the game with current bet sizing if player has enough money.
+        /// </summary>
         private void playClicked()
         {
             if (!playing)
@@ -265,6 +322,9 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Clicking quit button lets you move again and closes the Blackjack UI.
+        /// </summary>
         private void quitClicked()
         {
             blackjack.SetActive(false);
@@ -272,6 +332,9 @@ namespace Interface
             col.ShowInteraction();
         }
 
+        /// <summary>
+        /// Changes current bet size from a list of possible bet sizes.
+        /// </summary>
         private void betClicked()
         {
             if (!playing)
@@ -285,6 +348,10 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// If player can afford it while playing,
+        /// double the bet and draw one more card.
+        /// </summary>
         private void doubleClicked()
         {
             if (playing)
@@ -303,6 +370,9 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Deal a card to the player and check for results.
+        /// </summary>
         private void hitClicked()
         {
             if (playing)
@@ -312,9 +382,12 @@ namespace Interface
             }
         }
 
+        /// <summary>
+        /// Deal cards to the dealer until a result is reached.
+        /// </summary>
         private void standClicked()
         {
-            dealerPlay();
+                dealerPlay();
         }
     }
 }
