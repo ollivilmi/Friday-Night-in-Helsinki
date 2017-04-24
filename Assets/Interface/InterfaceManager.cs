@@ -56,7 +56,6 @@ namespace Interface
             background = GameObject.Find("Dialogue Background");
             imagePlayer = GameObject.Find("Player image").GetComponent<Image>();
             imageNPC = GameObject.Find("NPC image").GetComponent<Image>();
-            imagePlayer.sprite = GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite;
 
             dialogueActive = false;
             background.SetActive(false);

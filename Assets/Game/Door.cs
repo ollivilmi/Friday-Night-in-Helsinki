@@ -87,7 +87,7 @@ namespace Game
         /// <param name="xLocationCam"> Camera moves to this locatioin </param>
         private void EnterDoor(float xLocationPlayer, float xMin, float xMax, float xLocationCam)
         {
-            character.transform.position = new Vector2(xLocationPlayer, -8f);
+            character.transform.position = new Vector2(xLocationPlayer, -7f);
             Camera.main.transform.position = new Vector3(xLocationCam, 3f, -10f);
             limits.xMin = xMin;
             limits.xMax = xMax;
