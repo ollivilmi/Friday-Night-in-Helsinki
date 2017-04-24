@@ -24,6 +24,7 @@ namespace Game
         private Door door;
         private NPCType npcType;
         private Tahti tahti;
+        private Blackjack blackjack;
 		private DataSaver dataSaver;
 		private string selectedCharacter;
 		public bool moving;
@@ -106,6 +107,7 @@ namespace Game
             door = FindObjectOfType<Door>();
             npcType = FindObjectOfType<NPCType>();
             tahti = FindObjectOfType<Tahti>();
+            blackjack = FindObjectOfType<Blackjack>();
             iManager = FindObjectOfType<InterfaceManager>();
             player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();
@@ -127,6 +129,8 @@ namespace Game
             tahti.playerMovement = this.playerMovement;
             FindObjectOfType<Cutscene>().player.GetComponent<Image>().sprite = player.GetPlayerSprite();
             iManager.imagePlayer.sprite = player.GetPlayerSprite();
+            blackjack.player = this.player;
+            blackjack.playerMovement = this.playerMovement;
         }
 		/// <summary>
 		/// Handles player character's animations.
