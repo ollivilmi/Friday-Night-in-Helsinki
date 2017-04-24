@@ -128,7 +128,10 @@ namespace Game
             FindObjectOfType<Cutscene>().player.GetComponent<Image>().sprite = player.GetPlayerSprite();
             iManager.imagePlayer.sprite = player.GetPlayerSprite();
         }
-
+		/// <summary>
+		/// Handles player character's animations.
+		/// Is called in Update();
+		/// </summary>
 		void HandleAnimations()
 		{
 			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 
@@ -142,6 +145,14 @@ namespace Game
 			if (player.name == "Make") 
 			{
 				player.playerAnimator.SetBool ("isMake", true);
+			}
+			if (player.name == "Jarno") 
+			{
+				player.playerAnimator.SetBool ("isJarno", true);
+			}
+			if (player.name == "Teddy") 
+			{
+				player.playerAnimator.SetBool ("isTeddy", true);
 			}
 		}
     }
