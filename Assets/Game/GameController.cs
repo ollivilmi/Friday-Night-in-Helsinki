@@ -26,6 +26,7 @@ namespace Game
         private Tahti tahti;
 		private DataSaver dataSaver;
 		private string selectedCharacter;
+		public bool moving;
 
         private void Start()
         {
@@ -35,6 +36,7 @@ namespace Game
             GetObjects();
             SetUpScripts();
             StartPrefabs();
+
         }
 
         public GameEvents GetEvents()
@@ -54,10 +56,11 @@ namespace Game
 
         private void Update()
         {
-                playerMovement.posChar = character.transform.position;
-                playerMovement.LeftClick();
-                info.text = events.UpdateEvents();
-                stats.text = player.UpdateStats();
+            playerMovement.posChar = character.transform.position;
+            playerMovement.LeftClick();
+            info.text = events.UpdateEvents();
+            stats.text = player.UpdateStats();
+			HandleAnimations ();
         }
 
         /// <summary>
@@ -123,5 +126,21 @@ namespace Game
             tahti.player = this.player;
             tahti.playerMovement = this.playerMovement;
         }
+
+		void HandleAnimations()
+		{
+			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 
+			{
+				player.playerAnimator.SetBool ("moving", true);
+			} 
+			else 
+			{
+				player.playerAnimator.SetBool ("moving", false);
+			}
+			if (player.name == "Make") 
+			{
+				player.playerAnimator.SetBool ("isMake", true);
+			}
+		}
     }
 }

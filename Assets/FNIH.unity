@@ -2685,6 +2685,7 @@ GameObject:
   - component: {fileID: 849669650}
   - component: {fileID: 849669654}
   - component: {fileID: 849669653}
+  - component: {fileID: 849669652}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2740,6 +2741,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &849669652
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 849669649}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fedce45819ba5584cbd18b10ed747398, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!50 &849669653
 Rigidbody2D:
   serializedVersion: 4
