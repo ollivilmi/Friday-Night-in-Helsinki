@@ -287,10 +287,12 @@ namespace Interface
         /// <returns></returns>
         IEnumerator CoinAnimation()
         {
+            playing = true;
             info2.text = "Heads wins, tails loses.";
             coinAnimation.enabled = true;
             yield return new WaitForSeconds(3f);
             coinAnimation.enabled = false;
+            playing = false;
             int selection = random.Next(0, 2);
             if (selection == 0)
             {
