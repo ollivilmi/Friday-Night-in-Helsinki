@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Game
 {
     public class Door : MonoBehaviour
     {
-        GameObject character;
-        CameraFollow limits;
+        private GameObject character;
+        private CameraFollow limits;
+        private Cutscene cutscene;
         public Player.Player player { get; set; }
         public GameEvents events { get; set; }
 
         void Start()
 		{
 			character = GameObject.Find("Player");
-			limits = FindObjectOfType<CameraFollow> ();           
+			limits = FindObjectOfType<CameraFollow> ();
+            cutscene = FindObjectOfType<Cutscene>();      
 		}
 
 		public void Enter(NPC.Collision teleporter)
@@ -38,8 +41,14 @@ namespace Game
                 case "DoorMainHall3(Clone)":
                     EnterDoor(-225, -250, -240, -240);
                     break;
+                case "DoorRWSCasino(Clone)":
+                    EnterDoor(230, 195, 313, 230);
+                    break;
                 case "DoorMetroHelsinki1(Clone)":
                     EnterDoor(-125, -105, -68, -105);
+                    break;
+                case "DoorCasino(Clone)":
+                    EnterDoor(135, 0, 140, 135);
                     break;
                 case "MetroHelsinki(Clone)":
                     if(player.money > 4.9)
@@ -47,6 +56,7 @@ namespace Game
                         EnterDoor(-300, -320, -315, -315);
                         player.useMoney(-5);
                         events.ChangeTime(10);
+                        StartCoroutine(cutscene.CutsceneMetro());
                     }
                     else
                     {
@@ -59,6 +69,7 @@ namespace Game
                         EnterDoor(-260, -250, -240, -250);
                         player.useMoney(-5);
                         events.ChangeTime(10);
+                        StartCoroutine(cutscene.CutsceneMetro());
                     }
                     else
                     {
@@ -76,7 +87,7 @@ namespace Game
         /// <param name="xLocationCam"> Camera moves to this locatioin </param>
         private void EnterDoor(float xLocationPlayer, float xMin, float xMax, float xLocationCam)
         {
-            character.transform.position = new Vector2(xLocationPlayer, -8f);
+            character.transform.position = new Vector2(xLocationPlayer, -7f);
             Camera.main.transform.position = new Vector3(xLocationCam, 3f, -10f);
             limits.xMin = xMin;
             limits.xMax = xMax;

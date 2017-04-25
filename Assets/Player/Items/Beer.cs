@@ -15,13 +15,15 @@ namespace Player
             this.itemName = "Beer";
         }
 
-        public override void UseItem()
+        public override bool UseItem()
         {
             if (amount > 0)
             {
                 amount--;
                 player.drink(10);
+                return true;
             }
+            return false;
         }
     }
 }
