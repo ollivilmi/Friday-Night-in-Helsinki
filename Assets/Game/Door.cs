@@ -44,11 +44,17 @@ namespace Game
                 case "DoorRWSCasino(Clone)":
                     EnterDoor(230, 195, 313, 230);
                     break;
+                case "DoorRWSNightClub(Clone)":
+                    EnterDoor(348, 368, 467, 368);
+                    break;
                 case "DoorMetroHelsinki1(Clone)":
                     EnterDoor(-125, -105, -68, -105);
                     break;
                 case "DoorCasino(Clone)":
                     EnterDoor(135, 0, 140, 135);
+                    break;
+                case "DoorNightClub(Clone)":
+                    EnterDoor(125, 0, 140, 125);
                     break;
                 case "MetroHelsinki(Clone)":
                     if(player.money > 4.9)
