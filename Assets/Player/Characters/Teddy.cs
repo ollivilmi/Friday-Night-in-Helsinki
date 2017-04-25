@@ -23,7 +23,7 @@ namespace Player
             this.funLevel = -20;
             Sprite phone = Resources.Load<Sprite>("iphone");
             itemsQuest.Add(new QuestItem("iPhone", phone, "Your mobile phone. It's turned off today."));
-			this.playerSprite = Resources.Load<Sprite> ("Character3");
+			this.playerSprite = Resources.Load<Sprite> ("Teddy");
 			this.backStory = "Teddy has money";
         }
 

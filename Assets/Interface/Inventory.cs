@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 using Game;
+using System.Collections;
 
 namespace Interface
 {
@@ -15,6 +16,7 @@ namespace Interface
         private Text amountBeer, amountTobacco, amountQuestItem, info;
         public Movement playerMovement { get; set; }
         public Player.Player player { get; set; }
+        private Cutscene cutscene;
         private string active;
         private Image imageQuestItem;
         private int index;
@@ -42,9 +44,11 @@ namespace Interface
             amountTobacco = GameObject.Find("Tobacco amount").GetComponent<Text>();
             amountQuestItem = GameObject.Find("QuestItem amount").GetComponent<Text>();
             info = GameObject.Find("Info text").GetComponent<Text>();
+            cutscene = FindObjectOfType<Cutscene>();
 
             panelInventory = GameObject.Find("Inventory panel");
             panelInformation = GameObject.Find("Info panel");
+
             panelInventory.SetActive(false);
             panelInformation.SetActive(false);
         }
@@ -99,11 +103,17 @@ namespace Interface
         {
             switch (item) {
                 case "Beer":
-                    player.items[0].UseItem();
+                    if (player.items[0].UseItem())
+                    {
+                        cutscene.StartCutsceneItem("Beer");
+                    }
                     updateInventory();
                 break;
                 case "Tobacco":
-                    player.items[1].UseItem();
+                    if (player.items[1].UseItem())
+                    {
+                        cutscene.StartCutsceneItem("Tobacco");
+                    }
                     updateInventory();
                     break;
                 case "Quest Item":
