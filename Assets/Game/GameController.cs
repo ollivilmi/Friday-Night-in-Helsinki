@@ -14,7 +14,7 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, npcFiller;
+        private GameObject character, npcFiller, npcBar;
         private List<GameObject> triggerObjects;
         private InterfaceManager iManager;
         private GameEvents events;
@@ -96,6 +96,10 @@ namespace Game
 
             npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
             Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
+            npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
+            Instantiate(npcBar, new Vector3(470f, -8f), npcBar.transform.rotation);
+            Instantiate(npcBar, new Vector3(480f, -8.5f), npcBar.transform.rotation);
+            Instantiate(npcBar, new Vector3(485f, -8.3f), npcBar.transform.rotation);
         }
 
         /// <summary>
