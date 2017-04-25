@@ -15,35 +15,31 @@ namespace Interface
         public Button dBoxAnswer2 { get; set; }
         public Button dBoxAnswer3 { get; set; }
         public Button buttonInteraction { get; set; }
-        public List<Button> answerButtons { get; set; }
+        public Button[] answerButtons { get; set; }
         private Button buttonBeer, buttonTobacco;
         private DialogueHolder dHolder;
         private GameObject background, panelShop;
-        private Image imageNPC;
-        public Image imagePlayer { get; set; }
+        private Image imageNPC, imagePlayer;
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
-        private List<GameObject> dialogueElements;
         private NPC.Collision target;
         public Game.Movement playerMovement { get; set; }
 
         private void Start()
         {
-            dialogueElements = new List<GameObject>();
             dBoxNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
-            dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
-            dBoxAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
-            dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
+            dBoxNPC.onClick.AddListener(() => Click(dBoxNPC));
 
-            answerButtons = new List<Button> { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3, dBoxNPC };
-            foreach (Button button in answerButtons)
-            {
-                button.onClick.AddListener(() => Click(button));
-                dialogueElements.Add(button.gameObject);
-            }
+            dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
+            dBoxAnswer1.onClick.AddListener(() => Click(dBoxAnswer1));
+
+            dBoxAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
+            dBoxAnswer2.onClick.AddListener(() => Click(dBoxAnswer2));
+
+            dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
+            dBoxAnswer3.onClick.AddListener(() => Click(dBoxAnswer3));
 
             buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
             buttonInteraction.onClick.AddListener(() => Interaction());
-            dialogueElements.Add(buttonInteraction.gameObject);
 
             buttonBeer = GameObject.Find("BeerBuy").GetComponent<Button>();
             buttonBeer.onClick.AddListener(() => BuyItem("Beer"));
@@ -51,11 +47,14 @@ namespace Interface
             buttonTobacco.onClick.AddListener(() => BuyItem("Tobacco"));
 
             panelShop = GameObject.Find("Shop panel");
-            dialogueElements.Add(panelShop);
 
             background = GameObject.Find("Dialogue Background");
             imagePlayer = GameObject.Find("Player image").GetComponent<Image>();
             imageNPC = GameObject.Find("NPC image").GetComponent<Image>();
+            imagePlayer.sprite = GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite;
+
+            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 };
+            //For loop iteration
 
             dialogueActive = false;
             background.SetActive(false);
@@ -141,10 +140,12 @@ namespace Interface
         /// </summary>
         public void CloseDialogue()
         {
-            foreach (GameObject element in dialogueElements)
-            {
-                element.SetActive(false);
-            }
+            dBoxNPC.gameObject.SetActive(false);
+            dBoxAnswer1.gameObject.SetActive(false);
+            dBoxAnswer2.gameObject.SetActive(false);
+            dBoxAnswer3.gameObject.SetActive(false);
+            buttonInteraction.gameObject.SetActive(false);
+            panelShop.gameObject.SetActive(false);
             selectedAnswer.Clear();
         }
         /// <summary>

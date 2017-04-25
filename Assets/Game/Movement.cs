@@ -11,7 +11,7 @@ namespace Game
 {
     public class Movement
     {
-        public bool moveRight, moveLeft;
+        private bool moveRight, moveLeft;
         public bool Stop { get; set; }
         private Vector2 posMouse;
         public Vector2 posChar { get; set; }

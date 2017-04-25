@@ -15,7 +15,6 @@ namespace NPC
         protected DialogueHolder dHolder;
         protected InterfaceManager iManager;
         protected Player.Player player;
-        protected Movement playerMovement;
         protected GameController controller;
         protected GameEvents events;
         protected string collisionText, objectName;
@@ -40,26 +39,40 @@ namespace NPC
             image = gameObject.GetComponent<SpriteRenderer>().sprite;
             events = controller.GetEvents();
             player = events.GetPlayer();
-            playerMovement = controller.GetMovement();
             objectName = this.gameObject.name;
         }
-
-        protected virtual void OnTriggerStay2D(Collider2D col)
+   
+        protected virtual void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
                 if (!player.interacting)
                 {
                     iManager.SetTarget(this);
-                    iManager.SetHolder(dHolder);
                     try
                     {
                         iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
                         player.interacting = true;
                     }
-                    catch (System.ArgumentException)
+                     catch (System.ArgumentException)
                     {
                     }
+                }
+            }
+        }
+
+        protected virtual void OnTriggerStay2D(Collider2D col)
+        {
+            if (!player.interacting)
+            {
+                iManager.SetTarget(this);
+                try
+                {
+                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                    player.interacting = true;
+                }
+                catch (System.ArgumentException)
+                {
                 }
             }
         }

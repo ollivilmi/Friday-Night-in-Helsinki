@@ -22,6 +22,6 @@ namespace Player
             return itemName;
         }
 
-        abstract public bool UseItem();
+        abstract public void UseItem();
     }
 }

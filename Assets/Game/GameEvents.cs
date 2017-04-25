@@ -16,15 +16,14 @@ namespace Game
         public int score { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
-		public string selectedCharacter { get; set; }
         /// <summary>
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
         /// </summary>
 		public GameEvents(string selectedCharacter)
         {
-			this.selectedCharacter = selectedCharacter;
 			switch (selectedCharacter) {
+
 			case "Jarno": 
             
 				player = new Jarno ();

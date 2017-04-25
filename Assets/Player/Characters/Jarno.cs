@@ -14,6 +14,9 @@ namespace Player
 {
 	public class Jarno : Player  
 	{
+        //public static Sprite playerImage;
+        //public string backStory;
+
         public Jarno()
         {
             this.hour = 17;
@@ -29,9 +32,8 @@ namespace Player
             items[1].amount = 20;
             Sprite guitar = Resources.Load<Sprite>("guitar");
             itemsQuest.Add(new QuestItem("Guitar", guitar, "Your very own guitar."));
-			this.playerSprite = Resources.Load<Sprite> ("Jarno");
+			this.playerSprite = Resources.Load<Sprite> ("Character1");
 			this.backStory = "Jarno plays the guitar, drinks beer occasionaly, and is a nice guy in general";
-			character.sprite = playerSprite;
         }
 
 		override public string Think()
