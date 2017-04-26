@@ -26,6 +26,7 @@ namespace Interface
         private Text bfInsult, bfInfoText;
         private NPC.Collision target;
         private GameEvents events;
+        private InterfaceManager iManager;
 
         private void Start()
         {
@@ -33,6 +34,7 @@ namespace Interface
             playerHP = 0;
             npcHP = 0;
             cutscene = FindObjectOfType<Cutscene>();
+            iManager = FindObjectOfType<InterfaceManager>();
             barfight = GameObject.Find("BarFight");
 
             bfInsult = GameObject.Find("BFtext").GetComponent<Text>();
@@ -161,6 +163,7 @@ namespace Interface
                 {
                     events.ChangeTime(10);
                     events.addScore(20);
+                    StartCoroutine(iManager.PopUp("You put him in his place."));
                     player.useMoney(random.Next(0, 30));
                     target.Remove();
                     target.StopInteracting();

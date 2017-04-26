@@ -18,7 +18,7 @@ namespace Interface
         public List<Button> answerButtons { get; set; }
         private Button buttonBeer, buttonTobacco, buttonQuit;
         private DialogueHolder dHolder;
-        private GameObject background, panelShop, panelPopup;
+        private GameObject background, panelShop, panelPopUp;
         private Image imageNPC;
         public Image imagePlayer { get; set; }
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
@@ -26,14 +26,14 @@ namespace Interface
         private BarFight barfight;
         private NPC.Collision target;
         public Game.Movement playerMovement { get; set; }
-        private Text textPopUP;
+        private Text textPopUp;
 
         private void Start()
         {
             barfight = FindObjectOfType<BarFight>();
-            panelPopup = GameObject.Find("Information PopUp");
-            textPopUP = panelPopup.GetComponent<Text>();
-            panelPopup.SetActive(false);
+            panelPopUp = GameObject.Find("Information PopUp");
+            textPopUp = GameObject.Find("PopUpText").GetComponent<Text>();
+            panelPopUp.SetActive(false);
 
             dialogueElements = new List<GameObject>();
             dBoxNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
@@ -187,12 +187,17 @@ namespace Interface
             dHolder.BuyItem(item);
         }
 
+        public void OpenPopUp(string message)
+        {
+            StartCoroutine(PopUp(message));
+        }
+
         public IEnumerator PopUp(string message)
         {
-            panelPopup.SetActive(true);
-            textPopUP.text = message;
+            panelPopUp.SetActive(true);
+            textPopUp.text = message;
             yield return new WaitForSeconds(3f);
-            panelPopup.SetActive(false);
+            panelPopUp.SetActive(false);
         }
     }
 }

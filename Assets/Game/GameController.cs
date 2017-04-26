@@ -37,9 +37,10 @@ namespace Game
         {
             random = new System.Random();
 			dataSaver = FindObjectOfType<DataSaver> ();
-			selectedCharacter = dataSaver.character;
-            events = new GameEvents(selectedCharacter);
-            GetObjects();   
+			selectedCharacter = dataSaver.character;   
+            GetObjects();
+            events = new GameEvents(selectedCharacter, iManager, cutscene);
+            player = events.GetPlayer();
             SetUpScripts();
             StartPrefabs();
 
@@ -133,7 +134,6 @@ namespace Game
             iManager = FindObjectOfType<InterfaceManager>();
             cutscene = FindObjectOfType<Cutscene>();
             barfight = FindObjectOfType<BarFight>();
-            player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();
         }
 

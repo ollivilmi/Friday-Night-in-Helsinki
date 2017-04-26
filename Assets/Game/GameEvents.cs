@@ -18,13 +18,18 @@ namespace Game
         public int hour { get; set; }
         public int minute { get; set; }
 		public string selectedCharacter { get; set; }
+        public InterfaceManager iManager { get; set; }
+        public Cutscene cutscene { get; set; }
         /// <summary>
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
         /// </summary>
-		public GameEvents(string selectedCharacter)
+		public GameEvents(string selectedCharacter, InterfaceManager iManager, Cutscene cutscene)
         {
 			this.selectedCharacter = selectedCharacter;
+            this.iManager = iManager;
+            this.cutscene = cutscene;
+
 			switch (selectedCharacter) {
 			case "Jarno": 
 				player = new Jarno ();
@@ -57,6 +62,7 @@ namespace Game
             player.drink(-((double)minute * 1 / 6)); //Drunk level decreases by the amount of minutes passed
             while (this.minute >= 60 || this.hour == 24)
             {
+                iManager.OpenPopUp("Another hour has passed.");
                 if (this.minute >= 60)
                 {
                     this.minute -= 60;          //Every hour in Africa an hour passes
