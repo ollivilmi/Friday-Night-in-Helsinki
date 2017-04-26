@@ -12,11 +12,13 @@ namespace NPC {
     public class CollisionNPCBar : Collision {
 
         private NPCBar npc;
+        private BarFight barfight;
 
         override protected void Start()
         {
             base.Initialization();
-            npc = new NPCBar(events);
+            barfight = FindObjectOfType<BarFight>();
+            npc = new NPCBar(events, barfight);
             dHolder = new DialogueHolderBar(player, iManager, npc);
             collisionText = "Talk";
         }

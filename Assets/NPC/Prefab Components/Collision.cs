@@ -74,5 +74,11 @@ namespace NPC
         }
 
         public abstract void Interaction();
+
+        public void Remove()
+        {
+            print("Destroyed");
+            Destroy(this);
+        }
     }
 }

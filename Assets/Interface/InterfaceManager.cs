@@ -23,11 +23,14 @@ namespace Interface
         public Image imagePlayer { get; set; }
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private List<GameObject> dialogueElements;
+        private BarFight barfight;
         private NPC.Collision target;
         public Game.Movement playerMovement { get; set; }
 
         private void Start()
         {
+            barfight = FindObjectOfType<BarFight>();
+
             dialogueElements = new List<GameObject>();
             dBoxNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
             dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
@@ -78,6 +81,7 @@ namespace Interface
         public void SetTarget(NPC.Collision target)
         {
             this.target = target;
+            barfight.SetTarget(target);
         }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace Interface
         public void SetNPCImage(Sprite imageNPC)
         {
             this.imageNPC.sprite = imageNPC;
+            barfight.SetNPCSprite(imageNPC);
         }
 
         /// <summary>

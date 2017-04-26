@@ -23,7 +23,7 @@ public class NPCMovement : MonoBehaviour {
 		waitCounter = waitTime;
 		moveCounter = moveTime;
 		ChooseDirection();
-	}
+    }
 
 	private void Update () {
 

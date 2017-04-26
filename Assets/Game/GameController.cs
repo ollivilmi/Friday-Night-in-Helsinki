@@ -26,6 +26,7 @@ namespace Game
         private Tahti tahti;
         private Blackjack blackjack;
 		private DataSaver dataSaver;
+        private BarFight barfight;
 		private string selectedCharacter;
 		public bool moving;
 
@@ -115,6 +116,7 @@ namespace Game
             tahti = FindObjectOfType<Tahti>();
             blackjack = FindObjectOfType<Blackjack>();
             iManager = FindObjectOfType<InterfaceManager>();
+            barfight = FindObjectOfType<BarFight>();
             player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();
         }
@@ -137,6 +139,8 @@ namespace Game
             iManager.imagePlayer.sprite = player.GetPlayerSprite();
             blackjack.player = this.player;
             blackjack.playerMovement = this.playerMovement;
+            barfight.player = this.player;
+            barfight.SetPlayerSprite(player.playerSprite);
         }
 		/// <summary>
 		/// Handles player character's animations.
