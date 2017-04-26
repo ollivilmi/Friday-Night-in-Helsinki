@@ -147,7 +147,7 @@ namespace Interface
 
         private void attackResult(List<Image> user)
         {
-            int damage = random.Next(0, 2);
+            int damage = random.Next(0, 3);
             if (user == bfPlayer)
             {
                 if (player.drunkLevel > 60 && damage == 1)
@@ -158,8 +158,8 @@ namespace Interface
                 StartCoroutine(showInfo("Player deals " +damage +" damage!"));
                 if (npcHP >= 5)
                 {
-                    StartCoroutine(showInfo("Player wins!"));
-                    print(target);
+                    target.Remove();
+                    target.StopInteracting();
                     barfight.SetActive(false);
                 }
                 else
@@ -169,12 +169,13 @@ namespace Interface
             }
             else if (user == bfNPC)
             {
-                damage = random.Next(0, 2);
+                damage = random.Next(0, 3);
                 playerHP += damage;
                 StartCoroutine(showInfo("NPC deals " + damage + " damage!"));
                 if (playerHP >= 5)
                 {
-                    StartCoroutine(showInfo("NPC wins!"));
+                    target.StopInteracting();
+                    StartCoroutine(cutscene.CutsceneBlackout());
                     barfight.SetActive(false);
                 }
                 else

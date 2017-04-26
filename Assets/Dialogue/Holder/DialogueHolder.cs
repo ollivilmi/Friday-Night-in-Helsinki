@@ -32,6 +32,7 @@ namespace Dialogue
         {
             if (!iManager.dialogueActive)
             {
+                iManager.CloseDialogue();
                 DialogueLevel("");
                 iManager.SetDialogueActive(true);
             }
@@ -49,7 +50,7 @@ namespace Dialogue
         {
             iManager.CloseDialogue();
             iManager.SetDialogueActive(false);
-            iManager.ShowBox("Talk", iManager.buttonInteraction, "Start");
+            iManager.ShowBox("Talk", iManager.buttonInteraction, "");
         }
 
         /// <summary>

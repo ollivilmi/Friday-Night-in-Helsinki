@@ -71,7 +71,7 @@ namespace Dialogue
         {
             npcDialogue = storyDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
-            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Quit");
+            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "");
             iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
         }
 
@@ -81,7 +81,7 @@ namespace Dialogue
         /// </summary>
         private void InitializeDialogueOptions()
         {
-            iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
+            iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "");
 
             if (npc.functionality != null)
             {
@@ -128,6 +128,10 @@ namespace Dialogue
                 case "Quit":
                     QuitDialogue();
                     break;
+                default:
+                    iManager.CloseDialogue();
+                    InitializeDialogueOptions();
+                    break;
             }
         }
         /// <summary>
@@ -170,12 +174,13 @@ namespace Dialogue
                     npc.functionality = null;
                     break;
                 case "What do you have for sale?":
-                    iManager.ShowBox("Honestly, you and me both know you just want beer or cigarettes...", iManager.dBoxNPC, "Quit");
+                    iManager.ShowBox("Honestly, you and me both know you just want beer or cigarettes...", iManager.dBoxNPC, "");
                     iManager.OpenShop();
-                    iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit");
+                    iManager.ShowBox("Never mind.", iManager.dBoxAnswer1, "Quit");
                     break;
                 default:
-                    QuitDialogue();
+                    iManager.CloseDialogue();
+                    InitializeStoryDialogue();
                     break;
             }
         }

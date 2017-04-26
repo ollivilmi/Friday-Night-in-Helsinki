@@ -54,7 +54,7 @@ namespace NPC
                     iManager.SetHolder(dHolder);
                     try
                     {
-                        iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
+                        iManager.ShowBox(collisionText, iManager.buttonInteraction, "");
                         player.interacting = true;
                     }
                     catch (System.ArgumentException)
@@ -77,8 +77,14 @@ namespace NPC
 
         public void Remove()
         {
-            print("Destroyed");
-            Destroy(this);
+            Destroy(this.gameObject);
+        }
+
+        public void StopInteracting()
+        {
+            iManager.CloseDialogue();
+            iManager.SetDialogueActive(false);
+            player.interacting = false;
         }
     }
 }

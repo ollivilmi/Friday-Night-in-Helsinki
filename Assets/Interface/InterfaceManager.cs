@@ -16,7 +16,7 @@ namespace Interface
         public Button dBoxAnswer3 { get; set; }
         public Button buttonInteraction { get; set; }
         public List<Button> answerButtons { get; set; }
-        private Button buttonBeer, buttonTobacco;
+        private Button buttonBeer, buttonTobacco, buttonQuit;
         private DialogueHolder dHolder;
         private GameObject background, panelShop;
         private Image imageNPC;
@@ -52,6 +52,8 @@ namespace Interface
             buttonBeer.onClick.AddListener(() => BuyItem("Beer"));
             buttonTobacco = GameObject.Find("TobaccoBuy").GetComponent<Button>();
             buttonTobacco.onClick.AddListener(() => BuyItem("Tobacco"));
+            buttonQuit = GameObject.Find("QuitDialogue").GetComponent<Button>();
+            buttonQuit.onClick.AddListener(() => SetDialogueActive(false));
 
             panelShop = GameObject.Find("Shop panel");
             dialogueElements.Add(panelShop);
@@ -117,7 +119,7 @@ namespace Interface
             box.gameObject.SetActive(true);
             Text text = box.GetComponentInChildren<Text>();
             text.text = dialogue;
-            selectedAnswer.Add(box, answer);
+            selectedAnswer.Add(box, answer); 
         }
         /// <summary>
         /// Changes button's dialogue without changing what clicking it does
