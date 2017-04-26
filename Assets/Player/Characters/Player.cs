@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
+using Interface;
+using System.Collections;
 
 namespace Player
 {
@@ -29,6 +32,7 @@ namespace Player
         public bool interacting { get; set; }
 		protected SpriteRenderer character;
 		public Animator playerAnimator;
+        public GameEvents events;
 
         public Player()
         {
@@ -38,7 +42,6 @@ namespace Player
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
 			this.playerAnimator = GameObject.Find ("Player").GetComponent<Animator> ();
-
         }
         /// <summary>
         /// Returns player's stats in a string format.
@@ -46,8 +49,7 @@ namespace Player
         /// <returns></returns>
         public string UpdateStats()
         {
-            return "Drunk: " + (int)drunkLevel + " Money: " + money +
-                " Likability: " + getLikability() + " Fun: " + getfunLevel();
+            return " Money: " + money;
         }
         /// <summary>
         /// Add to fun level in the limits of -50 to 50. Adds a fun bonus for being drunk.

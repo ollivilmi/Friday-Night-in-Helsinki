@@ -6,6 +6,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Player;
+using Game;
 
 namespace Interface
 {
@@ -24,6 +25,7 @@ namespace Interface
         private Cutscene cutscene;
         private Text bfInsult, bfInfoText;
         private NPC.Collision target;
+        private GameEvents events;
 
         private void Start()
         {
@@ -72,8 +74,6 @@ namespace Interface
             bfDialogue = GameObject.Find("BFdialogue");
             bfDialogue.SetActive(false);
 
-            bfOptions = new List<Button>();
-
             bfOptions = new List<Button>()
             {
                 GameObject.Find("BFAttack").GetComponent<Button>(),
@@ -112,6 +112,7 @@ namespace Interface
 
         public void newGame()
         {
+            events = player.events;
             playerHP = 0;
             npcHP = 0;
             barfight.SetActive(true);
@@ -150,14 +151,17 @@ namespace Interface
             int damage = random.Next(0, 3);
             if (user == bfPlayer)
             {
-                if (player.drunkLevel > 60 && damage == 1)
+                if (player.drunkLevel > 60 && damage != 1)
                 {
-                    damage = random.Next(0, 2);
+                    damage = random.Next(0, 3);
                 }
                 npcHP += damage;
                 StartCoroutine(showInfo("Player deals " +damage +" damage!"));
                 if (npcHP >= 5)
                 {
+                    events.ChangeTime(10);
+                    events.addScore(20);
+                    player.useMoney(random.Next(0, 30));
                     target.Remove();
                     target.StopInteracting();
                     barfight.SetActive(false);
@@ -176,6 +180,7 @@ namespace Interface
                 {
                     target.StopInteracting();
                     StartCoroutine(cutscene.CutsceneBlackout());
+                    player.useMoney(-(random.Next(0, 20)));
                     barfight.SetActive(false);
                 }
                 else
@@ -258,6 +263,11 @@ namespace Interface
                     playerHP = 0;
                 }
                 bfPlayer[1].sprite = playerHPBar[playerHP];
+            }
+            if (player.drunkLevel == 100)
+            {
+                target.StopInteracting();
+                barfight.SetActive(false);
             }
             bfOptionsPanel.SetActive(true);
         }

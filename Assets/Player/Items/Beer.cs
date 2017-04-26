@@ -21,7 +21,14 @@ namespace Player
             {
                 amount--;
                 player.drink(10);
-                return true;
+                if (player.drunkLevel < 100)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return false;
         }

@@ -75,7 +75,7 @@ namespace NPC
 
         public abstract void Interaction();
 
-        public void Remove()
+        virtual public void Remove()
         {
             Destroy(this.gameObject);
         }

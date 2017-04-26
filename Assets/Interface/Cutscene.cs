@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Game;
 
 namespace Interface
 {
@@ -15,6 +16,8 @@ namespace Interface
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
         private Text cutsceneText;
+        public GameEvents events { get; set; }
+        private Door door;
 
         private void Start()
         {
@@ -25,6 +28,7 @@ namespace Interface
             player = GameObject.Find("CutscenePlayer");
             textObject = GameObject.Find("CutsceneText");
             cutsceneText = textObject.GetComponent<Text>();
+            door = FindObjectOfType<Door>();
 
             background = new List<Sprite>()
             {
@@ -79,11 +83,13 @@ namespace Interface
 
         public IEnumerator CutsceneBlackout()
         {
+            events.ChangeTime(60);
             cutscene.GetComponent<Image>().sprite = background[2];
             cutscene.SetActive(true);
             textObject.SetActive(true);
             cutsceneText.text = "You don't remember what happens in the following hour.";
-            yield return new WaitForSeconds(8f);
+            yield return new WaitForSeconds(8f);          
+            door.RandomLocation();
             textObject.SetActive(false);
             cutscene.SetActive(false);
         }

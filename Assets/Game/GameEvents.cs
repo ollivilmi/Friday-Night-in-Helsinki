@@ -7,6 +7,7 @@ using Dialogue;
 using NPC;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Game
 {
@@ -26,20 +27,18 @@ namespace Game
 			this.selectedCharacter = selectedCharacter;
 			switch (selectedCharacter) {
 			case "Jarno": 
-            
 				player = new Jarno ();
 				break;
-
 			case "Make":
 				player = new Make ();
 				break;
-
 			case "Teddy":
 				player = new Teddy ();
 				break;
 			}
             this.hour = player.hour;
             this.minute = player.minute;
+            player.events = this;
         }
 
         public Player.Player GetPlayer()
@@ -74,7 +73,7 @@ namespace Game
 
         public string UpdateEvents()
         {
-            return "Score: " + score + " Time: " + hour + ":" + minute;
+            return "Time: " + hour + ":" + minute;
         }
 
     }

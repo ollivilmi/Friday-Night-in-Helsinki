@@ -20,22 +20,26 @@ namespace Game
         private GameEvents events;
         private Movement playerMovement;
         private Inventory playerInventory;
-        private Text stats, info;
+        private Text info;
         private Door door;
         private NPCType npcType;
         private Tahti tahti;
         private Blackjack blackjack;
 		private DataSaver dataSaver;
         private BarFight barfight;
+        private Cutscene cutscene;
+        public int npcBarCount { get; set; }
 		private string selectedCharacter;
 		public bool moving;
+        private System.Random random;
 
         private void Start()
         {
+            random = new System.Random();
 			dataSaver = FindObjectOfType<DataSaver> ();
 			selectedCharacter = dataSaver.character;
             events = new GameEvents(selectedCharacter);
-            GetObjects();
+            GetObjects();   
             SetUpScripts();
             StartPrefabs();
 
@@ -60,9 +64,16 @@ namespace Game
         {
             playerMovement.posChar = character.transform.position;
             playerMovement.LeftClick();
-            info.text = events.UpdateEvents();
-            stats.text = player.UpdateStats();
+            info.text = events.UpdateEvents() + player.UpdateStats();
 			HandleAnimations ();
+            if (npcBarCount < 4)
+            {
+                StartCoroutine(SpawnBarNPC());
+            }
+            if (player.drunkLevel == 100)
+            {
+                StartCoroutine(cutscene.CutsceneBlackout());
+            }
         }
 
         /// <summary>
@@ -98,9 +109,14 @@ namespace Game
             npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
             Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
             npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
-            Instantiate(npcBar, new Vector3(470f, -8f), npcBar.transform.rotation);
-            Instantiate(npcBar, new Vector3(480f, -8.5f), npcBar.transform.rotation);
-            Instantiate(npcBar, new Vector3(485f, -8.3f), npcBar.transform.rotation);
+            npcBarCount = 1;
+        }            
+
+        private IEnumerator SpawnBarNPC()
+        {
+            npcBarCount++;
+            yield return new WaitForSeconds(30);
+            Instantiate(npcBar, new Vector3((float)random.Next(460,485), -random.Next(5,8)), npcBar.transform.rotation);      
         }
 
         /// <summary>
@@ -109,13 +125,13 @@ namespace Game
         private void GetObjects()
         {
             character = GameObject.Find("Player");
-            stats = GameObject.Find("Stats").GetComponent<Text>();
             info = GameObject.Find("Info").GetComponent<Text>();
             door = FindObjectOfType<Door>();
             npcType = FindObjectOfType<NPCType>();
             tahti = FindObjectOfType<Tahti>();
             blackjack = FindObjectOfType<Blackjack>();
             iManager = FindObjectOfType<InterfaceManager>();
+            cutscene = FindObjectOfType<Cutscene>();
             barfight = FindObjectOfType<BarFight>();
             player = events.GetPlayer();
             playerInventory = FindObjectOfType<Inventory>();
@@ -135,7 +151,8 @@ namespace Game
             npcType.player = this.player;
             tahti.player = this.player;
             tahti.playerMovement = this.playerMovement;
-            FindObjectOfType<Cutscene>().player.GetComponent<Image>().sprite = player.GetPlayerSprite();
+            cutscene.player.GetComponent<Image>().sprite = player.GetPlayerSprite();
+            cutscene.events = this.events;
             iManager.imagePlayer.sprite = player.GetPlayerSprite();
             blackjack.player = this.player;
             blackjack.playerMovement = this.playerMovement;

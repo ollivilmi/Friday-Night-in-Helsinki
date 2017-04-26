@@ -33,6 +33,7 @@ namespace Interface
         public Player.Player player { get; set; }
         public Movement playerMovement { get; set; }
         private CollisionTahti col;
+        private GameEvents events;
 
         private void Start()
         {
@@ -156,6 +157,7 @@ namespace Interface
         /// </summary>
         private void checkResults()
         {
+            events.ChangeTime(2);
             if (results[0] == 2)
             {
                 if (results[1] == 2 && results[2] == 2)
@@ -206,6 +208,7 @@ namespace Interface
         {
             if (!playing)
             {
+                events = player.events;
                 if (player.money >= bet)
                 {
                     player.useMoney(-bet);
@@ -247,6 +250,7 @@ namespace Interface
             {
                 if (lastWin > 0)
                 {
+                    events.ChangeTime(1);
                     player.useMoney(-lastWin);
                     StartCoroutine(CoinAnimation());
                 }

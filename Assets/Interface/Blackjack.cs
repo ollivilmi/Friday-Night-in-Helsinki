@@ -28,6 +28,7 @@ namespace Interface
         private System.Random random;
         private string resultText;
         private CollisionBlackjack col;
+        private GameEvents events;
 
         private void Start()
         {
@@ -150,6 +151,8 @@ namespace Interface
         /// </summary>
         private void startNewGame()
         {
+            events = player.events;
+            events.ChangeTime(3);
             controlButtons(true, false);
             resetGame();
             player.useMoney(-bet);

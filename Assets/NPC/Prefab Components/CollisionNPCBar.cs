@@ -32,6 +32,12 @@ namespace NPC {
             }
         }
 
+        public override void Remove()
+        {
+            base.Remove();
+            controller.npcBarCount--;
+        }
+
         override public void Interaction()
         {
             dHolder.StartDialogue();

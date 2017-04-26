@@ -13,12 +13,14 @@ namespace Game
         private Cutscene cutscene;
         public Player.Player player { get; set; }
         public GameEvents events { get; set; }
+        private System.Random random;
 
         void Start()
 		{
+            random = new System.Random();
 			character = GameObject.Find("Player");
 			limits = FindObjectOfType<CameraFollow> ();
-            cutscene = FindObjectOfType<Cutscene>();      
+            cutscene = FindObjectOfType<Cutscene>();
 		}
 
 		public void Enter(NPC.Collision teleporter)
@@ -84,6 +86,30 @@ namespace Game
                     break;
             }
         }
+
+        public void RandomLocation()
+        {
+            switch (random.Next(0, 6)) {
+                case 0:
+                    EnterDoor(20, 0, 140, 20);
+                    break;
+                case 1:
+                    EnterDoor(230, 195, 313, 230);
+                    break;
+                case 2:
+                    EnterDoor(-80, -105, -68, -80);
+                    break;
+                case 3:
+                    EnterDoor(-140, -182, -161, -161);
+                    break;
+                case 4:
+                    EnterDoor(348, 368, 467, 368);
+                    break;
+                case 5:
+                    EnterDoor(-260, -250, -240, -250);
+                    break;
+                    }
+        }
         /// <summary>
         /// Transports player and camera to the next area and sets the cameras borders in that area.
         /// </summary>
@@ -93,6 +119,7 @@ namespace Game
         /// <param name="xLocationCam"> Camera moves to this locatioin </param>
         private void EnterDoor(float xLocationPlayer, float xMin, float xMax, float xLocationCam)
         {
+            events.ChangeTime(1);
             character.transform.position = new Vector2(xLocationPlayer, -7f);
             Camera.main.transform.position = new Vector3(xLocationCam, 3f, -10f);
             limits.xMin = xMin;
