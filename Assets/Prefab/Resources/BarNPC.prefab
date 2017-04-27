@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4577289114698488}
   - component: {fileID: 212699344489092750}
   - component: {fileID: 61965072009752590}
+  - component: {fileID: 114442869534536810}
   - component: {fileID: 114926634296045128}
   - component: {fileID: 50489338320504428}
-  - component: {fileID: 114442869534536810}
   - component: {fileID: 95616426200700570}
   m_Layer: 0
   m_Name: BarNPC

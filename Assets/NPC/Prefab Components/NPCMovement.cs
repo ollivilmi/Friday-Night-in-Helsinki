@@ -19,7 +19,9 @@ public class NPCMovement : MonoBehaviour {
 	public bool moveLeft { get; set; }
 	public bool moveRight { get; set; }
 	private Animator animator;
-	private List<RuntimeAnimatorController> animations;
+    private SpriteRenderer spriterenderer;
+	private List<RuntimeAnimatorController> npcAnimations;
+    private List<Sprite> npcSprites;
 	private System.Random random;
 
 	private void Start () {
@@ -28,14 +30,25 @@ public class NPCMovement : MonoBehaviour {
 		theRigidbody = GetComponent<Rigidbody2D>();
 		character = this.gameObject;
 		animator = character.GetComponent<Animator> ();
-		animations = new List<RuntimeAnimatorController> () {
-			Resources.Load ("NPC_boy_blue") as RuntimeAnimatorController,
-			Resources.Load ("NPC_boy_green") as RuntimeAnimatorController,
-			Resources.Load ("NPC_boy_red") as RuntimeAnimatorController,
-			Resources.Load ("NPC_girl_white") as RuntimeAnimatorController,
-			Resources.Load ("NPC_girl_green") as RuntimeAnimatorController,
+        spriterenderer = character.GetComponent<SpriteRenderer>();
+		npcAnimations = new List<RuntimeAnimatorController> () {
+			Resources.Load ("NPC_boy_blue_animation") as RuntimeAnimatorController,
+			Resources.Load ("NPC_boy_green_animation") as RuntimeAnimatorController,
+			Resources.Load ("NPC_boy_red_animation") as RuntimeAnimatorController,
+			Resources.Load ("NPC_girl_white_animation") as RuntimeAnimatorController,
+			Resources.Load ("NPC_girl_green_animation") as RuntimeAnimatorController,
 		};
-		animator.runtimeAnimatorController = animations [random.Next (0, 5)];
+        npcSprites = new List<Sprite>()
+        {
+            Resources.Load<Sprite>("NPC_boy_blue"),
+            Resources.Load<Sprite>("NPC_boy_green"),
+            Resources.Load<Sprite>("NPC_boy_red"),
+            Resources.Load<Sprite>("NPC_girl_white"),
+            Resources.Load<Sprite>("NPC_girl_green"),
+        };
+        int randomNPC = random.Next(0, 5);
+		animator.runtimeAnimatorController = npcAnimations [randomNPC];
+        spriterenderer.sprite = npcSprites[randomNPC];
 		waitCounter = waitTime;
 		moveCounter = moveTime;
 		ChooseDirection();

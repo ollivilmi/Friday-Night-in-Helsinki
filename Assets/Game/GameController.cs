@@ -67,7 +67,7 @@ namespace Game
             playerMovement.LeftClick();
             info.text = events.UpdateEvents() + player.UpdateStats();
 			HandleAnimations ();
-            if (npcBarCount < 4)
+            if (npcBarCount < 5)
             {
                 StartCoroutine(SpawnBarNPC());
             }
@@ -109,7 +109,7 @@ namespace Game
 			Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
             Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
             npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
-            npcBarCount = 1;
+            npcBarCount = 0;
         }            
 
         private IEnumerator SpawnBarNPC()
