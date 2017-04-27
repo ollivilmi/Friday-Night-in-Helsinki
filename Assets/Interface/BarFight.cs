@@ -96,22 +96,36 @@ namespace Interface
             }
             barfight.SetActive(false);
         }
-
+        /// <summary>
+        /// Sets the sprite of the image that is used to portray the player.
+        /// This is set in GameController as the player is created.
+        /// </summary>
+        /// <param name="playerSprite">Sprite that the Image uses.</param>
         public void SetPlayerSprite(Sprite playerSprite)
         {
             bfPlayer[0].sprite = playerSprite;
         }
-
+        /// <summary>
+        /// Sets the sprite of the image that is used to portray the NPC.
+        /// This is set in the InterfaceManager after colliding with an NPC.
+        /// </summary>
+        /// <param name="npcSprite">Sprite that the Image uses.</param>
         public void SetNPCSprite (Sprite npcSprite)
         {
             bfNPC[0].sprite = npcSprite;
         }
-
+        /// <summary>
+        /// Target is the Collision script of the NPC.
+        /// This is used to remove the NPC GameObject after beating it.
+        /// </summary>
+        /// <param name="target">NPC's Collision script.</param>
         public void SetTarget(NPC.Collision target)
         {
             this.target = target;
         }
-
+        /// <summary>
+        /// Resets HP counters to 0 and activates the UI overlay.
+        /// </summary>
         public void newGame()
         {
             events = player.events;
@@ -121,7 +135,12 @@ namespace Interface
             bfPlayer[1].sprite = playerHPBar[0];
             bfNPC[1].sprite = npcHPBar[0];
         }
-
+        /// <summary>
+        /// Shows result texts on the screen, used to display
+        /// how much damage was dealt for 1 second.
+        /// </summary>
+        /// <param name="message">The message you want to show.</param>
+        /// <returns></returns>
         private IEnumerator showInfo(string message)
         {
             bfInfo.SetActive(true);
@@ -129,7 +148,10 @@ namespace Interface
             yield return new WaitForSeconds(1f);
             bfInfo.SetActive(false);
         }
-
+        /// <summary>
+        /// Translates the button click into a command.
+        /// </summary>
+        /// <param name="button">Player options in BarFight.</param>
         private void attackOptions(Button button)
         {
             string selection = buttonToString[button];
@@ -147,7 +169,11 @@ namespace Interface
                     break;
             }
         }
-
+        /// <summary>
+        /// Checks winning conditions. Randomizes damage, also if
+        /// player is very drunk the player has a higher chance of missing.
+        /// </summary>
+        /// <param name="user">bfPlayer or bfNPC. The list contains the image of the player at [0] and hp bar at [1].</param>
         private void attackResult(List<Image> user)
         {
             int damage = random.Next(0, 3);
@@ -192,7 +218,9 @@ namespace Interface
                 }
             }
         }
-
+        /// <summary>
+        /// Randomizes whether the NPC insults or attacks head on.
+        /// </summary>
         private void npcAttack()
         {
             int randomize = random.Next(0, 2);
@@ -206,14 +234,22 @@ namespace Interface
                     break;
             }
         }
-
+        /// <summary>
+        /// Starts attack animation, then waits 1,5 seconds for the NPC to act.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator useAttack()
         {
             StartCoroutine(attack(bfPlayer));
             yield return new WaitForSeconds(1.5f);
             npcAttack();
         }
-
+        /// <summary>
+        /// Plays an attack animation where the player moves 40 frames forward
+        /// and backward.
+        /// </summary>
+        /// <param name="user">bfPlayer or bfNPC. The list contains the image of the player at [0] and hp bar at [1].</param>
+        /// <returns></returns>
         private IEnumerator attack(List<Image> user)
         {
             for (int i = 0; i < 40; i++)
@@ -232,16 +268,24 @@ namespace Interface
                 bfOptionsPanel.SetActive(true);
             }
         }
-
+        /// <summary>
+        /// Changes dialogue box location and starts the insult attack.
+        /// Waits for 3 seconds and then lets the NPC randomize a response.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator useInsult()
         {
-            bfDialogue.transform.position = new Vector3(210f, bfDialogue.transform.position.y, bfDialogue.transform.position.z);
+            bfDialogue.transform.position = new Vector2(170f, bfDialogue.transform.position.y);
             StartCoroutine(insult(bfPlayer));
             yield return new WaitForSeconds(3f);
-            bfDialogue.transform.position = new Vector3(300f, bfDialogue.transform.position.y, bfDialogue.transform.position.z);
+            bfDialogue.transform.position = new Vector2(300f, bfDialogue.transform.position.y);
             npcAttack();
         }
-
+        /// <summary>
+        /// Randomizes an insult to the insult dialogue box from the insults list. Checks for damage.
+        /// </summary>
+        /// <param name="user">bfPlayer or bfNPC. The list contains the image of the player at [0] and hp bar at [1].</param>
+        /// <returns></returns>
         private IEnumerator insult(List<Image> user)
         {
             bfDialogue.SetActive(true);
@@ -254,7 +298,11 @@ namespace Interface
                 bfOptionsPanel.SetActive(true);
             }
         }
-
+        /// <summary>
+        /// Drink a beer if you have one. Gives you 2hp but increases drunkLevel.
+        /// You have a higher chance of missing at over 60 drunkLevel and you black out 
+        /// at 100.
+        /// </summary>
         private void useDrink()
         {
             if (player.items[0].UseItem())
