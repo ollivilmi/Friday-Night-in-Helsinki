@@ -83,10 +83,8 @@ namespace Game
         private void StartPrefabs()
         {
             triggerObjects = new List<GameObject> {
-                (GameObject)Resources.Load("BarNPC", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCPetri", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCMatti", typeof(GameObject)),
-                (GameObject)Resources.Load("NPCFiller", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCTommi", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),
@@ -108,6 +106,7 @@ namespace Game
             }
 
             npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
+			Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
             Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
             npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
             npcBarCount = 1;

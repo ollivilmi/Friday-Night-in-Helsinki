@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50580025392272676}
   - component: {fileID: 114950497267626418}
   - component: {fileID: 114326199503841332}
+  - component: {fileID: 95103553698559932}
   m_Layer: 0
   m_Name: NPCTommi
   m_TagString: Untagged
@@ -78,6 +79,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.8400003, y: 2.94}
+--- !u!95 &95103553698559932
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850490658317878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114326199503841332
 MonoBehaviour:
   m_ObjectHideFlags: 1
