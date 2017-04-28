@@ -60,6 +60,7 @@ namespace Interface
         {
             if (panelInventory.activeInHierarchy == false)
             {
+                playerMovement.StopMovement();
                 playerMovement.Stop = true;
                 panelInventory.SetActive(true);
                 updateInventory();

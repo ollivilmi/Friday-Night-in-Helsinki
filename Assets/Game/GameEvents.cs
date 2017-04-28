@@ -20,7 +20,7 @@ namespace Game
 		public string selectedCharacter { get; set; }
         public InterfaceManager iManager { get; set; }
         public Cutscene cutscene { get; set; }
-        private GameObject character;
+
         /// <summary>
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
@@ -30,7 +30,6 @@ namespace Game
 			this.selectedCharacter = selectedCharacter;
             this.iManager = iManager;
             this.cutscene = cutscene;
-            this.character = character;
 
 			switch (selectedCharacter) {
 			case "Jarno": 

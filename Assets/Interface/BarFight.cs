@@ -189,7 +189,7 @@ namespace Interface
                 {
                     events.ChangeTime(10);
                     events.addScore(20);
-                    StartCoroutine(iManager.PopUp("You put him in his place."));
+                    StartCoroutine(iManager.PopUp("You showed who's the boss."));
                     player.useMoney(random.Next(0, 30));
                     target.Remove();
                     target.StopInteracting();
@@ -223,15 +223,18 @@ namespace Interface
         /// </summary>
         private void npcAttack()
         {
-            int randomize = random.Next(0, 2);
-            switch (randomize)
+            if (barfight.activeInHierarchy)
             {
-                case 0:
-                    StartCoroutine(insult(bfNPC));
-                    break;
-                case 1:
-                    StartCoroutine(attack(bfNPC));
-                    break;
+                int randomize = random.Next(0, 2);
+                switch (randomize)
+                {
+                    case 0:
+                        StartCoroutine(insult(bfNPC));
+                        break;
+                    case 1:
+                        StartCoroutine(attack(bfNPC));
+                        break;
+                }
             }
         }
         /// <summary>
@@ -275,10 +278,10 @@ namespace Interface
         /// <returns></returns>
         private IEnumerator useInsult()
         {
-            bfDialogue.transform.position = new Vector2(170f, bfDialogue.transform.position.y);
+            bfDialogue.GetComponent<RectTransform>().position = new Vector2(220f, bfDialogue.transform.position.y);
             StartCoroutine(insult(bfPlayer));
             yield return new WaitForSeconds(3f);
-            bfDialogue.transform.position = new Vector2(300f, bfDialogue.transform.position.y);
+            bfDialogue.GetComponent<RectTransform>().position = new Vector2(310f, bfDialogue.transform.position.y);
             npcAttack();
         }
         /// <summary>

@@ -173,7 +173,6 @@ namespace Interface
         {
             if (panelShop.activeInHierarchy == false)
             {
-                playerMovement.Stop = true;
                 panelShop.SetActive(true);
             }
             else

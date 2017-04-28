@@ -26,10 +26,11 @@ namespace Player
             this.drunkLevel = 0;
             this.funLevel = 20;
             this.height = -8.5f;
+            this.playerAnimator.SetBool("isJarno", true);
             items[0].amount = 2;
             items[1].amount = 20;
-            Sprite guitar = Resources.Load<Sprite>("guitar");
-            itemsQuest.Add(new QuestItem("Guitar", guitar, "Your very own guitar."));
+            Sprite guitar = Resources.Load<Sprite>("eguitarSquare");
+            itemsQuest.Add(new QuestItem("Guitar", guitar, "Electric guitar. You need an amplifier to play it."));
 			this.playerSprite = Resources.Load<Sprite> ("Jarno");
 			this.backStory = "Jarno plays the guitar, drinks beer occasionaly, and is a nice guy in general";
 			character.sprite = playerSprite;
