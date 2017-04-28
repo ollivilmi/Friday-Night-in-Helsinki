@@ -72,7 +72,7 @@ namespace Dialogue
                     if (active != "Beer")
                     {
                         active = "Beer";
-                        iManager.ShowBox("That would be 5 euroes for 1 beer, thank you.\n\n\n\nClick the icon again to buy.", iManager.dBoxNPC);
+                        iManager.ShowBox("That would be 5 euroes for 1 beer, thank you.\nClick the icon again to buy.", iManager.dBoxNPC);
                     }
                     else if (player.money >= 5 && active == "Beer")
                     {
@@ -86,7 +86,7 @@ namespace Dialogue
                     if (active != "Tobacco")
                     {
                         active = "Tobacco";
-                        iManager.ShowBox("That would be 6 euroes for 5 cigarettes, thank you.\n\n\n\nClick the icon again to buy.", iManager.dBoxNPC);
+                        iManager.ShowBox("That would be 6 euroes for 5 cigarettes, thank you.\nClick the icon again to buy.", iManager.dBoxNPC);
                     }
                     else if (player.money >= 6 && active == "Tobacco")
                     {
