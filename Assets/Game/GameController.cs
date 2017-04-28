@@ -156,6 +156,7 @@ namespace Game
             blackjack.playerMovement = this.playerMovement;
             barfight.player = this.player;
             barfight.SetPlayerSprite(player.playerSprite);
+            FindObjectOfType<GuitarGod>().playerMovement = this.playerMovement;
         }
 		/// <summary>
 		/// Handles player character's animations.
