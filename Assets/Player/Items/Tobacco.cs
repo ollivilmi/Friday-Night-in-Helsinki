@@ -15,13 +15,15 @@ namespace Player
             this.player = player;
         }
 
-        public override void UseItem()
+        override public bool UseItem()
         {
             if (amount > 0)
             {
                 amount--;
-                player.haveFun(10);
+                player.haveFun(2);
+                return true;
             }
+            return false;
         }
     }
 }

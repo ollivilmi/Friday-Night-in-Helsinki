@@ -15,38 +15,56 @@ namespace Interface
         public Button dBoxAnswer2 { get; set; }
         public Button dBoxAnswer3 { get; set; }
         public Button buttonInteraction { get; set; }
-        public Button[] answerButtons { get; set; }
+        public List<Button> answerButtons { get; set; }
+        private Button buttonBeer, buttonTobacco, buttonQuit;
         private DialogueHolder dHolder;
-        private GameObject background;
-        private Image imageNPC, imagePlayer;
+        private GameObject background, panelShop, panelPopUp;
+        private Image imageNPC;
+        public Image imagePlayer { get; set; }
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
+        private List<GameObject> dialogueElements;
+        private BarFight barfight;
         private NPC.Collision target;
         public Game.Movement playerMovement { get; set; }
+        private Text textPopUp;
 
         private void Start()
         {
+            barfight = FindObjectOfType<BarFight>();
+            panelPopUp = GameObject.Find("Information PopUp");
+            textPopUp = GameObject.Find("PopUpText").GetComponent<Text>();
+            panelPopUp.SetActive(false);
+
+            dialogueElements = new List<GameObject>();
             dBoxNPC = GameObject.Find("DialogueBox").GetComponent<Button>();
-            dBoxNPC.onClick.AddListener(() => Click(dBoxNPC));
-
             dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
-            dBoxAnswer1.onClick.AddListener(() => Click(dBoxAnswer1));
-
             dBoxAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
-            dBoxAnswer2.onClick.AddListener(() => Click(dBoxAnswer2));
-
             dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
-            dBoxAnswer3.onClick.AddListener(() => Click(dBoxAnswer3));
+
+            answerButtons = new List<Button> { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3, dBoxNPC };
+            foreach (Button button in answerButtons)
+            {
+                button.onClick.AddListener(() => Click(button));
+                dialogueElements.Add(button.gameObject);
+            }
 
             buttonInteraction = GameObject.Find("Interaction").GetComponent<Button>();
             buttonInteraction.onClick.AddListener(() => Interaction());
+            dialogueElements.Add(buttonInteraction.gameObject);
+
+            buttonBeer = GameObject.Find("BeerBuy").GetComponent<Button>();
+            buttonBeer.onClick.AddListener(() => BuyItem("Beer"));
+            buttonTobacco = GameObject.Find("TobaccoBuy").GetComponent<Button>();
+            buttonTobacco.onClick.AddListener(() => BuyItem("Tobacco"));
+            buttonQuit = GameObject.Find("QuitDialogue").GetComponent<Button>();
+            buttonQuit.onClick.AddListener(() => SetDialogueActive(false));
+
+            panelShop = GameObject.Find("Shop panel");
+            dialogueElements.Add(panelShop);
 
             background = GameObject.Find("Dialogue Background");
             imagePlayer = GameObject.Find("Player image").GetComponent<Image>();
             imageNPC = GameObject.Find("NPC image").GetComponent<Image>();
-            imagePlayer.sprite = GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite;
-
-            answerButtons = new Button[3] { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3 };
-            //For loop iteration
 
             dialogueActive = false;
             background.SetActive(false);
@@ -69,6 +87,7 @@ namespace Interface
         public void SetTarget(NPC.Collision target)
         {
             this.target = target;
+            barfight.SetTarget(target);
         }
 
         /// <summary>
@@ -78,6 +97,7 @@ namespace Interface
         public void SetNPCImage(Sprite imageNPC)
         {
             this.imageNPC.sprite = imageNPC;
+            barfight.SetNPCSprite(imageNPC);
         }
 
         /// <summary>
@@ -103,8 +123,20 @@ namespace Interface
             box.gameObject.SetActive(true);
             Text text = box.GetComponentInChildren<Text>();
             text.text = dialogue;
-            selectedAnswer.Add(box, answer);
+            selectedAnswer.Add(box, answer); 
         }
+        /// <summary>
+        /// Changes button's dialogue without changing what clicking it does
+        /// </summary>
+        /// <param name="dialogue"></param>
+        /// <param name="box"></param>
+        public void ShowBox(string dialogue, Button box)
+        {
+            box.gameObject.SetActive(true);
+            Text text = box.GetComponentInChildren<Text>();
+            text.text = dialogue;
+        }
+
         /// <summary>
         /// Returns which button was clicked to the DialogueHolder.
         /// </summary>
@@ -120,11 +152,10 @@ namespace Interface
         /// </summary>
         public void CloseDialogue()
         {
-            dBoxNPC.gameObject.SetActive(false);
-            dBoxAnswer1.gameObject.SetActive(false);
-            dBoxAnswer2.gameObject.SetActive(false);
-            dBoxAnswer3.gameObject.SetActive(false);
-            buttonInteraction.gameObject.SetActive(false);
+            foreach (GameObject element in dialogueElements)
+            {
+                element.SetActive(false);
+            }
             selectedAnswer.Clear();
         }
         /// <summary>
@@ -136,6 +167,37 @@ namespace Interface
             playerMovement.StopMovement();
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
+        }
+        
+        public void OpenShop()
+        {
+            if (panelShop.activeInHierarchy == false)
+            {
+                playerMovement.Stop = true;
+                panelShop.SetActive(true);
+            }
+            else
+            {
+                panelShop.SetActive(false);
+            }
+        }
+
+        private void BuyItem(string item)
+        {
+            dHolder.BuyItem(item);
+        }
+
+        public void OpenPopUp(string message)
+        {
+            StartCoroutine(PopUp(message));
+        }
+
+        public IEnumerator PopUp(string message)
+        {
+            panelPopUp.SetActive(true);
+            textPopUp.text = message;
+            yield return new WaitForSeconds(3f);
+            panelPopUp.SetActive(false);
         }
     }
 }

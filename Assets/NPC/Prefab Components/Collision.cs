@@ -15,6 +15,7 @@ namespace NPC
         protected DialogueHolder dHolder;
         protected InterfaceManager iManager;
         protected Player.Player player;
+        protected Movement playerMovement;
         protected GameController controller;
         protected GameEvents events;
         protected string collisionText, objectName;
@@ -39,20 +40,26 @@ namespace NPC
             image = gameObject.GetComponent<SpriteRenderer>().sprite;
             events = controller.GetEvents();
             player = events.GetPlayer();
+            playerMovement = controller.GetMovement();
             objectName = this.gameObject.name;
         }
-   
-        protected virtual void OnTriggerEnter2D(Collider2D col)
+
+        protected virtual void OnTriggerStay2D(Collider2D col)
         {
             if (col.gameObject.tag == "Player")
             {
-                iManager.SetTarget(this);
-                try
+                if (!player.interacting)
                 {
-                    iManager.ShowBox(collisionText, iManager.buttonInteraction, "Start");
-                }
-                catch (System.ArgumentException)
-                {
+                    iManager.SetTarget(this);
+                    iManager.SetHolder(dHolder);
+                    try
+                    {
+                        iManager.ShowBox(collisionText, iManager.buttonInteraction, "");
+                        player.interacting = true;
+                    }
+                    catch (System.ArgumentException)
+                    {
+                    }
                 }
             }
         }
@@ -62,9 +69,22 @@ namespace NPC
             if (col.gameObject.tag == "Player")
             {
                 iManager.CloseDialogue();
+                player.interacting = false;
             }
         }
 
         public abstract void Interaction();
+
+        virtual public void Remove()
+        {
+            Destroy(this.gameObject);
+        }
+
+        public void StopInteracting()
+        {
+            iManager.CloseDialogue();
+            iManager.SetDialogueActive(false);
+            player.interacting = false;
+        }
     }
 }

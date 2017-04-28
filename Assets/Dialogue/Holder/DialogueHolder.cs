@@ -17,12 +17,13 @@ namespace Dialogue
         protected string answer, answerDialogue, npcDialogue;
         protected InterfaceManager iManager;
         public int level { get; set; }
-        protected int dialogueLength;
+        protected int dialogueLength, beerCount, tobaccoCount;
         public string selection { get; set; }
         public StoryHolder storyDialogue { get; set; }
         public int moodChange { get; set; }
         protected Player.Player player;
         protected System.Random random;
+        protected string active;
 
         /// <summary>
         /// Starts the dialogue if you click an NPC while on top of it.
@@ -31,6 +32,7 @@ namespace Dialogue
         {
             if (!iManager.dialogueActive)
             {
+                iManager.CloseDialogue();
                 DialogueLevel("");
                 iManager.SetDialogueActive(true);
             }
@@ -48,7 +50,7 @@ namespace Dialogue
         {
             iManager.CloseDialogue();
             iManager.SetDialogueActive(false);
-            iManager.ShowBox("Talk", iManager.buttonInteraction, "Start");
+            iManager.ShowBox("Talk", iManager.buttonInteraction, "");
         }
 
         /// <summary>
@@ -60,6 +62,41 @@ namespace Dialogue
             int temp = moodChange;
             moodChange = 0;
             return temp;
+        }
+
+        public void BuyItem(string item)
+        {
+            switch (item)
+            {
+                case "Beer":
+                    if (active != "Beer")
+                    {
+                        active = "Beer";
+                        iManager.ShowBox("That would be 5 euroes for 1 beer, thank you.\n\n\n\nClick the icon again to buy.", iManager.dBoxNPC);
+                    }
+                    else if (player.money >= 5 && active == "Beer")
+                    {
+                        player.useMoney(-5);
+                        player.items[0].amount++;
+                        beerCount++;
+                        iManager.ShowBox("You have bought " +beerCount+" beers from me.", iManager.dBoxNPC);
+                    }
+                    break;
+                case "Tobacco":
+                    if (active != "Tobacco")
+                    {
+                        active = "Tobacco";
+                        iManager.ShowBox("That would be 6 euroes for 5 cigarettes, thank you.\n\n\n\nClick the icon again to buy.", iManager.dBoxNPC);
+                    }
+                    else if (player.money >= 6 && active == "Tobacco")
+                    {
+                        player.useMoney(-6);
+                        player.items[1].amount += 5;
+                        tobaccoCount += 5;
+                        iManager.ShowBox("You have bought " + tobaccoCount + " cigarettes from me.", iManager.dBoxNPC);
+                    }
+                    break;
+            }
         }
     }
 }

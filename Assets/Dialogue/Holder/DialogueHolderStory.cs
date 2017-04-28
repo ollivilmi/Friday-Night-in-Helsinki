@@ -50,7 +50,7 @@ namespace Dialogue
             {
                 InitializeDialogueOptions();
             }
-            if (optionsActive) //TODO: don't use level, use a bool
+            if (optionsActive)
             {
                 DialogueOptions();
             }
@@ -71,8 +71,7 @@ namespace Dialogue
         {
             npcDialogue = storyDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
-            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "Quit");
-            iManager.ShowBox("Quit", iManager.dBoxAnswer1, "Quit"); 
+            iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "");
             iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
         }
 
@@ -82,7 +81,7 @@ namespace Dialogue
         /// </summary>
         private void InitializeDialogueOptions()
         {
-            iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "Quit");
+            iManager.ShowBox(storyDialogue.GetDialogueOpener(), iManager.dBoxNPC, "");
 
             if (npc.functionality != null)
             {
@@ -129,6 +128,10 @@ namespace Dialogue
                 case "Quit":
                     QuitDialogue();
                     break;
+                default:
+                    iManager.CloseDialogue();
+                    InitializeDialogueOptions();
+                    break;
             }
         }
         /// <summary>
@@ -164,14 +167,20 @@ namespace Dialogue
                     QuitDialogue();
                     break;
                 case "Is this your phone?":
-                    iManager.ShowBox("Oh, yes! Did you meet my friend Matti? I've been looking for this phone for weeks.", iManager.dBoxNPC, "Quit");
+                    iManager.ShowBox("Oh, yes! Seems like you met my friend Matti? I've been waiting to get my hands on this phone for weeks.", iManager.dBoxNPC, "Quit");
                     player.haveFun(15);
                     player.useMoney(20);
                     player.RemoveQuestItem("Old phone");
                     npc.functionality = null;
                     break;
+                case "What do you have for sale?":
+                    iManager.ShowBox("Honestly, you and me both know you just want beer or cigarettes...", iManager.dBoxNPC, "");
+                    iManager.OpenShop();
+                    iManager.ShowBox("Never mind.", iManager.dBoxAnswer1, "Quit");
+                    break;
                 default:
-                    QuitDialogue();
+                    iManager.CloseDialogue();
+                    InitializeStoryDialogue();
                     break;
             }
         }

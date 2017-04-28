@@ -14,25 +14,33 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, barNPC, npcPetri, npcMatti, doorRWS1,
-        doorMainHall1, doorMainHall2, doorMainHall3, doorBar, doorMetroHelsinki1,
-        metroHelsinki, metroSornainen, npcFiller, npcTommi;
+        private GameObject character, npcFiller, npcBar;
+        private List<GameObject> triggerObjects;
         private InterfaceManager iManager;
         private GameEvents events;
         private Movement playerMovement;
         private Inventory playerInventory;
-        private Text stats, info;
+        private Text info;
         private Door door;
         private NPCType npcType;
+        private Tahti tahti;
+        private Blackjack blackjack;
 		private DataSaver dataSaver;
+        private BarFight barfight;
+        private Cutscene cutscene;
+        public int npcBarCount { get; set; }
 		private string selectedCharacter;
+		public bool moving;
+        private System.Random random;
 
         private void Start()
         {
+            random = new System.Random();
 			dataSaver = FindObjectOfType<DataSaver> ();
-			selectedCharacter = dataSaver.character;
-            events = new GameEvents(selectedCharacter);
+			selectedCharacter = dataSaver.character;   
             GetObjects();
+            events = new GameEvents(selectedCharacter, iManager, cutscene, character);
+            player = events.GetPlayer();
             SetUpScripts();
             StartPrefabs();
         }
@@ -47,12 +55,25 @@ namespace Game
             return playerMovement;
         }
 
+        public Player.Player GetPlayer()
+        {
+            return player;
+        }
+
         private void Update()
         {
-                playerMovement.posChar = character.transform.position;
-                playerMovement.LeftClick();
-                info.text = events.UpdateEvents();
-                stats.text = player.UpdateStats();
+            playerMovement.posChar = character.transform.position;
+            playerMovement.LeftClick();
+            info.text = events.UpdateEvents() + player.UpdateStats();
+			HandleAnimations ();
+            if (npcBarCount < 5)
+            {
+                StartCoroutine(SpawnBarNPC());
+            }
+            if (player.drunkLevel == 100)
+            {
+                StartCoroutine(cutscene.CutsceneBlackout());
+            }
         }
 
         /// <summary>
@@ -60,34 +81,41 @@ namespace Game
         /// </summary>
         private void StartPrefabs()
         {
-            barNPC = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
-            npcPetri = (GameObject)Resources.Load("NPCPetri", typeof(GameObject));
-            npcMatti = (GameObject)Resources.Load("NPCMatti", typeof(GameObject));
-            npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
-            npcTommi = (GameObject)Resources.Load("NPCTommi", typeof(GameObject));
-            doorRWS1 = (GameObject)Resources.Load("DoorRWS1", typeof(GameObject));
-            doorMainHall1 = (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject));
-            doorMainHall2 = (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject));
-            doorMainHall3 = (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject));
-            doorBar = (GameObject)Resources.Load("DoorBar1", typeof(GameObject));
-            doorMetroHelsinki1 = (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject));
-            metroHelsinki = (GameObject)Resources.Load("MetroHelsinki", typeof(GameObject));
-            metroSornainen = (GameObject)Resources.Load("MetroSornainen", typeof(GameObject));
+            triggerObjects = new List<GameObject> {
+                (GameObject)Resources.Load("NPCPetri", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCMatti", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCTommi", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorRWSNightClub", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorCasino", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorNightClub", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall2", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMainHall3", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorBar1", typeof(GameObject)),
+                (GameObject)Resources.Load("DoorMetroHelsinki1", typeof(GameObject)),
+                (GameObject)Resources.Load("MetroHelsinki", typeof(GameObject)),
+                (GameObject)Resources.Load("MetroSornainen", typeof(GameObject)),
+            };
 
-            Instantiate(npcPetri, npcPetri.transform.position, npcPetri.transform.rotation);
-            Instantiate(npcMatti, npcMatti.transform.position, npcMatti.transform.rotation);
-            Instantiate(barNPC, barNPC.transform.position, barNPC.transform.rotation);
-            Instantiate(npcTommi, npcTommi.transform.position, npcTommi.transform.rotation);
-            Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
-            Instantiate(npcFiller, new Vector3(-90f,-8.3f), npcFiller.transform.rotation);
-            Instantiate(doorRWS1, doorRWS1.transform.position, doorRWS1.transform.rotation);
-            Instantiate(doorMainHall1, doorMainHall1.transform.position, doorMainHall1.transform.rotation);
-            Instantiate(doorMainHall2, doorMainHall2.transform.position, doorMainHall2.transform.rotation);
-            Instantiate(doorMainHall3, doorMainHall3.transform.position, doorMainHall3.transform.rotation);
-            Instantiate(doorBar, doorBar.transform.position, doorBar.transform.rotation);
-            Instantiate(doorMetroHelsinki1, doorMetroHelsinki1.transform.position, doorMetroHelsinki1.transform.rotation);
-            Instantiate(metroHelsinki, metroHelsinki.transform.position, metroHelsinki.transform.rotation);
-            Instantiate(metroSornainen, metroSornainen.transform.position, metroSornainen.transform.rotation);
+            foreach (GameObject element in triggerObjects)
+            {
+                Instantiate(element, element.transform.position, element.transform.rotation);
+            }
+
+            npcFiller = (GameObject)Resources.Load("NPCFiller", typeof(GameObject));
+			Instantiate(npcFiller, npcFiller.transform.position, npcFiller.transform.rotation);
+            Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
+            npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
+            npcBarCount = 0;
+        }            
+
+        private IEnumerator SpawnBarNPC()
+        {
+            npcBarCount++;
+            yield return new WaitForSeconds(30);
+            Instantiate(npcBar, new Vector3((float)random.Next(460,485), -random.Next(5,8)), npcBar.transform.rotation);      
         }
 
         /// <summary>
@@ -96,12 +124,14 @@ namespace Game
         private void GetObjects()
         {
             character = GameObject.Find("Player");
-            stats = GameObject.Find("Stats").GetComponent<Text>();
             info = GameObject.Find("Info").GetComponent<Text>();
             door = FindObjectOfType<Door>();
             npcType = FindObjectOfType<NPCType>();
+            tahti = FindObjectOfType<Tahti>();
+            blackjack = FindObjectOfType<Blackjack>();
             iManager = FindObjectOfType<InterfaceManager>();
-            player = events.GetPlayer();
+            cutscene = FindObjectOfType<Cutscene>();
+            barfight = FindObjectOfType<BarFight>();
             playerInventory = FindObjectOfType<Inventory>();
         }
 
@@ -117,6 +147,58 @@ namespace Game
             door.player = this.player;
             door.events = this.events;
             npcType.player = this.player;
+            tahti.player = this.player;
+            tahti.playerMovement = this.playerMovement;
+            cutscene.player.GetComponent<Image>().sprite = player.GetPlayerSprite();
+            cutscene.events = this.events;
+            iManager.imagePlayer.sprite = player.GetPlayerSprite();
+            blackjack.player = this.player;
+            blackjack.playerMovement = this.playerMovement;
+            barfight.player = this.player;
+            barfight.SetPlayerSprite(player.playerSprite);
         }
+		/// <summary>
+		/// Handles player character's animations.
+		/// Is called in Update();
+		/// </summary>
+		void HandleAnimations()
+		{
+			//checks if player is moving
+			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 
+			{
+				player.playerAnimator.SetBool ("moving", true);
+			} 
+			else 
+			{
+				player.playerAnimator.SetBool ("moving", false);
+			}
+
+			//checks if player is Make
+			if (player.name == "Make") {
+				player.playerAnimator.SetBool ("isMake", true);
+			} 
+			else 
+			{
+				player.playerAnimator.SetBool ("isMake", false);
+			}
+			//checks if player is Jarno
+			if (player.name == "Jarno") 
+			{
+				player.playerAnimator.SetBool ("isJarno", true);
+			}
+			else 
+			{
+				player.playerAnimator.SetBool ("isJarno", false);
+			}
+			//checks if player is Teddy
+			if (player.name == "Teddy") 
+			{
+				player.playerAnimator.SetBool ("isTeddy", true);
+			}
+			else 
+			{
+				player.playerAnimator.SetBool ("isTeddy", false);
+			}
+		}
     }
 }

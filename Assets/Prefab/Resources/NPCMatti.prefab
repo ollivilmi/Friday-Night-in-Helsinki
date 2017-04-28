@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50506741473654328}
   - component: {fileID: 114348834764735310}
   - component: {fileID: 114329270014909124}
+  - component: {fileID: 95514768602972704}
   m_Layer: 0
   m_Name: NPCMatti
   m_TagString: Untagged
@@ -78,6 +79,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.8400003, y: 2.94}
+--- !u!95 &95514768602972704
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779968745607524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114329270014909124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +151,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 887195175
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4de309f00ff079a4e96da9782f3a7269, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75f45ad18621bab44898eff8bad8e092, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -1,0 +1,3 @@
+Ehh, me?/You're right. I was born in Kuopio but I moved here because of my job./Do you happen to work for StoryCompanyPlaceholder?/I'm Matti. I don't think we've had the pleasure of talking before, but we've probably seen each other./I've been training new phone salesmen. It's inredibly stressful./My friend Tommi is here as well. If you find him, please give him this.
+Yep. You don't seem like a local./I knew it. I know some people from Kuopio./Ahh yes, do I know you?/Ahh... What are you up to?/I know, I've been one myself. Are you with someone?/Sure thing. See you around.
+Continue/Continue/Continue/Continue/Continue/Quit

@@ -7,6 +7,7 @@ using Dialogue;
 using NPC;
 using UnityEngine;
 using UnityEngine.UI;
+using Interface;
 
 namespace Game
 {
@@ -16,29 +17,38 @@ namespace Game
         public int score { get; set; }
         public int hour { get; set; }
         public int minute { get; set; }
+		public string selectedCharacter { get; set; }
+        public InterfaceManager iManager { get; set; }
+        public Cutscene cutscene { get; set; }
+        private GameObject character;
         /// <summary>
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
         /// </summary>
-		public GameEvents(string selectedCharacter)
+		public GameEvents(string selectedCharacter, InterfaceManager iManager, Cutscene cutscene, GameObject character)
         {
+			this.selectedCharacter = selectedCharacter;
+            this.iManager = iManager;
+            this.cutscene = cutscene;
+            this.character = character;
+
 			switch (selectedCharacter) {
-
 			case "Jarno": 
-            
 				player = new Jarno ();
-				break;
-
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+                    break;
 			case "Make":
 				player = new Make ();
-				break;
-
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+                    break;
 			case "Teddy":
 				player = new Teddy ();
-				break;
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+				    break;
 			}
             this.hour = player.hour;
             this.minute = player.minute;
+            player.events = this;
         }
 
         public Player.Player GetPlayer()
@@ -57,6 +67,7 @@ namespace Game
             player.drink(-((double)minute * 1 / 6)); //Drunk level decreases by the amount of minutes passed
             while (this.minute >= 60 || this.hour == 24)
             {
+                iManager.OpenPopUp("Another hour has passed.");
                 if (this.minute >= 60)
                 {
                     this.minute -= 60;          //Every hour in Africa an hour passes
@@ -73,7 +84,7 @@ namespace Game
 
         public string UpdateEvents()
         {
-            return "Score: " + score + " Time: " + hour + ":" + minute;
+            return "Time: " + hour + ":" + minute;
         }
 
     }

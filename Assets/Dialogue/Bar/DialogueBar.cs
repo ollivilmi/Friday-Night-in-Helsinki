@@ -7,7 +7,6 @@ namespace Dialogue
 	{
 		private string[] dialogue1, dialogue2Positive, dialogue2Neutral,
 		dialogue2Negative, dialogue3Positive, dialogue3Neutral, dialogue3Negative;
-		private string[][] dialogue2, dialogue3;
 		private Random random;
         private string[] dialogue, answers;
 		private int select;
@@ -45,21 +44,12 @@ namespace Dialogue
 				"One more word and you are done.", 
 				"Are you kidding me?", 
 				"That was the last straw." };
-			this.dialogue2 = new string[][] { dialogue2Positive, dialogue2Neutral, dialogue2Negative };
-			this.dialogue3 = new string[][] { dialogue3Positive, dialogue3Neutral, dialogue3Negative };
 			this.random = new Random ();
 			this.dialogue = new string[4];
             this.answers = new string[3];
 			this.select = 0;
 		}
 
-		public DialogueBar (string[] dialogue1, string[][] dialogue2, string[][] dialogue3)
-		{
-			this.dialogue1 = dialogue1;
-			this.dialogue2 = dialogue2; 
-			this.dialogue3 = dialogue3;
-			this.random = new Random ();
-		}
         /// <summary>
         /// Function to randomize player answer options by using Next(1,4).
         /// Gets random string[3] dialogue and string[3] answers "Positive" "Neutral" or "Negative"

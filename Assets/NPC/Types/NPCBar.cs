@@ -4,15 +4,18 @@ using Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
 using Game;
+using Interface;
 
 namespace NPC
 {
     public class NPCBar : NPC
     {
         private int itemIndex;
+        private BarFight barfight;
 
-        public NPCBar(GameEvents events)
+        public NPCBar(GameEvents events, BarFight barfight)
         {
+            this.barfight = barfight;
             this.events = events;
             mood = random.Next(0, 101);
             items = new List<string>() { "Beer", "Tobacco" };
@@ -60,7 +63,7 @@ namespace NPC
             }
             else if (mood < 20)
             {
-                return "I hate you. Leave.";
+                barfight.newGame();
             }
             return "";
         }

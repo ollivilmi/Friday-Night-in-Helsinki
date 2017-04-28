@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Game;
+using Interface;
+using System.Collections;
 
 namespace Player
 {
@@ -23,15 +26,23 @@ namespace Player
         public string[] answer { get; set; }
         public string special { get; set; }
         protected System.Random random;
-
+        protected char[] delimiter;
 		public Sprite playerSprite;
-		public String backStory;
+		public string backStory;
+        public bool interacting { get; set; }
+		protected SpriteRenderer character;
+		public Animator playerAnimator;
+        public GameEvents events;
+        public float height { get; set; }
 
         public Player()
         {
+			this.character = GameObject.Find("Player").GetComponent<SpriteRenderer>();
+            delimiter = new char[] {'/'};
             random = new System.Random();
             this.items = new List<Item> { new Beer(this, 0), new Tobacco(this, 0)};
             this.itemsQuest = new List<QuestItem>();
+			this.playerAnimator = GameObject.Find ("Player").GetComponent<Animator> ();
         }
         /// <summary>
         /// Returns player's stats in a string format.
@@ -39,8 +50,7 @@ namespace Player
         /// <returns></returns>
         public string UpdateStats()
         {
-            return "Drunk: " + (int)drunkLevel + " Money: " + money +
-                " Likability: " + getLikability() + " Fun: " + getfunLevel();
+            return " Money: " + money;
         }
         /// <summary>
         /// Add to fun level in the limits of -50 to 50. Adds a fun bonus for being drunk.
@@ -166,16 +176,18 @@ namespace Player
 
         public void StoryFiller()
         {
-            string[] fillerStory1 = { "What?", "Hello.", "Uhh...", "Are you talking to me?", "Hey." };
-            string[] fillerStory2 = { "I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Me finnish very small.", "¿Hablas español?", "I'm doing just great." };
+            string[] fillerStory1 = { "Uhh... Me? Just fine.", "I'm doing just great.", "I'm fine I guess.", "Nothing much, really.", "Are you talking to me?" };
+            string[] fillerStory2 = { "Sorry, I'm really busy right now.", "Sorry, I don't have time to talk.", "Sorry, I'm busy.", "Go bother someone else.", "That was a great conversation. I'm glad we're over it." };
             story = new string[]
             {
                 fillerStory1[random.Next(0,fillerStory1.Length)],
                 fillerStory2[random.Next(0,fillerStory2.Length)]
             };
+            string[] fillerReply1 = { "What brings you here?", "What's your name?", "Where are you from?", "Do you work here?", "What do you think about the weather?", "Have I seen you before?" };
+            string[] fillerReply2 = { "Oh okay, good bye then.", "Okay, bye.", "Okay.", "I see... Good bye.", "Maybe some other time.", "Good bye." };
             reply = new string[] {
-                "Hello. How are you?",
-                "Good bye."
+                fillerReply1[random.Next(0,fillerReply1.Length)],
+                fillerReply2[random.Next(0,fillerReply2.Length)],
             };
             answer = new string[]
             {
@@ -185,24 +197,7 @@ namespace Player
 
         public void StoryTommi()
         {
-            story = new string[]
-            {
-                "Hey. I don't know if we've met, I come here almost every week.",
-                "Yes, as a telemarketer. Some days it's actually a very fulfilling job... But in reality I'm just counting days to Friday.",
-                "My name's Tommi, nice to meet you. What's your phone number?",
-                "Hah, I understand. See you around."
-            };
-            reply = new string[]
-            {
-                "Do you work in Helsinki?",
-                "Yeah, that's understandable. It's not a job I could see myself in. What's your name?",
-                "I think I'd rather not give it to you.",
-                "See you."
-            };
-            answer = new string[]
-            {
-                "Continue", "Continue", "Continue", "Quit"
-            };
+            ReadStoryFile("StoryTommi");
         }
 
         public void SetStory(string name)
@@ -215,11 +210,11 @@ namespace Player
                 case "Where are you from?":
                     StoryMatti();
                     break;
-                case "Hello.":
-                    StoryFiller();
-                    break;
                 case "Hey, what's up?":
                     StoryTommi();
+                    break;
+                default:
+                    StoryFiller();
                     break;
             }
         }
@@ -233,6 +228,10 @@ namespace Player
 			return this.playerSprite;
 		}
 
+        /// <summary>
+        /// Removes quest item from player's inventory that has the name of the parameter.
+        /// </summary>
+        /// <param name="item">Compared to QuestItem variable "name"</param>
         public void RemoveQuestItem(string item)
         {
             foreach (QuestItem qi in itemsQuest)
@@ -243,6 +242,18 @@ namespace Player
                     break;
                 }
             }
+        }
+        /// <summary>
+        /// Reads story file from Resources folder, sets string[] story, reply and answer from it.
+        /// </summary>
+        /// <param name="textFile">Name of the file to read.</param>
+        protected void ReadStoryFile(string textFile)
+        {
+            TextAsset storyTxt = (TextAsset)Resources.Load(textFile);
+            string[] storyTemp = storyTxt.text.Split("\n"[0]);
+            story = storyTemp[0].Split(delimiter);
+            reply = storyTemp[1].Split(delimiter);
+            answer = storyTemp[2].Split(delimiter);
         }
     }
 }
