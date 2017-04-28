@@ -100,7 +100,7 @@ namespace Game
                     EnterDoor(-80, -105, -68, -80);
                     break;
                 case 3:
-                    EnterDoor(-140, -182, -161, -161);
+                    EnterDoor(-150, -170, -161, -161);
                     break;
                 case 4:
                     EnterDoor(348, 368, 467, 368);

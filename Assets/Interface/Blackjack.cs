@@ -268,6 +268,7 @@ namespace Interface
                 {
                     if (playerCount > dealerCount)
                     {
+                        player.useMoney(2 * bet);
                         resultText = "Player wins!";
                         endGame();
 
