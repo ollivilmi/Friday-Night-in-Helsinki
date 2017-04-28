@@ -132,6 +132,7 @@ namespace Interface
             playerHP = 0;
             npcHP = 0;
             barfight.SetActive(true);
+            bfOptionsPanel.SetActive(true);
             bfPlayer[1].sprite = playerHPBar[0];
             bfNPC[1].sprite = npcHPBar[0];
         }
