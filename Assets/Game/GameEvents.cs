@@ -81,9 +81,15 @@ namespace Game
             }
         }
 
-        public string UpdateEvents()
+        public string GetClock()
         {
-            return "Time: " + hour + ":" + minute;
+            string time = "" + hour +":";
+            if (minute < 10)
+            {
+                time += "0" + minute;
+            }
+            else time += minute;
+            return "Time: " +time;
         }
 
     }

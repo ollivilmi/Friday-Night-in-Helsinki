@@ -64,7 +64,7 @@ namespace Game
         {
             playerMovement.posChar = character.transform.position;
             playerMovement.LeftClick();
-            info.text = events.UpdateEvents() + player.UpdateStats();
+            info.text = events.GetClock() + player.UpdateStats();
 			HandleAnimations ();
             if (npcBarCount < 5)
             {
