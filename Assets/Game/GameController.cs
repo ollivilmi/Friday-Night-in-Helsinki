@@ -39,11 +39,10 @@ namespace Game
 			dataSaver = FindObjectOfType<DataSaver> ();
 			selectedCharacter = dataSaver.character;   
             GetObjects();
-            events = new GameEvents(selectedCharacter, iManager, cutscene);
+            events = new GameEvents(selectedCharacter, iManager, cutscene, character);
             player = events.GetPlayer();
             SetUpScripts();
             StartPrefabs();
-
         }
 
         public GameEvents GetEvents()

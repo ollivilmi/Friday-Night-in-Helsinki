@@ -29,6 +29,7 @@ namespace Player
             this.money = 200;
             this.drunkLevel = 30;
             this.funLevel = 0;
+            this.height = -8.2f;
             items[1].amount = 20;
             Sprite knife = Resources.Load<Sprite>("Chef_Knife");
             itemsQuest.Add(new QuestItem("Knife", knife, "In case of emergency."));

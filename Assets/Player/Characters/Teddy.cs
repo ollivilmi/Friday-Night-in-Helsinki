@@ -21,6 +21,7 @@ namespace Player
             this.money = 1000;
             this.drunkLevel = 0;
             this.funLevel = -20;
+            this.height = -7.5f;
             Sprite phone = Resources.Load<Sprite>("iphone");
             itemsQuest.Add(new QuestItem("iPhone", phone, "Your mobile phone. It's turned off today."));
 			this.playerSprite = Resources.Load<Sprite> ("Teddy");

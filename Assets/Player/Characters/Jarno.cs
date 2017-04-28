@@ -25,6 +25,7 @@ namespace Player
             this.money = 50;
             this.drunkLevel = 0;
             this.funLevel = 20;
+            this.height = -8.5f;
             items[0].amount = 2;
             items[1].amount = 20;
             Sprite guitar = Resources.Load<Sprite>("guitar");

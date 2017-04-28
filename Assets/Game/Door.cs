@@ -35,7 +35,7 @@ namespace Game
                     EnterDoor(20, 0, 140, 20);
 				    break;
 			    case "DoorMainHall2(Clone)":
-                    EnterDoor(-140, -182, -161, -161);
+                    EnterDoor(-150, -170, -161, -161);
 				    break;
 			    case "DoorBar1(Clone)":
                     EnterDoor(-80, -105, -68, -80);
@@ -120,8 +120,8 @@ namespace Game
         private void EnterDoor(float xLocationPlayer, float xMin, float xMax, float xLocationCam)
         {
             events.ChangeTime(1);
-            character.transform.position = new Vector2(xLocationPlayer, -7f);
-            Camera.main.transform.position = new Vector3(xLocationCam, 3f, -10f);
+            character.transform.position = new Vector2(xLocationPlayer, player.height);
+            Camera.main.transform.position = new Vector3(xLocationCam, 2f, -10f);
             limits.xMin = xMin;
             limits.xMax = xMax;
         }

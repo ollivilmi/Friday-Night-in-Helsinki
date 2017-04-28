@@ -33,6 +33,7 @@ namespace Player
 		protected SpriteRenderer character;
 		public Animator playerAnimator;
         public GameEvents events;
+        public float height { get; set; }
 
         public Player()
         {

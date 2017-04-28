@@ -20,26 +20,31 @@ namespace Game
 		public string selectedCharacter { get; set; }
         public InterfaceManager iManager { get; set; }
         public Cutscene cutscene { get; set; }
+        private GameObject character;
         /// <summary>
         /// Creates an instance of the player's character and sets
         /// time from the character's variables.
         /// </summary>
-		public GameEvents(string selectedCharacter, InterfaceManager iManager, Cutscene cutscene)
+		public GameEvents(string selectedCharacter, InterfaceManager iManager, Cutscene cutscene, GameObject character)
         {
 			this.selectedCharacter = selectedCharacter;
             this.iManager = iManager;
             this.cutscene = cutscene;
+            this.character = character;
 
 			switch (selectedCharacter) {
 			case "Jarno": 
 				player = new Jarno ();
-				break;
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+                    break;
 			case "Make":
 				player = new Make ();
-				break;
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+                    break;
 			case "Teddy":
 				player = new Teddy ();
-				break;
+                character.transform.position = new Vector2(character.transform.position.x, player.height);
+				    break;
 			}
             this.hour = player.hour;
             this.minute = player.minute;
