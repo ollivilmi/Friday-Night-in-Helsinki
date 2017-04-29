@@ -46,6 +46,23 @@ namespace Interface
             }
         }
 
+        public void SetPlayer(Sprite character)
+        {
+            switch (character.name)
+            {
+                case "Jarno":
+                    player.GetComponent<Image>().sprite = character;
+                    break;
+                case "Make":
+                    player.GetComponent<Image>().sprite = character;
+                    break;
+                case "Teddy":
+                    player.GetComponent<Image>().sprite = character;
+                    player.GetComponent<RectTransform>().localPosition = new Vector3(-61f, -47f);
+                    break;
+            }
+        }
+
         public void StartCutsceneItem(string item)
         {
             switch (item)

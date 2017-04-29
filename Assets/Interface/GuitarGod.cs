@@ -13,7 +13,7 @@ namespace Interface
 {
     public class GuitarGod : MonoBehaviour
     {
-        private int score, count, multiplier, missclickCount, comboCount, failLimit;
+        private int score, count, multiplier, missclickCount, comboCount, failLimit, previousNote, randomNote;
         private float timer;
         private List<GameObject> guitarnotes;
         private System.Random random;
@@ -55,8 +55,13 @@ namespace Interface
                 uiMultiplier.text = "x" + multiplier;
                 if (count < 3)
                 {
-                    Instantiate(guitarnotes[random.Next(0, 3)]);
-                    count++;
+                    randomNote = random.Next(0, 3);
+                    if (randomNote != previousNote)
+                    {
+                        Instantiate(guitarnotes[randomNote]);
+                        previousNote = randomNote;
+                        count++;
+                    }       
                 }
                 if (failLimit < 0)
                 {

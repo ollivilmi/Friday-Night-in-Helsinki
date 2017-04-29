@@ -149,7 +149,7 @@ namespace Game
             npcType.player = this.player;
             tahti.player = this.player;
             tahti.playerMovement = this.playerMovement;
-            cutscene.player.GetComponent<Image>().sprite = player.GetPlayerSprite();
+            cutscene.SetPlayer(player.GetPlayerSprite());
             cutscene.events = this.events;
             iManager.imagePlayer.sprite = player.GetPlayerSprite();
             blackjack.player = this.player;
