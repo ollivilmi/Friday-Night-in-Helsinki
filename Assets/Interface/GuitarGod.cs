@@ -60,7 +60,7 @@ namespace Interface
                     randomNote = random.Next(0, 3);
                     if (randomNote != previousNote)
                     {
-                        StartCoroutine(spawnDelay(UnityEngine.Random.Range(0f, 0.1f)));
+                        Instantiate(guitarnotes[randomNote]);
                         previousNote = randomNote;
                         count++;
                     }
@@ -72,11 +72,6 @@ namespace Interface
             }
         }
 
-        private IEnumerator spawnDelay(float waitTime)
-        {
-            yield return new WaitForSeconds(waitTime);
-            Instantiate(guitarnotes[randomNote]);
-        }
 
         public void NewGame()
         {
