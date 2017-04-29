@@ -28,7 +28,7 @@ namespace Interface
         private void Update()
         {
             note.transform.Translate(new Vector3(0f, guitargod.GetSpeed() * Time.deltaTime, 0f));
-            if (transform.localPosition.y < -260)
+            if (transform.localPosition.y < -300)
             {
                 guitargod.NoteMissed();
                 Destroy(gameObject);
@@ -41,7 +41,7 @@ namespace Interface
 
         private void Clicked()
         {
-            if (transform.localPosition.y > -200 && transform.localPosition.y < -100)
+            if (transform.localPosition.y > -200 && transform.localPosition.y < -90)
             {
                 guitargod.NoteClicked();
                 Destroy(gameObject);
