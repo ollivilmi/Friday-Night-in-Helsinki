@@ -13,23 +13,28 @@ namespace Interface
 {
     public class GuitarGod : MonoBehaviour
     {
-        private int score, count, missclickCount, comboCount, failLimit;
+        private int score, count, multiplier, missclickCount, comboCount, failLimit;
         private float timer;
         private List<GameObject> guitarnotes;
         private System.Random random;
-        private Text uiScore;
+        private Text uiScore, uiMultiplier;
         private Button missClick;
+        private Sprite[] rockmeters;
         public bool playing { get; set; }
         public Movement playerMovement { get; set; }
         private GameObject guitargod;
+        private Image rockmeterImage;
 
         private void Start()
         {
             playing = false;
             uiScore = GameObject.Find("GuitarGodScore").GetComponent<Text>();
+            uiMultiplier = GameObject.Find("GGMultiplier").GetComponent<Text>();
             random = new System.Random();
             missClick = GameObject.Find("Missclick").GetComponent<Button>();
             missClick.onClick.AddListener(() => MissClicked());
+            rockmeters = Resources.LoadAll<Sprite>("rockmeter");
+            rockmeterImage = GameObject.Find("GGRockMeter").GetComponent<Image>();
 
             guitarnotes = new List<GameObject>()
             {
@@ -45,7 +50,9 @@ namespace Interface
         {
             if (playing)
             {
-                uiScore.text = "Score: " + score + "\nMiss clicks: " + missclickCount + "\nCombo: " + comboCount;
+                scoreMultiplier();
+                uiScore.text = ""+score;
+                uiMultiplier.text = "x" + multiplier;
                 if (count < 3)
                 {
                     Instantiate(guitarnotes[random.Next(0, 3)]);
@@ -67,7 +74,8 @@ namespace Interface
             count = 3;
             comboCount = 0;
             timer = 0;
-            failLimit = 5;
+            failLimit = 3;
+            healthMeter(0);
             playing = true;
             StartCoroutine(SpawnDelay());
             StartCoroutine(gameTimer());
@@ -95,6 +103,15 @@ namespace Interface
             }
         }
 
+        private void healthMeter(int amount)
+        {
+            failLimit += amount;
+            if (failLimit < 7 && failLimit >= 0)
+            {
+                rockmeterImage.sprite = rockmeters[failLimit];
+            }
+        }
+
         public float GetSpeed()
         {
             return -150f - (timer * 2);
@@ -103,8 +120,7 @@ namespace Interface
         private void MissClicked()
         {
             missclickCount++;
-            score--;
-            failLimit--;
+            healthMeter(-1);
             comboCount = 0;
         }
 
@@ -112,40 +128,42 @@ namespace Interface
         {
             count--;
             comboCount++;
-            if (failLimit < 5)
+            if (failLimit < 6)
             {
-                failLimit++;
+                healthMeter(1);
             }
-            score += scoreMultiplier();
+            score += 1 * multiplier;
         }
 
         public void NoteMissed()
         {
             count--;
-            score--;
-            failLimit--;
+            healthMeter(-1);
             comboCount = 0;
         }
 
-        private int scoreMultiplier()
+        private void scoreMultiplier()
         {
             if (comboCount < 4)
             {
-                return 1;
+                multiplier = 1;
+                return;
             }
             else if (comboCount < 8)
             {
-                return 2;
+                multiplier = 2;
+                return;
             }
             else if (comboCount < 12)
             {
-                return 3;
+                multiplier = 3;
+                return;
             }
             else if (comboCount < 16 || comboCount > 16)
             {
-                return 4;
+                multiplier = 4;
+                return;
             }
-            return 0;
         }
     }
 }
