@@ -29,19 +29,19 @@ namespace Game
 			switch (name)
 			{
 			    case "DoorRWS1(Clone)":
-                    EnterDoor(-60, -105, -68, -68);
+                    EnterDoor(-270, -318, -238, -270);
 				    break;
 			    case "DoorMainHall1(Clone)":
                     EnterDoor(20, 0, 140, 20);
 				    break;
 			    case "DoorMainHall2(Clone)":
-                    EnterDoor(-150, -170, -161, -161);
+                    EnterDoor(-382, -458, -376, -382);
 				    break;
 			    case "DoorBar1(Clone)":
-                    EnterDoor(-80, -105, -68, -80);
+                    EnterDoor(-314, -318, -238, -314);
 				    break;
                 case "DoorMainHall3(Clone)":
-                    EnterDoor(-225, -250, -240, -240);
+                    EnterDoor(-150, -170, -162, -162);
                     break;
                 case "DoorRWSCasino(Clone)":
                     EnterDoor(230, 195, 313, 230);
@@ -50,7 +50,7 @@ namespace Game
                     EnterDoor(348, 368, 467, 368);
                     break;
                 case "DoorMetroHelsinki1(Clone)":
-                    EnterDoor(-125, -105, -68, -105);
+                    EnterDoor(-242, -318, -238, -242);
                     break;
                 case "DoorCasino(Clone)":
                     EnterDoor(135, 0, 140, 135);
@@ -61,7 +61,7 @@ namespace Game
                 case "MetroHelsinki(Clone)":
                     if(player.money > 4.9)
                     {
-                        EnterDoor(-300, -320, -315, -315);
+                        EnterDoor(-545, -600, -545, -545);
                         player.useMoney(-5);
                         events.ChangeTime(10);
                         StartCoroutine(cutscene.CutsceneMetro());
@@ -74,7 +74,7 @@ namespace Game
                 case "MetroSornainen(Clone)":
                     if (player.money > 4.9)
                     {
-                        EnterDoor(-260, -250, -240, -250);
+                        EnterDoor(-458, -458, -376, -458);
                         player.useMoney(-5);
                         events.ChangeTime(10);
                         StartCoroutine(cutscene.CutsceneMetro());
