@@ -162,22 +162,6 @@ namespace Player
         public abstract string Think();
         public abstract void StoryPetri();
         public abstract void StoryMatti();
-        public void StoryHeikki()
-        {
-            ReadStoryFile("StoryHeikki");
-        }
-        public void StoryHeikki2()
-        {
-            ReadStoryFile("StoryHeikki2");
-        }
-        public void StoryJartsa()
-        {
-            ReadStoryFile("StoryJartsa");
-        }
-        public void StoryAlexander()
-        {
-            ReadStoryFile("StoryAlexander");
-        }
         /// <summary>
         /// Character specific request option to story npcs.
         /// </summary>
@@ -230,16 +214,19 @@ namespace Player
                     StoryTommi();
                     break;
                 case "Hippi-Heikki, is that you?":
-                    StoryHeikki();
+                    ReadStoryFile("StoryHeikki");
                     break;
                 case "Are you Jartsa?":
-                    StoryJartsa();
+                    ReadStoryFile("StoryJartsa");
                     break;
                 case "Hey, I found him!":
-                    StoryHeikki2();
+                    ReadStoryFile("StoryHeikki2");
                     break;
                 case "Hello, fellow investor.":
-                    StoryAlexander();
+                    ReadStoryFile("StoryAlexander");
+                    break;
+                case "Howdy.":
+                    ReadStoryFile("StoryJP");
                     break;
                 default:
                     StoryFiller();

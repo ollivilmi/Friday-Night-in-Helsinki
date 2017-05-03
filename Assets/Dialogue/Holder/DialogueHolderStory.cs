@@ -167,7 +167,6 @@ namespace Dialogue
                     QuitDialogue();
                     break;
                 case "Move Jartsa":
-                    Debug.Log("Moving");
                     GameObject.Find("NPCHeikki(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Hey, I found him!");
                     GameObject jartsaObject = GameObject.Find("NPCJartsa(Clone)");
                     jartsaObject.transform.position = new Vector3(-185f, -5.7f, 0f);

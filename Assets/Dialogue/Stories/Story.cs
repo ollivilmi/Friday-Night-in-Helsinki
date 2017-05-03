@@ -85,8 +85,7 @@ namespace Dialogue
                     jartsa.SetFunctionality("I'm ready, let's play!");
                     break;
                 case "Hello, fellow investor.":
-                    Debug.Log("Alexander finished");
-                    //Set dialogues for two investors
+                    GameObject.Find("NPCJ-P(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Howdy.");
                     break;
             }
         }
