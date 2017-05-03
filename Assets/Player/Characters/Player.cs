@@ -162,6 +162,18 @@ namespace Player
         public abstract string Think();
         public abstract void StoryPetri();
         public abstract void StoryMatti();
+        public void StoryHeikki()
+        {
+            ReadStoryFile("StoryHeikki");
+        }
+        public void StoryHeikki2()
+        {
+            ReadStoryFile("StoryHeikki2");
+        }
+        public void StoryJartsa()
+        {
+            ReadStoryFile("StoryJartsa");
+        }
         /// <summary>
         /// Character specific request option to story npcs.
         /// </summary>
@@ -212,6 +224,15 @@ namespace Player
                     break;
                 case "Hey, what's up?":
                     StoryTommi();
+                    break;
+                case "Hippi-Heikki, is that you?":
+                    StoryHeikki();
+                    break;
+                case "Are you Jartsa?":
+                    StoryJartsa();
+                    break;
+                case "Hey, I found him!":
+                    StoryHeikki2();
                     break;
                 default:
                     StoryFiller();

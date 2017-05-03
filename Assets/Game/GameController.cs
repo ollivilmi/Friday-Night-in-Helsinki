@@ -85,6 +85,8 @@ namespace Game
                 (GameObject)Resources.Load("NPCPetri", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCMatti", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCTommi", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCHeikki", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCJartsa", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSNightClub", typeof(GameObject)),

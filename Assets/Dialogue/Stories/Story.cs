@@ -59,6 +59,7 @@ namespace Dialogue
         /// <param name="name">Opening line of the story dialogue, "How are you?" for example</param>
         private void StoryEnding(string name)
         {
+            CollisionNPCStory heikki, jartsa, tommi;
             switch (name)
             {
                 case "How are you?":
@@ -71,9 +72,24 @@ namespace Dialogue
                     if (player.name != "Make")
                     {
                         npc.ReturnItems();
-                        CollisionNPCStory tommi = GameObject.Find("NPCTommi(Clone)").GetComponent<CollisionNPCStory>();
+                        tommi = GameObject.Find("NPCTommi(Clone)").GetComponent<CollisionNPCStory>();
                         tommi.SetFunctionality("Is this your phone?");
                     }
+                    break;
+                case "Hippi-Heikki, is that you?":
+                    jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
+                    jartsa.ChangeStory("Are you Jartsa?");
+                    break;
+                case "Are you Jartsa?":
+                    heikki = GameObject.Find("NPCHeikki(Clone)").GetComponent<CollisionNPCStory>();
+                    heikki.ChangeStory("Hey, I found him!");
+                    GameObject jartsaObject = GameObject.Find("NPCJartsa(Clone)");
+                    jartsaObject.transform.position = new Vector3(-185f, -5.7f, 0f);
+                    jartsaObject.transform.rotation = Quaternion.identity;
+                    break;
+                case "Hey, I found him!":
+                    jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
+                    jartsa.ChangeStory("");
                     break;
             }
         }

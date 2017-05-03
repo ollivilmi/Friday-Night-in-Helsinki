@@ -166,6 +166,13 @@ namespace Dialogue
                 case "Quit":
                     QuitDialogue();
                     break;
+                case "Move Jartsa":
+                    GameObject.Find("NPCHeikki(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Hey, I found him!");
+                    GameObject jartsaObject = GameObject.Find("NPCJartsa(Clone)");
+                    jartsaObject.transform.position = new Vector3(-185f, -5.7f, 0f);
+                    jartsaObject.transform.rotation = Quaternion.identity;
+                    QuitDialogue();
+                    break;
                 case "Is this your phone?":
                     iManager.ShowBox("Oh, yes! Seems like you met my friend Matti? I've been waiting to get my hands on this phone for weeks.", iManager.dBoxNPC, "Quit");
                     player.haveFun(15);

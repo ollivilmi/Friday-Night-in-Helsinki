@@ -12,7 +12,7 @@ namespace NPC
     {
         private int itemIndex;
         public string functionality { get; set; }
-        protected Story story;
+        public Story story { get; set; }
         /// <summary>
         /// Creates a story NPC
         /// </summary>
@@ -36,6 +36,9 @@ namespace NPC
                     break;
                 case "Tommi":
                     story = new Story(player, this, "Hey, what's up?", events);
+                    break;
+                case "Heikki":
+                    story = new Story(player, this, "Hippi-Heikki, is that you?", events);
                     break;
                 default:
                     string[] filler = { "How's it going?", "How are you doing?", "Hey, how are you?", "How's it hanging?", "What's up?" };

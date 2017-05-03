@@ -32,7 +32,7 @@ namespace Game
                     EnterDoor(-270, -318, -238, -270);
 				    break;
 			    case "DoorMainHall1(Clone)":
-                    EnterDoor(20, 0, 140, 20);
+                    EnterDoor(11, 0, 140, 11);
 				    break;
 			    case "DoorMainHall2(Clone)":
                     EnterDoor(-382, -458, -376, -382);
@@ -53,10 +53,10 @@ namespace Game
                     EnterDoor(-242, -318, -238, -242);
                     break;
                 case "DoorCasino(Clone)":
-                    EnterDoor(135, 0, 140, 135);
+                    EnterDoor(148, 0, 140, 148);
                     break;
                 case "DoorNightClub(Clone)":
-                    EnterDoor(125, 0, 140, 125);
+                    EnterDoor(92, 0, 140, 92);
                     break;
                 case "MetroHelsinki(Clone)":
                     if(player.money > 4.9)

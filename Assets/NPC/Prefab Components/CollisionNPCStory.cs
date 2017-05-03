@@ -30,6 +30,12 @@ namespace NPC
             base.OnTriggerStay2D(col);
         }
 
+        public void ChangeStory(string storyName)
+        {
+            npc.story = new Story(player, npc, storyName, events);
+            dHolder = new DialogueHolderStory(player, iManager, npc);
+        }
+
         override public void Interaction()
         {
             dHolder.storyDialogue.SetStory(npc.GetStory());
