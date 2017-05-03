@@ -36,6 +36,7 @@ namespace Game
 				    break;
 			    case "DoorMainHall2(Clone)":
                     EnterDoor(-382, -458, -376, -382);
+				StartCoroutine(cutscene.CutsceneElevatorDown());
 				    break;
 			    case "DoorBar1(Clone)":
                     EnterDoor(-314, -318, -238, -314);

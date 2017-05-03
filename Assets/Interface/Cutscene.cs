@@ -11,7 +11,7 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, textObject;
+        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, textObject, animationElevatorDown;
         public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
@@ -29,16 +29,18 @@ namespace Interface
             textObject = GameObject.Find("CutsceneText");
             cutsceneText = textObject.GetComponent<Text>();
             door = FindObjectOfType<Door>();
+			animationElevatorDown = GameObject.Find ("CutsceneElevatorDown");
 
             background = new List<Sprite>()
             {
                 Resources.Load<Sprite>("darkalley"),
                 Resources.Load<Sprite>("metro"),
                 Resources.Load<Sprite>("blackout"),
+				Resources.Load<Sprite>("hissikuilu"),
             };
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
-            textObject, player, cutscene };
+				textObject, player, cutscene, animationElevatorDown };
 
             foreach (GameObject element in cutsceneObjects)
             {
@@ -85,6 +87,15 @@ namespace Interface
             animationMetro.SetActive(false);
             cutscene.SetActive(false);
         }
+		public IEnumerator CutsceneElevatorDown()
+		{
+			cutscene.GetComponent<Image>().sprite = background[3];
+			animationElevatorDown.SetActive(true);
+			cutscene.SetActive(true);
+			yield return new WaitForSeconds(5f);
+			animationElevatorDown.SetActive(false);
+			cutscene.SetActive(false);
+		}
 
         private IEnumerator CutsceneItem(GameObject item)
         {
