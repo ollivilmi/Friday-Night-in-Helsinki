@@ -194,7 +194,6 @@ namespace Dialogue
                     npc.functionality = null;
                     break;
                 default:
-                    Debug.Log(selection);
                     iManager.CloseDialogue();
                     InitializeStoryDialogue();
                     break;

@@ -36,13 +36,13 @@ namespace Game
         private void Start()
         {
             random = new System.Random();
-			dataSaver = FindObjectOfType<DataSaver> ();
+            dataSaver = FindObjectOfType<DataSaver> ();
 			selectedCharacter = dataSaver.character;   
             GetObjects();
-            events = new GameEvents(selectedCharacter, iManager, cutscene, character);
+            events = new GameEvents(selectedCharacter, iManager, cutscene, character, this);
             player = events.GetPlayer();
             SetUpScripts();
-            StartPrefabs();
+            StartPrefabs();     
         }
 
         public GameEvents GetEvents()
@@ -179,5 +179,34 @@ namespace Game
 				player.playerAnimator.SetBool ("moving", false);
 			}
 		}
+
+        public void ChangeSkyBox(int hour)
+        {
+            if (hour < 19 && hour > 8)
+            {
+                Camera.main.backgroundColor = new Color(86f/255, 111f/255, 150f/255);
+                return;
+            }
+            else if (hour < 20 && hour > 8)
+            {
+                Camera.main.backgroundColor = new Color(46f/255, 87f/255, 150f/255);
+                return;
+            }
+            else if (hour < 21 && hour > 8)
+            {
+                Camera.main.backgroundColor = new Color(0, 25f/255, 64f/255);
+                return;
+            }
+            else if (hour < 22 && hour > 8)
+            {
+                Camera.main.backgroundColor = new Color(0, 12f/255, 30f/255);
+                return;
+            }
+            else if (hour >= 22 || hour <= 8)
+            {
+                Camera.main.backgroundColor = new Color(0, 5f/255, 10f/255);
+                return;
+            }
+        }
     }
 }

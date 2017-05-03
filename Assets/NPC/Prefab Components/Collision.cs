@@ -48,7 +48,7 @@ namespace NPC
         {
             if (col.gameObject.tag == "Player")
             {
-                if (!player.interacting)
+                if (!player.interacting && iManager.target != this)
                 {
                     iManager.SetTarget(this);
                     iManager.SetHolder(dHolder);
@@ -68,6 +68,7 @@ namespace NPC
         {
             if (col.gameObject.tag == "Player")
             {
+                iManager.SetTarget(null);
                 iManager.CloseDialogue();
                 player.interacting = false;
             }

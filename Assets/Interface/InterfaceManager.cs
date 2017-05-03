@@ -25,7 +25,7 @@ namespace Interface
         private Dictionary<Button, string> selectedAnswer = new Dictionary<Button, string>();
         private List<GameObject> dialogueElements;
         private BarFight barfight;
-        private NPC.Collision target;
+        public NPC.Collision target { get; set; }
         public Game.Movement playerMovement { get; set; }
         private Text textPopUp;
 
