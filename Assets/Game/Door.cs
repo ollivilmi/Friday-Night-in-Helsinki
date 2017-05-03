@@ -53,7 +53,7 @@ namespace Game
                     EnterDoor(-242, -318, -238, -242);
                     break;
                 case "DoorCasino(Clone)":
-                    EnterDoor(148, 0, 140, 148);
+                    EnterDoor(148, 0, 140, 139);
                     break;
                 case "DoorNightClub(Clone)":
                     EnterDoor(92, 0, 140, 92);
