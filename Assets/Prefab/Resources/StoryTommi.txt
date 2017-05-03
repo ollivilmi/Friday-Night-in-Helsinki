@@ -1,3 +1,3 @@
-Hey. I don't know if we've met, I come here almost every week./Yes, as a telemarketer. Some days it's actually a very fulfilling job... But in reality I'm just counting days to Friday./My name's Tommi, nice to meet you. What's your phone number?/Hah, I understand. See you around.
-Do you work in Helsinki?/Yeah, that's understandable. It's not a job I could see myself in. What's your name?/I think I'd rather not give it to you./See you.
+Hey. I don't know if we've met, I come here almost every week./Yes, as a telemarketer. Some days it's actually a very fulfilling job... But in reality I'm just counting days to Friday./It was nice to meet you. What's your phone number?/Hah, I understand. See you around.
+Do you work in Helsinki?/Yeah, that's understandable. It's not a job I could see myself in./I think I'd rather not give it to you./See you.
 Continue/Continue/Continue/Quit

@@ -14,6 +14,7 @@ namespace Interface
         public Button dBoxAnswer1 { get; set; }
         public Button dBoxAnswer2 { get; set; }
         public Button dBoxAnswer3 { get; set; }
+        public Button dBoxAnswerStory { get; set; }
         public Button buttonInteraction { get; set; }
         public List<Button> answerButtons { get; set; }
         private Button buttonBeer, buttonTobacco, buttonQuit;
@@ -40,8 +41,9 @@ namespace Interface
             dBoxAnswer1 = GameObject.Find("Answer1").GetComponent<Button>();
             dBoxAnswer2 = GameObject.Find("Answer2").GetComponent<Button>();
             dBoxAnswer3 = GameObject.Find("Answer3").GetComponent<Button>();
+            dBoxAnswerStory = GameObject.Find("AnswerStory").GetComponent<Button>();
 
-            answerButtons = new List<Button> { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3, dBoxNPC };
+            answerButtons = new List<Button> { dBoxAnswer1, dBoxAnswer2, dBoxAnswer3, dBoxAnswerStory, dBoxNPC };
             foreach (Button button in answerButtons)
             {
                 button.onClick.AddListener(() => Click(button));

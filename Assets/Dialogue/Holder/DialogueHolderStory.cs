@@ -72,7 +72,7 @@ namespace Dialogue
             npcDialogue = storyDialogue.GetStoryDialogue(level, out answerDialogue, out answer);
             
             iManager.ShowBox(npcDialogue, iManager.dBoxNPC, "");
-            iManager.ShowBox(answerDialogue, iManager.dBoxAnswer2, answer);
+            iManager.ShowBox(answerDialogue, iManager.dBoxAnswerStory, answer);
         }
 
         /// <summary>

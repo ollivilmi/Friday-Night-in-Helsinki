@@ -93,22 +93,22 @@ namespace Game
         {
             switch (random.Next(0, 6)) {
                 case 0:
-                    EnterDoor(20, 0, 140, 20);
+                    EnterDoor(11, 0, 140, 11);
                     break;
                 case 1:
-                    EnterDoor(230, 195, 313, 230);
+                    EnterDoor(-270, -318, -238, -270);
                     break;
                 case 2:
-                    EnterDoor(-80, -105, -68, -80);
+                    EnterDoor(230, 195, 313, 230);
                     break;
                 case 3:
-                    EnterDoor(-150, -170, -161, -161);
-                    break;
-                case 4:
                     EnterDoor(348, 368, 467, 368);
                     break;
+                case 4:
+                    EnterDoor(-545, -600, -545, -545);
+                    break;
                 case 5:
-                    EnterDoor(-260, -250, -240, -250);
+                    EnterDoor(-458, -458, -376, -458);
                     break;
                     }
         }
