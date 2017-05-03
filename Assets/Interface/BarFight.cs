@@ -15,7 +15,8 @@ namespace Interface
         private List<Image> bfPlayer;
         private List<Image> bfNPC;
         private Sprite[] playerHPBar, npcHPBar;
-        private GameObject bfOptionsPanel, bfDialogue, bfInfo, barfight;
+        private GameObject bfOptionsPanel, bfInfo, barfight;
+        private List<GameObject> bfDialogue;
         private List<Button> bfOptions;
         private List<String> insults;
         private Dictionary<Button, string> buttonToString;
@@ -23,7 +24,8 @@ namespace Interface
         private System.Random random;
         public Player.Player player { get; set; }
         private Cutscene cutscene;
-        private Text bfInsult, bfInfoText;
+        private Text bfInfoText;
+        private List<Text> bfInsults;
         private NPC.Collision target;
         private GameEvents events;
         private InterfaceManager iManager;
@@ -37,7 +39,7 @@ namespace Interface
             iManager = FindObjectOfType<InterfaceManager>();
             barfight = GameObject.Find("BarFight");
 
-            bfInsult = GameObject.Find("BFtext").GetComponent<Text>();
+            bfInsults = new List<Text> { GameObject.Find("BFtextNPC").GetComponent<Text>(), GameObject.Find("BFtextPlayer").GetComponent<Text>() }; 
             bfInfo = GameObject.Find("BFinfo");
             bfInfoText = bfInfo.GetComponent<Text>();
             bfInfo.SetActive(false);
@@ -73,8 +75,9 @@ namespace Interface
             bfNPC[1].sprite = npcHPBar[0];
 
             bfOptionsPanel = GameObject.Find("BFoptions");
-            bfDialogue = GameObject.Find("BFdialogue");
-            bfDialogue.SetActive(false);
+            bfDialogue = new List<GameObject> { GameObject.Find("BFdialogueNPC"), GameObject.Find("BFdialoguePlayer") };
+            bfDialogue[0].SetActive(false);
+            bfDialogue[1].SetActive(false);
 
             bfOptions = new List<Button>()
             {
@@ -279,10 +282,8 @@ namespace Interface
         /// <returns></returns>
         private IEnumerator useInsult()
         {
-            bfDialogue.GetComponent<RectTransform>().position = new Vector2(220f, bfDialogue.transform.position.y);
             StartCoroutine(insult(bfPlayer));
             yield return new WaitForSeconds(3f);
-            bfDialogue.GetComponent<RectTransform>().position = new Vector2(310f, bfDialogue.transform.position.y);
             npcAttack();
         }
         /// <summary>
@@ -292,13 +293,25 @@ namespace Interface
         /// <returns></returns>
         private IEnumerator insult(List<Image> user)
         {
-            bfDialogue.SetActive(true);
-            bfInsult.text = insults[random.Next(0, insults.Count)];
+            if (user == bfPlayer)
+            {
+                bfDialogue[1].SetActive(true);
+                bfInsults[1].text = insults[random.Next(0, insults.Count)];
+            }
+            else if (user == bfNPC)
+            {
+                bfDialogue[0].SetActive(true);
+                bfInsults[0].text = insults[random.Next(0, insults.Count)];
+            }       
             yield return new WaitForSeconds(3f);
             attackResult(user);
-            bfDialogue.SetActive(false);
-            if (user == bfNPC)
+            if (user == bfPlayer)
             {
+                bfDialogue[1].SetActive(false);
+            }
+            else if (user == bfNPC)
+            {
+                bfDialogue[0].SetActive(false);
                 bfOptionsPanel.SetActive(true);
             }
         }
