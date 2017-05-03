@@ -80,16 +80,13 @@ namespace Dialogue
                     jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
                     jartsa.ChangeStory("Are you Jartsa?");
                     break;
-                case "Are you Jartsa?":
-                    heikki = GameObject.Find("NPCHeikki(Clone)").GetComponent<CollisionNPCStory>();
-                    heikki.ChangeStory("Hey, I found him!");
-                    GameObject jartsaObject = GameObject.Find("NPCJartsa(Clone)");
-                    jartsaObject.transform.position = new Vector3(-185f, -5.7f, 0f);
-                    jartsaObject.transform.rotation = Quaternion.identity;
-                    break;
                 case "Hey, I found him!":
                     jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
-                    jartsa.ChangeStory("");
+                    jartsa.SetFunctionality("I'm ready, let's play!");
+                    break;
+                case "Hello, fellow investor.":
+                    Debug.Log("Alexander finished");
+                    //Set dialogues for two investors
                     break;
             }
         }

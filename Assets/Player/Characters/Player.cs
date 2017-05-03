@@ -174,6 +174,10 @@ namespace Player
         {
             ReadStoryFile("StoryJartsa");
         }
+        public void StoryAlexander()
+        {
+            ReadStoryFile("StoryAlexander");
+        }
         /// <summary>
         /// Character specific request option to story npcs.
         /// </summary>
@@ -233,6 +237,9 @@ namespace Player
                     break;
                 case "Hey, I found him!":
                     StoryHeikki2();
+                    break;
+                case "Hello, fellow investor.":
+                    StoryAlexander();
                     break;
                 default:
                     StoryFiller();

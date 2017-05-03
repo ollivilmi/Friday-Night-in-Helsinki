@@ -167,6 +167,7 @@ namespace Dialogue
                     QuitDialogue();
                     break;
                 case "Move Jartsa":
+                    Debug.Log("Moving");
                     GameObject.Find("NPCHeikki(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Hey, I found him!");
                     GameObject jartsaObject = GameObject.Find("NPCJartsa(Clone)");
                     jartsaObject.transform.position = new Vector3(-185f, -5.7f, 0f);
@@ -184,6 +185,9 @@ namespace Dialogue
                     iManager.ShowBox("Honestly, you and me both know you just want beer or cigarettes...", iManager.dBoxNPC, "");
                     iManager.OpenShop();
                     iManager.ShowBox("Never mind.", iManager.dBoxAnswer1, "Quit");
+                    break;
+                case "I'm ready, let's play!":
+                    //Cutscene
                     break;
                 default:
                     iManager.CloseDialogue();
