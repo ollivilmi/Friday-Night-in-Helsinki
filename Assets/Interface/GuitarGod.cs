@@ -47,7 +47,10 @@ namespace Interface
             guitargod = GameObject.Find("GuitarGod");
             StartCoroutine(gameTimer());
         }
-
+        /// <summary>
+        /// Spawns new random notes when count is reduced,
+        /// updates info meters. Ends game if failLimit is reached.
+        /// </summary>
         private void Update()
         {
             if (playing)
@@ -72,7 +75,9 @@ namespace Interface
             }
         }
 
-
+        /// <summary>
+        /// Resets variables, starts timer and GuitarGodUI
+        /// </summary>
         public void NewGame()
         {
             guitargod.SetActive(true);
@@ -87,7 +92,9 @@ namespace Interface
             StartCoroutine(startDelay());
             StartCoroutine(gameTimer());
         }
-
+        /// <summary>
+        /// Checks your score and assesses your performance with a PopUp
+        /// </summary>
         public void EndGame()
         {
             playing = false;
@@ -123,7 +130,11 @@ namespace Interface
                 StartCoroutine(iManager.PopUp("Are you drunk?"));
             }
         }
-
+        /// <summary>
+        /// Timer starts when you start a new game, it's used make the game faster
+        /// indefinitely
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator gameTimer()
         {
             while (playing)
@@ -133,7 +144,10 @@ namespace Interface
             }
             yield return new WaitForSeconds(0.01f);
         }
-
+        /// <summary>
+        /// Delay when starting a new game to avoid starting with multiple buttons
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator startDelay()
         {
             if (playing)
@@ -145,7 +159,10 @@ namespace Interface
                 }
             }
         }
-
+        /// <summary>
+        /// Changes rock meter according to the failLimit variable
+        /// </summary>
+        /// <param name="amount"></param>
         private void healthMeter(int amount)
         {
             failLimit += amount;
@@ -154,19 +171,28 @@ namespace Interface
                 rockmeterImage.sprite = rockmeters[failLimit];
             }
         }
-
+        /// <summary>
+        /// Returns speed, increases with timer
+        /// </summary>
+        /// <returns></returns>
         public float GetSpeed()
         {
             return -150f - (timer * 2);
         }
-
+        /// <summary>
+        /// Counts a missclick, resets combo and loses health
+        /// </summary>
         private void MissClicked()
         {
             missclickCount++;
             healthMeter(-1);
             comboCount = 0;
         }
-
+        /// <summary>
+        /// Adds to health if under health cap, adds to comboCount, gives score
+        /// which is multiplied by multiplier. (Combo meter)
+        /// Decreases count by one, instantiating a new note.
+        /// </summary>
         public void NoteClicked()
         {
             count--;
@@ -177,14 +203,19 @@ namespace Interface
             }
             score += 1 * multiplier;
         }
-
+        /// <summary>
+        /// Decreases count by one whe, instantiating a new note. Decreases health
+        /// by one and resets comboCount.
+        /// </summary>
         public void NoteMissed()
         {
             count--;
             healthMeter(-1);
             comboCount = 0;
         }
-
+        /// <summary>
+        /// Checks comboCount to deduce which multiplier (1-4) to use.
+        /// </summary>
         private void scoreMultiplier()
         {
             if (comboCount < 4)
