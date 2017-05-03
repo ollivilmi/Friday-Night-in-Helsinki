@@ -51,6 +51,7 @@ namespace Game
                     EnterDoor(348, 368, 467, 368);
                     break;
                 case "DoorMetroHelsinki1(Clone)":
+				StartCoroutine(cutscene.CutsceneElevatorUp());
                     EnterDoor(-242, -318, -238, -242);
                     break;
                 case "DoorCasino(Clone)":

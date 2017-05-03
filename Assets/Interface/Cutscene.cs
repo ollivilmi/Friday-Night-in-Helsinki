@@ -11,7 +11,7 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, textObject, animationElevatorDown;
+        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, textObject, animationElevatorDown, animationElevatorUp;
         public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
@@ -30,6 +30,7 @@ namespace Interface
             cutsceneText = textObject.GetComponent<Text>();
             door = FindObjectOfType<Door>();
 			animationElevatorDown = GameObject.Find ("CutsceneElevatorDown");
+			animationElevatorUp = GameObject.Find ("CutsceneElevatorUp");
 
             background = new List<Sprite>()
             {
@@ -40,7 +41,7 @@ namespace Interface
             };
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
-				textObject, player, cutscene, animationElevatorDown };
+				textObject, player, cutscene, animationElevatorDown, animationElevatorUp };
 
             foreach (GameObject element in cutsceneObjects)
             {
@@ -94,6 +95,15 @@ namespace Interface
 			cutscene.SetActive(true);
 			yield return new WaitForSeconds(5f);
 			animationElevatorDown.SetActive(false);
+			cutscene.SetActive(false);
+		}
+		public IEnumerator CutsceneElevatorUp()
+		{
+			cutscene.GetComponent<Image>().sprite = background[3];
+			animationElevatorUp.SetActive(true);
+			cutscene.SetActive(true);
+			yield return new WaitForSeconds(5f);
+			animationElevatorUp.SetActive(false);
 			cutscene.SetActive(false);
 		}
 
