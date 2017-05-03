@@ -43,9 +43,6 @@ namespace NPC
                 case "Alexander":
                     story = new Story(player, this, "Hello, fellow investor.", events);
                     break;
-                case "JP":
-                    story = new Story(player, this, "Howdy.", events);
-                    break;
                 default:
                     string[] filler = { "How's it going?", "How are you doing?", "Hey, how are you?", "How's it hanging?", "What's up?" };
                     story = new Story(player, this, filler[random.Next(0,filler.Length)], events);

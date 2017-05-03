@@ -59,7 +59,7 @@ namespace Dialogue
         /// <param name="name">Opening line of the story dialogue, "How are you?" for example</param>
         private void StoryEnding(string name)
         {
-            CollisionNPCStory heikki, jartsa, tommi;
+            CollisionNPCStory jartsa, tommi;
             switch (name)
             {
                 case "How are you?":
