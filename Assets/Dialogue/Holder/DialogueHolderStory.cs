@@ -186,9 +186,15 @@ namespace Dialogue
                     iManager.ShowBox("Never mind.", iManager.dBoxAnswer1, "Quit");
                     break;
                 case "I'm ready, let's play!":
-                    //Cutscene
+                    player.events.cutscene.StartCutsceneItem("Guitar");
+                    player.events.ChangeTime(90);
+                    player.haveFun(50);
+                    player.events.addScore(100);
+                    iManager.ShowBox("That was incredibly fun! We should do this another time.", iManager.dBoxNPC, "Quit");
+                    npc.functionality = null;
                     break;
                 default:
+                    Debug.Log(selection);
                     iManager.CloseDialogue();
                     InitializeStoryDialogue();
                     break;

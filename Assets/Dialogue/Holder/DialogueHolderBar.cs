@@ -52,7 +52,6 @@ namespace Dialogue
             switch (level)
             {
                 case 1:
-                    Debug.Log("Bar dialogue lvl 1");
                     GetBarDialogue1();
                     InitializeBarDialogue();
                     break;
@@ -63,7 +62,6 @@ namespace Dialogue
                     GetBarDialogue3();
                     break;
                 case 4:
-                    Debug.Log("Bar dialogue done");
                     level = 0;
                     ReturnMoodChange();
                     string item = "";

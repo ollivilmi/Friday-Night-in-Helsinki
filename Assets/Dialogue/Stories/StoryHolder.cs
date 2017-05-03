@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NPC;
+using UnityEngine;
 
 namespace Dialogue
 {
     public class StoryHolder
     {
         private string[] dialogueOpener;
-        private Random random;
+        private System.Random random;
         private Story story;
         public bool finished { get; set; }
 
         public StoryHolder(Player.Player player, NPCStory npc)
         {
-            random = new Random();
+            random = new System.Random();
             this.dialogueOpener = new string[] { "Hey.", "Hello.", "Greetings.", "Yes?", "Sup." };
         }
 

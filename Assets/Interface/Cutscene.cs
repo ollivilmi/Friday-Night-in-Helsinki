@@ -11,7 +11,7 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco, animationMetro, textObject, animationElevatorDown, animationElevatorUp;
+        private GameObject cutscene, animationBeer, animationTobacco, animationGuitar, animationMetro, textObject, animationElevatorDown, animationElevatorUp;
         public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
@@ -23,6 +23,7 @@ namespace Interface
         {
             animationBeer = GameObject.Find("CutsceneBeer");
             animationTobacco = GameObject.Find("CutsceneTobacco");
+            animationGuitar = GameObject.Find("CutsceneGuitar");
             animationMetro = GameObject.Find("CutsceneMetro");
             cutscene = GameObject.Find("Cutscene");
             player = GameObject.Find("CutscenePlayer");
@@ -40,7 +41,7 @@ namespace Interface
 				Resources.Load<Sprite>("hissikuilu"),
             };
 
-            cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro,
+            cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro, animationGuitar,
 				textObject, player, cutscene, animationElevatorDown, animationElevatorUp };
 
             foreach (GameObject element in cutsceneObjects)
@@ -71,10 +72,13 @@ namespace Interface
             switch (item)
             {
                 case "Beer":
-                    StartCoroutine(CutsceneItem(animationBeer));
+                    StartCoroutine(CutsceneItem(animationBeer, 3f));
                     break;
                 case "Tobacco":
-                    StartCoroutine(CutsceneItem(animationTobacco));
+                    StartCoroutine(CutsceneItem(animationTobacco, 3f));
+                    break;
+                case "Guitar":
+                    StartCoroutine(CutsceneItem(animationGuitar, 9f));
                     break;
             }
         }
@@ -107,13 +111,13 @@ namespace Interface
 			cutscene.SetActive(false);
 		}
 
-        private IEnumerator CutsceneItem(GameObject item)
+        private IEnumerator CutsceneItem(GameObject item, float time)
         {
             cutscene.GetComponent<Image>().sprite = background[0];
             cutscene.SetActive(true);
             item.SetActive(true);
             player.SetActive(true);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(time);
             item.SetActive(false);
             player.SetActive(false);
             cutscene.SetActive(false);

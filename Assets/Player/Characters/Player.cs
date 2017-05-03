@@ -33,10 +33,12 @@ namespace Player
 		protected SpriteRenderer character;
 		public Animator playerAnimator;
         public GameEvents events;
+        public bool[] questAlexander;
         public float height { get; set; }
 
         public Player()
         {
+            questAlexander = new bool[] { false, false };
 			this.character = GameObject.Find("Player").GetComponent<SpriteRenderer>();
             delimiter = new char[] {'/'};
             random = new System.Random();
@@ -227,6 +229,12 @@ namespace Player
                     break;
                 case "Howdy.":
                     ReadStoryFile("StoryJP");
+                    break;
+                case "Become a smooth criminal":
+                    ReadStoryFile("StoryLiinu");
+                    break;
+                case "Great success!":
+                    ReadStoryFile("StoryAlexander2");
                     break;
                 default:
                     StoryFiller();

@@ -51,7 +51,7 @@ namespace Dialogue
 
         public int GetLength()
         {
-            return story.Length;
+            return answer.Length;
         }
         /// <summary>
         /// The result of completing a story
@@ -86,6 +86,21 @@ namespace Dialogue
                     break;
                 case "Hello, fellow investor.":
                     GameObject.Find("NPCJ-P(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Howdy.");
+                    GameObject.Find("NPCLiinu(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Become a smooth criminal");
+                    break;
+                case "Howdy.":
+                    player.questAlexander[0] = true;
+                    if (player.questAlexander[1])
+                    {
+                        GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
+                    }
+                    break;
+                case "Become a smooth criminal":
+                    player.questAlexander[1] = true;
+                    if (player.questAlexander[1])
+                    {
+                        GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
+                    }
                     break;
             }
         }
