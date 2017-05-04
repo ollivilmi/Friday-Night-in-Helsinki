@@ -6,6 +6,7 @@ using NPC;
 using Game;
 using UnityEngine;
 
+
 namespace Dialogue
 {
     public class Story
@@ -78,7 +79,7 @@ namespace Dialogue
                     break;
                 case "Hippi-Heikki, is that you?":
                     jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
-                    jartsa.ChangeStory("Are you Jartsa?");
+                    jartsa.ChangeStory("Do I know you?");
                     break;
                 case "Hey, I found him!":
                     jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
@@ -86,7 +87,7 @@ namespace Dialogue
                     break;
                 case "Hello, fellow investor.":
                     GameObject.Find("NPCJ-P(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Howdy.");
-                    GameObject.Find("NPCLiinu(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Become a smooth criminal");
+                    GameObject.Find("NPCLiinu(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Smooth criminal");
                     break;
                 case "Howdy.":
                     player.questAlexander[0] = true;
@@ -95,12 +96,16 @@ namespace Dialogue
                         GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
                     }
                     break;
-                case "Become a smooth criminal":
+                case "Smooth criminal":
                     player.questAlexander[1] = true;
                     if (player.questAlexander[1])
                     {
                         GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
                     }
+                    break;
+                case "Pick a fight":
+                    Debug.Log("Fight picked");
+                    player.events.cutscene.BlackOut();
                     break;
             }
         }

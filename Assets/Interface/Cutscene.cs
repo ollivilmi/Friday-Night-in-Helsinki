@@ -83,6 +83,11 @@ namespace Interface
             }
         }
 
+        public void BlackOut()
+        {
+            StartCoroutine(CutsceneBlackout());
+        }
+
         public IEnumerator CutsceneMetro()
         {
             cutscene.GetComponent<Image>().sprite = background[1];

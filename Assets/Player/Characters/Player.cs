@@ -218,7 +218,7 @@ namespace Player
                 case "Hippi-Heikki, is that you?":
                     ReadStoryFile("StoryHeikki");
                     break;
-                case "Are you Jartsa?":
+                case "Do I know you?":
                     ReadStoryFile("StoryJartsa");
                     break;
                 case "Hey, I found him!":
@@ -230,11 +230,17 @@ namespace Player
                 case "Howdy.":
                     ReadStoryFile("StoryJP");
                     break;
-                case "Become a smooth criminal":
+                case "Smooth criminal":
                     ReadStoryFile("StoryLiinu");
                     break;
                 case "Great success!":
                     ReadStoryFile("StoryAlexander2");
+                    break;
+                case "Pick a fight":
+                    ReadStoryFile("StoryKake");
+                    break;
+                case "Are you alright?":
+                    ReadStoryFile("StoryDrunk");
                     break;
                 default:
                     StoryFiller();

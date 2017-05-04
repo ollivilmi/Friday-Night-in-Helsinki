@@ -14,7 +14,7 @@ namespace Game
     {
 
         private Player.Player player;
-        private GameObject character, npcFiller, npcBar;
+        private GameObject character, npcFiller, npcBar, npcDrunk;
         private List<GameObject> triggerObjects;
         private InterfaceManager iManager;
         private GameEvents events;
@@ -90,6 +90,7 @@ namespace Game
                 (GameObject)Resources.Load("NPCAlexander", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCLiinu", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCJ-P", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCKake", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSNightClub", typeof(GameObject)),
@@ -114,6 +115,10 @@ namespace Game
             Instantiate(npcFiller, new Vector3(-90f, -8.3f), npcFiller.transform.rotation);
             npcBar = (GameObject)Resources.Load("BarNPC", typeof(GameObject));
             npcBarCount = 0;
+            npcDrunk = (GameObject)Resources.Load("NPCDrunk", typeof(GameObject));
+            Instantiate(npcDrunk, npcDrunk.transform.position, npcDrunk.transform.rotation);
+            Instantiate(npcDrunk, new Vector3(111f, -7.3f, 0), npcDrunk.transform.rotation);
+            Instantiate(npcDrunk, new Vector3(-614f, -7.3f, 0), npcDrunk.transform.rotation);
         }            
 
         private IEnumerator SpawnBarNPC()
