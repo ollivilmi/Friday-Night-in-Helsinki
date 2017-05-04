@@ -27,6 +27,8 @@ namespace Dialogue
 
         public override void StartDialogue()
         {
+            Debug.Log("Bar dialogue started");
+            Debug.Log(barNPC);
             level = 0;
             base.StartDialogue();
         }
