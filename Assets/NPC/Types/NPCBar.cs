@@ -12,7 +12,11 @@ namespace NPC
     {
         private int itemIndex;
         private BarFight barfight;
-
+        /// <summary>
+        /// Randomizes the NPC's mood and gives it some items.
+        /// </summary>
+        /// <param name="events"></param>
+        /// <param name="barfight"></param>
         public NPCBar(GameEvents events, BarFight barfight)
         {
             this.barfight = barfight;
@@ -23,6 +27,7 @@ namespace NPC
         }
         /// <summary>
         /// Checks mood. If 100 and the NPC has items, return item.
+        /// If mood is less than 20, start a new BarFight.
         /// </summary>
         /// <param name="item"></param>
         public string ReturnItems(out string item)

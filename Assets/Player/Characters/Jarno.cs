@@ -40,7 +40,10 @@ namespace Player
 		{
 			return "I am Jarno.";
 		}
-
+        /// <summary>
+        /// Jarno's Special is begging for money, and the result is randomized.
+        /// </summary>
+        /// <returns></returns>
 		override public string Special()
 		{
             switch (random.Next(0, 4))
@@ -63,6 +66,10 @@ namespace Player
                     return "";
             }
         }
+        /// <summary>
+        /// Randomizes NPCs reply in case you ask again.
+        /// </summary>
+        /// <returns></returns>
 		override public string SpecialUsed()
 		{
             string[] specialAnswer = new string[] { "What? You're asking me again?", "Please, you asked me already.", "Go bother someone else." };

@@ -22,13 +22,17 @@ namespace NPC
             collisionText = "Play";
             blackjack.SetActive(false);
         }
-
+        /// <summary>
+        /// Activates BlackJack UI and stops movement.
+        /// </summary>
         override public void Interaction()
         {
             blackjack.SetActive(true);
             playerMovement.Stop = true;
         }
-
+        /// <summary>
+        /// Shows interaction button.
+        /// </summary>
         public void ShowInteraction()
         {
             iManager.ShowBox(collisionText, iManager.buttonInteraction);

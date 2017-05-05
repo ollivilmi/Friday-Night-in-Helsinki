@@ -184,7 +184,10 @@ namespace Game
 				player.playerAnimator.SetBool ("moving", false);
 			}
 		}
-
+        /// <summary>
+        /// Changes skybox color for different game times
+        /// </summary>
+        /// <param name="hour">Current time in the game</param>
         public void ChangeSkyBox(int hour)
         {
             if (hour < 19 && hour > 8)

@@ -175,7 +175,10 @@ namespace Player
         /// <returns></returns>
         public abstract string SpecialUsed();
 
-
+        /// <summary>
+        /// Filler story, which NPCs use by default unless they have been given something else.
+        /// Length is always 2, and it's randomized.
+        /// </summary>
         public void StoryFiller()
         {
             string[] fillerStory1 = { "Uhh... Me? Just fine.", "I'm doing just great.", "I'm fine I guess.", "Nothing much, really.", "Are you talking to me?" };
@@ -197,11 +200,13 @@ namespace Player
             };
         }
 
-        public void StoryTommi()
-        {
-            ReadStoryFile("StoryTommi");
-        }
-
+        /// <summary>
+        /// Sets the player's Story variables, which are accessed
+        /// when creating a story for an NPC. This is used to make it possible
+        /// to have multiple different dialogues for different characters on
+        /// one NPC.
+        /// </summary>
+        /// <param name="name">The name of the story: this is seen in the DialogueOptions. Opening line.</param>
         public void SetStory(string name)
         {
             switch (name)
@@ -213,7 +218,7 @@ namespace Player
                     StoryMatti();
                     break;
                 case "Hey, what's up?":
-                    StoryTommi();
+                    ReadStoryFile("StoryTommi");
                     break;
                 case "Hippi-Heikki, is that you?":
                     ReadStoryFile("StoryHeikki");
@@ -247,11 +252,17 @@ namespace Player
                     break;
             }
         }
-
+        /// <summary>
+        /// Gets player Backstory for character selection
+        /// </summary>
+        /// <returns></returns>
 		public String GetBackStory(){
 			return this.backStory;
 		}
-
+        /// <summary>
+        /// Gets player sprite for character selection
+        /// </summary>
+        /// <returns></returns>
 		public Sprite GetPlayerSprite()
 		{
 			return this.playerSprite;

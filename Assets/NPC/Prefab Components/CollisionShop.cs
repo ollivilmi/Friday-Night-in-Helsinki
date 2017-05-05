@@ -28,7 +28,9 @@ namespace NPC
         {
             base.OnTriggerStay2D(col);
         }
-
+        /// <summary>
+        /// Sets "Bartender" button active
+        /// </summary>
         override public void Interaction()
         {
             dHolder.storyDialogue.SetStory(npc.GetStory());

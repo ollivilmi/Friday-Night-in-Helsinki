@@ -21,7 +21,9 @@ namespace NPC
             this.doorway = FindObjectOfType<Door>();
             collisionText = "Enter";
         }
-
+        /// <summary>
+        /// Shows enter button.
+        /// </summary>
         override public void Interaction()
         {
 			doorway.Enter (this);

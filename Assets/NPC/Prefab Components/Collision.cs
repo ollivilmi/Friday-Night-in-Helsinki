@@ -75,12 +75,16 @@ namespace NPC
         }
 
         public abstract void Interaction();
-
+        /// <summary>
+        /// Removes the GameObject, mainly used to remove an NPC after a Bar Fight.
+        /// </summary>
         virtual public void Remove()
         {
             Destroy(this.gameObject);
         }
-
+        /// <summary>
+        /// Closes Dialogue and sets interacting to false.
+        /// </summary>
         public void StopInteracting()
         {
             iManager.CloseDialogue();

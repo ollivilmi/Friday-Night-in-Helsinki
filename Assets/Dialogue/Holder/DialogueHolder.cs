@@ -63,7 +63,10 @@ namespace Dialogue
             moodChange = 0;
             return temp;
         }
-
+        /// <summary>
+        /// If the NPC has a shop functionality, this is used to buy Beer or Tobacco.
+        /// </summary>
+        /// <param name="item">Used in the switch to determine what was clicked.</param>
         public void BuyItem(string item)
         {
             switch (item)

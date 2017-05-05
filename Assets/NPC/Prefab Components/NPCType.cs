@@ -10,7 +10,12 @@ namespace NPC
     public class NPCType : MonoBehaviour
     {
         public Player.Player player { get; set; }
-
+        /// <summary>
+        /// Creates the NPC's story by checking it's name.
+        /// </summary>
+        /// <param name="npc">Name of the npc GameObject</param>
+        /// <param name="events">GameEvents</param>
+        /// <returns></returns>
         public NPCStory GetType(Collision npc, GameEvents events)
         {
             string name = npc.GetName();

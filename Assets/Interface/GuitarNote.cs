@@ -27,7 +27,11 @@ namespace Interface
             transform.localPosition = GetComponent<RectTransform>().position;
             StartCoroutine(spawnDelay(UnityEngine.Random.Range(0.1f,0.3f)));
         }
-
+        /// <summary>
+        /// Delay which is used to make sure that the prefab has been instantiated properly.
+        /// </summary>
+        /// <param name="delay">Delay before moving.</param>
+        /// <returns></returns>
         private IEnumerator spawnDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -50,7 +54,9 @@ namespace Interface
                 Destroy(gameObject);
             }
         }
-
+        /// <summary>
+        /// Destroys the note and adds to score.
+        /// </summary>
         private void Clicked()
         {
                 guitargod.NoteClicked();

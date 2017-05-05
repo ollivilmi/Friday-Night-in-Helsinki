@@ -42,7 +42,10 @@ namespace Player
         {
             return "I am Make.";
         }
-
+        /// <summary>
+        /// Make's special randomizes some Finnish dialogue. It's only a joke and has no real repercussions.
+        /// </summary>
+        /// <returns></returns>
         override public string Special()
         {
             this.special = specialDialogue[random.Next(0, specialDialogue.Length)];
@@ -50,6 +53,10 @@ namespace Player
             "Oh... You were talking to me?", "Dear god. You're so drunk you are incomprehensible.", "Did you have something more than just alcohol?" };
             return specialAnswer[random.Next(0, specialAnswer.Length)];
         }
+        /// <summary>
+        /// After trying to speak Finnish again, the NPC is annoyed.
+        /// </summary>
+        /// <returns></returns>
         override public string SpecialUsed()
         {
             string[] specialAnswer = new string[] { "Stop bothering me with your gibberish.", "I still can't understand you.", "What?",

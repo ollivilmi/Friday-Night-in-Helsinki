@@ -28,7 +28,9 @@ namespace NPC
             tahti.SetActive(true);
             playerMovement.Stop = true;
         }
-
+        /// <summary>
+        /// Sets "Play" button active
+        /// </summary>
         public void ShowInteraction()
         {
             iManager.ShowBox(collisionText, iManager.buttonInteraction);

@@ -33,7 +33,11 @@ namespace Player
         {
             return "I am Teddy.";
         }
-
+        /// <summary>
+        /// Teddy can use money to bribe strangers. Randomizes the result, sometimes
+        /// the NPC doesn't want Teddy's money, sometimes they do and thank him.
+        /// </summary>
+        /// <returns></returns>
         override public string Special()
         {
             switch (random.Next(0, 4))
@@ -56,6 +60,10 @@ namespace Player
                     return "";
             }
         }
+        /// <summary>
+        /// Trying to bribe someone twice is annoying to the NPCs, randomizes a reply.
+        /// </summary>
+        /// <returns></returns>
         override public string SpecialUsed()
         {
             string[] randomAnswer = { "Are you trying to humiliate me? I don't want your money.",

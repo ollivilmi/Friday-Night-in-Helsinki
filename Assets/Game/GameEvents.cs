@@ -52,17 +52,27 @@ namespace Game
             controller.ChangeSkyBox(hour);
             player.events = this;
         }
-
+        /// <summary>
+        /// Returns player
+        /// </summary>
+        /// <returns></returns>
         public Player.Player GetPlayer()
         {
             return player;
         }
-
+        /// <summary>
+        /// Adds to the score variable
+        /// </summary>
+        /// <param name="score">Variable which is used to track how well you have done.</param>
         public void addScore(int score)
         {
             this.score += (int)(score + (0.1 * (double)player.getfunLevel())); //Add score, bonus points for funLevel
         }
-
+        /// <summary>
+        /// Used to manipulate time. Decreases drunkLevel and funLevel as time passes, and changes SkyBox
+        /// to become darker as it gets late.
+        /// </summary>
+        /// <param name="minute">How many minutes have passed</param>
         public void ChangeTime(int minute)
         {
             this.minute += minute;
@@ -73,7 +83,7 @@ namespace Game
                 controller.ChangeSkyBox(hour);
                 if (this.minute >= 60)
                 {
-                    this.minute -= 60;          //Every hour in Africa an hour passes
+                    this.minute -= 60;
                     this.hour++;                // Have some fun if you are drunk
                     player.haveFun(-10);        // Fun level decreases over time	
                     score += (player.getfunLevel()) / 2;
@@ -84,7 +94,10 @@ namespace Game
                 }
             }
         }
-
+        /// <summary>
+        /// Prints clock in the correct format.
+        /// </summary>
+        /// <returns></returns>
         public string GetClock()
         {
             string time = "" + hour +":";

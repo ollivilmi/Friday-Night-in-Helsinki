@@ -35,19 +35,28 @@ namespace NPC
             npc.story = new Story(player, npc, storyName, events);
             dHolder = new DialogueHolderStory(player, iManager, npc);
         }
-
+        /// <summary>
+        /// Changes DialogueHolder's story to this NPC's story and starts dialogue.
+        /// Changes the NPC's image to this NPC's sprite.
+        /// </summary>
         override public void Interaction()
         {
             dHolder.storyDialogue.SetStory(npc.GetStory());
             dHolder.StartDialogue();
             iManager.SetNPCImage(image);
         }
-
+        /// <summary>
+        /// Gets this NPC's functionality, if it has one.
+        /// </summary>
+        /// <returns></returns>
         public string GetFunctionality()
         {
             return this.functionality;
         }
-
+        /// <summary>
+        /// Changes this NPC's functionality.
+        /// </summary>
+        /// <param name="func">Used as 3rd option in DialogueOptions.</param>
         public void SetFunctionality(string func)
         {
             this.functionality = func;

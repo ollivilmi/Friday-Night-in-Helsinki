@@ -14,7 +14,8 @@ namespace NPC
         public string functionality { get; set; }
         public Story story { get; set; }
         /// <summary>
-        /// Creates a story NPC
+        /// Checks NPCType for the NPC's name, and sets it's story and items.
+        /// By default the type is filler.
         /// </summary>
         /// <param name="player"></param>
         /// <param name="npcname"></param>
@@ -55,7 +56,10 @@ namespace NPC
                     break;
             }
         }
-
+        /// <summary>
+        /// Return the instance of this npc's story dialogue.
+        /// </summary>
+        /// <returns></returns>
         public Story GetStory()
         {
             return this.story;

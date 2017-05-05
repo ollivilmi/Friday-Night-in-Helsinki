@@ -31,13 +31,17 @@ namespace NPC {
                 npc.changeMood(dHolder.ReturnMoodChange());
             }
         }
-
+        /// <summary>
+        /// Also reduces the count to spawn a new one after a delay.
+        /// </summary>
         public override void Remove()
         {
             base.Remove();
             controller.npcBarCount--;
         }
-
+        /// <summary>
+        /// Shows "talk" button
+        /// </summary>
         override public void Interaction()
         {
             dHolder.StartDialogue();

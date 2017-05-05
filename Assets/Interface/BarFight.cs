@@ -183,7 +183,7 @@ namespace Interface
             int damage = random.Next(0, 3);
             if (user == bfPlayer)
             {
-                if (player.drunkLevel > 60 && damage != 1)
+                if (player.drunkLevel > 60 && damage != 0)
                 {
                     damage = random.Next(0, 3);
                 }

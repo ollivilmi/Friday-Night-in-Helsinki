@@ -49,7 +49,10 @@ namespace Interface
                 element.SetActive(false);
             }
         }
-
+        /// <summary>
+        /// Sets the Player Image object's sprite to correspond the character you are playing.
+        /// </summary>
+        /// <param name="character">Jarno, Make or Teddy</param>
         public void SetPlayer(Sprite character)
         {
             switch (character.name)
@@ -66,7 +69,11 @@ namespace Interface
                     break;
             }
         }
-
+        /// <summary>
+        /// Starts a Cutscene which involves the player with some animated item. Can be used from
+        /// normal C# classes.
+        /// </summary>
+        /// <param name="item">Which item to start a cutscene for.</param>
         public void StartCutsceneItem(string item)
         {
             switch (item)
@@ -82,12 +89,17 @@ namespace Interface
                     break;
             }
         }
-
+        /// <summary>
+        /// Starts BlackOut cutscene, can be accessed from normal C# classes.
+        /// </summary>
         public void BlackOut()
         {
             StartCoroutine(CutsceneBlackout());
         }
-
+        /// <summary>
+        /// Starts Metro Cutscene by changing the background and enabling the Metro object.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator CutsceneMetro()
         {
             cutscene.GetComponent<Image>().sprite = background[1];
@@ -97,7 +109,11 @@ namespace Interface
             animationMetro.SetActive(false);
             cutscene.SetActive(false);
         }
-		public IEnumerator CutsceneElevatorDown()
+        /// <summary>
+        /// Starts Elevator Cutscene by changing the background and enabling the Elevator object.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator CutsceneElevatorDown()
 		{
 			cutscene.GetComponent<Image>().sprite = background[3];
 			animationElevatorDown.SetActive(true);
@@ -106,7 +122,11 @@ namespace Interface
 			animationElevatorDown.SetActive(false);
 			cutscene.SetActive(false);
 		}
-		public IEnumerator CutsceneElevatorUp()
+        /// <summary>
+        /// Starts Elevator Cutscene by changing the background and enabling the Elevator object.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator CutsceneElevatorUp()
 		{
 			cutscene.GetComponent<Image>().sprite = background[3];
 			animationElevatorUp.SetActive(true);
@@ -115,7 +135,12 @@ namespace Interface
 			animationElevatorUp.SetActive(false);
 			cutscene.SetActive(false);
 		}
-
+        /// <summary>
+        /// Starts item cutscene with the specified item and time. The item is indefinitely animated.
+        /// </summary>
+        /// <param name="item">Item object, which is a child of the Cutscene panel</param>
+        /// <param name="time">How long to display the cutscene</param>
+        /// <returns></returns>
         private IEnumerator CutsceneItem(GameObject item, float time)
         {
             cutscene.GetComponent<Image>().sprite = background[0];
@@ -127,7 +152,11 @@ namespace Interface
             player.SetActive(false);
             cutscene.SetActive(false);
         }
-
+        /// <summary>
+        /// Changes time by 60 minutes, randomizes a new location for the player
+        /// opens up the panel for 8 seconds, telling you that you lost your memory.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator CutsceneBlackout()
         {
             events.ChangeTime(60);

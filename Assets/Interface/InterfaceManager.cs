@@ -170,7 +170,9 @@ namespace Interface
             target.Interaction();
             buttonInteraction.gameObject.SetActive(false);
         }
-        
+        /// <summary>
+        /// Opens or closes a shop panel.
+        /// </summary>
         public void OpenShop()
         {
             if (panelShop.activeInHierarchy == false)
@@ -182,17 +184,28 @@ namespace Interface
                 panelShop.SetActive(false);
             }
         }
-
+        /// <summary>
+        /// After clicking a button in the shop panel,
+        /// buys it if it's the latest button that was clicked.
+        /// </summary>
+        /// <param name="item"></param>
         private void BuyItem(string item)
         {
             dHolder.BuyItem(item);
         }
-
+        /// <summary>
+        /// Opens a panel which contains a message for the player.
+        /// </summary>
+        /// <param name="message">Something to tell the player.</param>
         public void OpenPopUp(string message)
         {
             StartCoroutine(PopUp(message));
         }
-
+        /// <summary>
+        /// Opens a panel for 3 seconds.
+        /// </summary>
+        /// <param name="message">Something to tell the player</param>
+        /// <returns></returns>
         public IEnumerator PopUp(string message)
         {
             panelPopUp.SetActive(true);
