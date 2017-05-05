@@ -85,26 +85,25 @@ namespace Dialogue
                     jartsa = GameObject.Find("NPCJartsa(Clone)").GetComponent<CollisionNPCStory>();
                     jartsa.SetFunctionality("I'm ready, let's play!");
                     break;
-                case "Hello, fellow investor.":
-                    GameObject.Find("NPCJ-P(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Howdy.");
-                    GameObject.Find("NPCLiinu(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Smooth criminal");
+                case "Excuse me sir, but I couldn't help but notice you're in the investment business as well.":
+                    GameObject.Find("NPCJ-P(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Howdy there, how's it goin'?");
+                    GameObject.Find("NPCLiinu(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Hey there, pretty lady!");
                     break;
-                case "Howdy.":
+                case "Howdy there, how's it goin'?":
                     player.questAlexander[0] = true;
                     if (player.questAlexander[1])
                     {
                         GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
                     }
                     break;
-                case "Smooth criminal":
+                case "Hey there, pretty lady!":
                     player.questAlexander[1] = true;
                     if (player.questAlexander[1])
                     {
                         GameObject.Find("NPCAlexander(Clone)").GetComponent<CollisionNPCStory>().ChangeStory("Great success!");
                     }
                     break;
-                case "Pick a fight":
-                    Debug.Log("Fight picked");
+                case "Jump the queue.":
                     player.events.cutscene.BlackOut();
                     break;
             }

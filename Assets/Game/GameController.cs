@@ -90,6 +90,7 @@ namespace Game
                 (GameObject)Resources.Load("NPCAlexander", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCLiinu", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCJ-P", typeof(GameObject)),
+                (GameObject)Resources.Load("NPCSpaceman", typeof(GameObject)),
                 (GameObject)Resources.Load("NPCKake", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWS1", typeof(GameObject)),
                 (GameObject)Resources.Load("DoorRWSCasino", typeof(GameObject)),

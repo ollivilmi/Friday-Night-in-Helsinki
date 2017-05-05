@@ -79,7 +79,10 @@ namespace Interface
         /// <param name="dHolder">The NPC's dialogue.</param>
         public void SetHolder(DialogueHolder dHolder)
         {
-            this.dHolder = dHolder;
+            if (!dialogueActive)
+            {
+                this.dHolder = dHolder;
+            }
         }
 
         /// <summary>

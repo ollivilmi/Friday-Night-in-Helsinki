@@ -54,7 +54,7 @@ namespace Dialogue
         }
 
         /// <summary>
-        /// A horrible getter to return an integer and reset mood back to 0 ...What?
+        /// Gets moodChange and resets it to 0.
         /// </summary>
         /// <returns></returns>
         public int ReturnMoodChange()

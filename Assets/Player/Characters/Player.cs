@@ -229,23 +229,26 @@ namespace Player
                 case "Hey, I found him!":
                     ReadStoryFile("StoryHeikki2");
                     break;
-                case "Hello, fellow investor.":
+                case "Excuse me sir, but I couldn't help but notice you're in the investment business as well.":
                     ReadStoryFile("StoryAlexander");
                     break;
-                case "Howdy.":
+                case "Howdy there, how's it goin'?":
                     ReadStoryFile("StoryJP");
                     break;
-                case "Smooth criminal":
+                case "Hey there, pretty lady!":
                     ReadStoryFile("StoryLiinu");
                     break;
                 case "Great success!":
                     ReadStoryFile("StoryAlexander2");
                     break;
-                case "Pick a fight":
+                case "Jump the queue.":
                     ReadStoryFile("StoryKake");
                     break;
                 case "Are you alright?":
                     ReadStoryFile("StoryDrunk");
+                    break;
+                case "Hey, what are you up to?":
+                    ReadStoryFile("StorySpaceman");
                     break;
                 default:
                     StoryFiller();

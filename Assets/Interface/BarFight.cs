@@ -61,10 +61,10 @@ namespace Interface
                 "Hey donkey, how is your mother? Do the zoo keepers remember to feed her?",
                 "You stupidhead, how does it feel to be stupid?",
                 "I had a lovely evening with your mother yesterday. Or was it a cow? Can't remember.",
-                "I’m sorry your dad beat you instead of cancer.",
-                "If you were a potato you’d be a stupid potato.",
+                "I'm sorry your dad beat you instead of cancer.",
+                "If you were a potato you'd be a stupid potato.",
                 "You are so ugly that when you were born, the doctor slapped your mother.",
-                "Ready to fail like your dad’s condom?",
+                "Ready to fail like your dad's condom?",
                 "You look like something I drew with my left hand.",
             };
 

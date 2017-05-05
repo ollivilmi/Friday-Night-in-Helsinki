@@ -42,13 +42,16 @@ namespace NPC
                     story = new Story(player, this, "Hippi-Heikki, is that you?", events);
                     break;
                 case "Alexander":
-                    story = new Story(player, this, "Hello, fellow investor.", events);
+                    story = new Story(player, this, "Excuse me sir, but I couldn't help but notice you're in the investment business as well.", events);
                     break;
                 case "Kake":
-                    story = new Story(player, this, "Pick a fight", events);
+                    story = new Story(player, this, "Jump the queue.", events);
                     break;
                 case "Drunk":
                     story = new Story(player, this, "Are you alright?", events);
+                    break;
+                case "Spaceman":
+                    story = new Story(player, this, "Hey, what are you up to?", events);
                     break;
                 default:
                     string[] filler = { "How's it going?", "How are you doing?", "Hey, how are you?", "How's it hanging?", "What's up?" };

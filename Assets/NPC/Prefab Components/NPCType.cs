@@ -35,6 +35,8 @@ namespace NPC
                     return new NPCStory(player, "Kake", events);
                 case "NPCDrunk(Clone)":
                     return new NPCStory(player, "Drunk", events);
+                case "NPCSpaceman(Clone)":
+                    return new NPCStory(player, "Spaceman", events);
                 default:
                 return new NPCStory(player, "Default", events);
             }
