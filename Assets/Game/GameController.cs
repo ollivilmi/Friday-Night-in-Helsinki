@@ -30,7 +30,7 @@ namespace Game
         private Cutscene cutscene;
         public int npcBarCount { get; set; }
 		private string selectedCharacter;
-		public bool moving;
+		public bool moving { get; set; }
         private System.Random random;
 
         private void Start()
@@ -38,11 +38,11 @@ namespace Game
             random = new System.Random();
             dataSaver = FindObjectOfType<DataSaver> ();
 			selectedCharacter = dataSaver.character;   
-            GetObjects();
+            getObjects();
             events = new GameEvents(selectedCharacter, iManager, cutscene, character, this);
             player = events.GetPlayer();
-            SetUpScripts();
-            StartPrefabs();     
+            setUpScripts();
+            startPrefabs();     
         }
         /// <summary>
         /// Get GameEvents object
@@ -74,10 +74,10 @@ namespace Game
             playerMovement.posChar = character.transform.position;
             playerMovement.LeftClick();
             info.text = events.GetClock() + player.UpdateStats();
-			HandleAnimations ();
+			handleAnimations ();
             if (npcBarCount < 5)
             {
-                StartCoroutine(SpawnBarNPC());
+                StartCoroutine(spawnBarNPC());
             }
             if (player.drunkLevel == 100)
             {
@@ -88,7 +88,7 @@ namespace Game
         /// <summary>
         /// Finds all the prefabs and instantiates them.
         /// </summary>
-        private void StartPrefabs()
+        private void startPrefabs()
         {
             triggerObjects = new List<GameObject> {
                 (GameObject)Resources.Load("NPCPetri", typeof(GameObject)),
@@ -134,7 +134,7 @@ namespace Game
         /// Spawns bar NPCs after a 30 second delay if npcBarCount is less than 5
         /// </summary>
         /// <returns></returns>
-        private IEnumerator SpawnBarNPC()
+        private IEnumerator spawnBarNPC()
         {
             npcBarCount++;
             yield return new WaitForSeconds(30);
@@ -144,7 +144,7 @@ namespace Game
         /// <summary>
         /// Finds all the necessary GameObjects and player from Events.
         /// </summary>
-        private void GetObjects()
+        private void getObjects()
         {
             character = GameObject.Find("Player");
             info = GameObject.Find("Info").GetComponent<Text>();
@@ -161,7 +161,7 @@ namespace Game
         /// <summary>
         /// Creates an instance of movement, sets up script variables.
         /// </summary>
-        private void SetUpScripts()
+        private void setUpScripts()
         {
             playerMovement = new Movement(player, character);
             iManager.playerMovement = this.playerMovement;
@@ -185,7 +185,7 @@ namespace Game
 		/// Handles player character's animations.
 		/// Is called in Update();
 		/// </summary>
-		void HandleAnimations()
+		private void handleAnimations()
 		{
 			//checks if player is moving
 			if (playerMovement.moveLeft == true || playerMovement.moveRight == true) 

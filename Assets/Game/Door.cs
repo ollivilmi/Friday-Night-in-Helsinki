@@ -22,7 +22,10 @@ namespace Game
 			limits = FindObjectOfType<CameraFollow> ();
             cutscene = FindObjectOfType<Cutscene>();
 		}
-
+        /// <summary>
+        /// Enters a door, which is determined by the name of the instantiated trigger.
+        /// </summary>
+        /// <param name="teleporter">Which trigger is used.</param>
 		public void Enter(NPC.Collision teleporter)
         {
 			string name = teleporter.GetName ();
@@ -88,7 +91,9 @@ namespace Game
                     break;
             }
         }
-
+        /// <summary>
+        /// Enters a random door. Used when the player gets blacked out.
+        /// </summary>
         public void RandomLocation()
         {
             switch (random.Next(0, 6)) {

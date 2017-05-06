@@ -259,7 +259,7 @@ namespace Player
         /// Gets player Backstory for character selection
         /// </summary>
         /// <returns></returns>
-		public String GetBackStory(){
+		public string GetBackStory(){
 			return this.backStory;
 		}
         /// <summary>

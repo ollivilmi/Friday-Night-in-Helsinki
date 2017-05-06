@@ -287,7 +287,7 @@ namespace Interface
         /// the player may double again.
         /// </summary>
         /// <returns></returns>
-        IEnumerator CoinAnimation()
+        private IEnumerator CoinAnimation()
         {
             playing = true;
             info2.text = "Heads wins, tails loses.";

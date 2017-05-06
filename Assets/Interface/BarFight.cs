@@ -18,7 +18,7 @@ namespace Interface
         private GameObject bfOptionsPanel, bfInfo, barfight;
         private List<GameObject> bfDialogue;
         private List<Button> bfOptions;
-        private List<String> insults;
+        private List<string> insults;
         private Dictionary<Button, string> buttonToString;
         private int playerHP, npcHP;
         private System.Random random;
