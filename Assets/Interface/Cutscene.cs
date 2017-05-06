@@ -11,11 +11,12 @@ namespace Interface
 {
     public class Cutscene : MonoBehaviour
     {
-        private GameObject cutscene, animationBeer, animationTobacco, animationGuitar, animationMetro, textObject, animationElevatorDown, animationElevatorUp;
+        private GameObject cutscene, animationBeer, animationTobacco, animationGuitar, 
+        animationMetro, textObject, textObject2, animationElevatorDown, animationElevatorUp;
         public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
-        private Text cutsceneText;
+        private Text cutsceneText, cutsceneText2;
         public GameEvents events { get; set; }
         private Door door;
 
@@ -28,7 +29,9 @@ namespace Interface
             cutscene = GameObject.Find("Cutscene");
             player = GameObject.Find("CutscenePlayer");
             textObject = GameObject.Find("CutsceneText");
+            textObject2 = GameObject.Find("CutsceneText2");
             cutsceneText = textObject.GetComponent<Text>();
+            cutsceneText2 = textObject2.GetComponent<Text>();
             door = FindObjectOfType<Door>();
 			animationElevatorDown = GameObject.Find ("CutsceneElevatorDown");
 			animationElevatorUp = GameObject.Find ("CutsceneElevatorUp");
@@ -42,7 +45,7 @@ namespace Interface
             };
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro, animationGuitar,
-				textObject, player, cutscene, animationElevatorDown, animationElevatorUp };
+				textObject, textObject2, player, cutscene, animationElevatorDown, animationElevatorUp };
 
             foreach (GameObject element in cutsceneObjects)
             {
@@ -95,6 +98,13 @@ namespace Interface
         public void BlackOut()
         {
             StartCoroutine(CutsceneBlackout());
+        }
+        /// <summary>
+        /// Starts Goldmoney cutscene, can be accessed from normal C# classes.
+        /// </summary>
+        public void Goldmoney()
+        {
+            StartCoroutine(CutsceneGoldmoney());
         }
         /// <summary>
         /// Starts Metro Cutscene by changing the background and enabling the Metro object.
@@ -152,6 +162,24 @@ namespace Interface
             player.SetActive(false);
             cutscene.SetActive(false);
         }
+        /// <summary>
+        /// Starts cutscene for completing the Goldmoney quest.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator CutsceneGoldmoney()
+        {
+            events.ChangeTime(90);
+            cutscene.GetComponent<Image>().sprite = background[2];
+            cutscene.SetActive(true);
+            player.SetActive(true);
+            textObject2.SetActive(true);
+            cutsceneText2.text = "And so he became even richer. The party was packed with old men and champagne that cost more than your average car.";
+            yield return new WaitForSeconds(10f);
+            textObject2.SetActive(false);
+            player.SetActive(false);
+            cutscene.SetActive(false);
+        }
+
         /// <summary>
         /// Changes time by 60 minutes, randomizes a new location for the player
         /// opens up the panel for 8 seconds, telling you that you lost your memory.

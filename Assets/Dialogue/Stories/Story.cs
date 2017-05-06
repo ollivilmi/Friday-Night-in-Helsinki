@@ -104,7 +104,13 @@ namespace Dialogue
                     }
                     break;
                 case "Jump the queue.":
-                    player.events.cutscene.BlackOut();
+                    events.cutscene.BlackOut();
+                    break;
+                case "Great success!":
+                    events.cutscene.Goldmoney();
+                    player.haveFun(-20);
+                    events.addScore(100);
+                    player.useMoney(1000);
                     break;
             }
         }

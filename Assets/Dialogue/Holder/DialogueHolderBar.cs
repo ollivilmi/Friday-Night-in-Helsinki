@@ -18,7 +18,6 @@ namespace Dialogue
         {
             this.player = player;
             this.iManager = iManager;
-            this.iManager.SetHolder(this); //Set this dialogue to be used in the manager
             this.barNPC = npc;
             this.randomBarDialogue = new DialogueBar();
             level = 0;

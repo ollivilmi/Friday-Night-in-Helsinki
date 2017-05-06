@@ -174,7 +174,7 @@ namespace Dialogue
                     QuitDialogue();
                     break;
                 case "Is this your phone?":
-                    iManager.ShowBox("Oh, yes! Seems like you met my friend Matti? I've been waiting to get my hands on this phone for weeks.", iManager.dBoxNPC, "Quit");
+                    iManager.ShowBox("Oh, yes! Seems like you met my employer? I've been waiting to get my hands on this phone for weeks.", iManager.dBoxNPC, "Quit");
                     player.haveFun(15);
                     player.useMoney(20);
                     player.RemoveQuestItem("Old phone");
