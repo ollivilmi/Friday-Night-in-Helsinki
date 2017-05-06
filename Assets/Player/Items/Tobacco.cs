@@ -7,6 +7,11 @@ namespace Player
 {
     public class Tobacco : Item
     {
+        /// <summary>
+        /// Adds Tobacco to the player's item list.
+        /// </summary>
+        /// <param name="player">Player object.</param>
+        /// <param name="amount">How many tobaccos the player starts with.</param>
         public Tobacco(Player player, int amount)
         {
             this.price = 0.2f;
@@ -14,7 +19,11 @@ namespace Player
             this.itemName = "Tobacco";
             this.player = player;
         }
-
+        /// <summary>
+        /// If the player has Tobacco, uses it to have some fun.
+        /// Returns false if the player doesn't have any.
+        /// </summary>
+        /// <returns></returns>
         override public bool UseItem()
         {
             if (amount > 0)

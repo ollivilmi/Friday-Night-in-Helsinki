@@ -11,12 +11,18 @@ namespace Player
         public int amount { get; set; }
         protected string itemName;
         protected Player player;
-
+        /// <summary>
+        /// Adds to the amount. Amount means for example how
+        /// many beers the player has.
+        /// </summary>
         public void Add()
         {
             amount++;
         }
-
+        /// <summary>
+        /// Returns the name of the item.
+        /// </summary>
+        /// <returns></returns>
         public string GetName()
         {
             return itemName;

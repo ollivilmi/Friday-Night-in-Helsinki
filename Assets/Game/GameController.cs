@@ -44,17 +44,26 @@ namespace Game
             SetUpScripts();
             StartPrefabs();     
         }
-
+        /// <summary>
+        /// Get GameEvents object
+        /// </summary>
+        /// <returns></returns>
         public GameEvents GetEvents()
         {
             return events;
         }
-
+        /// <summary>
+        /// Get Player's movement script (used mainly to stop movement)
+        /// </summary>
+        /// <returns></returns>
         public Movement GetMovement()
         {
             return playerMovement;
         }
-
+        /// <summary>
+        /// Get player object
+        /// </summary>
+        /// <returns></returns>
         public Player.Player GetPlayer()
         {
             return player;
@@ -121,7 +130,10 @@ namespace Game
             Instantiate(npcDrunk, new Vector3(111f, -7.3f, 0), npcDrunk.transform.rotation);
             Instantiate(npcDrunk, new Vector3(-614f, -7.3f, 0), npcDrunk.transform.rotation);
         }            
-
+        /// <summary>
+        /// Spawns bar NPCs after a 30 second delay if npcBarCount is less than 5
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator SpawnBarNPC()
         {
             npcBarCount++;
