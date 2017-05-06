@@ -79,7 +79,7 @@ namespace Game
                         EnterDoor(-458, -458, -376, -458);
                         player.useMoney(-5);
                         events.ChangeTime(10);
-                        StartCoroutine(cutscene.CutsceneMetro());
+                        StartCoroutine(cutscene.CutsceneMetroBack());
                     }
                     else
                     {

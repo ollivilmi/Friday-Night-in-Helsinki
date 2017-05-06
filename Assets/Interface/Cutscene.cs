@@ -12,7 +12,7 @@ namespace Interface
     public class Cutscene : MonoBehaviour
     {
         private GameObject cutscene, animationBeer, animationTobacco, animationGuitar, 
-        animationMetro, textObject, textObject2, animationElevatorDown, animationElevatorUp;
+        animationMetro, textObject, textObject2, animationElevatorDown, animationElevatorUp, animationMetroBack;
         public GameObject player { get; set; }
         private List<GameObject> cutsceneObjects;
         private List<Sprite> background;
@@ -35,17 +35,18 @@ namespace Interface
             door = FindObjectOfType<Door>();
 			animationElevatorDown = GameObject.Find ("CutsceneElevatorDown");
 			animationElevatorUp = GameObject.Find ("CutsceneElevatorUp");
+            animationMetroBack = GameObject.Find("CutsceneMetroBack");
 
             background = new List<Sprite>()
             {
                 Resources.Load<Sprite>("darkalley"),
-                Resources.Load<Sprite>("metro"),
+                Resources.Load<Sprite>("Metro_tunnel"),
                 Resources.Load<Sprite>("blackout"),
 				Resources.Load<Sprite>("hissikuilu"),
             };
 
             cutsceneObjects = new List<GameObject> { animationBeer, animationTobacco, animationMetro, animationGuitar,
-				textObject, textObject2, player, cutscene, animationElevatorDown, animationElevatorUp };
+				textObject, textObject2, player, cutscene, animationElevatorDown, animationElevatorUp, animationMetroBack };
 
             foreach (GameObject element in cutsceneObjects)
             {
@@ -117,6 +118,19 @@ namespace Interface
             cutscene.SetActive(true);
             yield return new WaitForSeconds(5f);
             animationMetro.SetActive(false);
+            cutscene.SetActive(false);
+        }
+        /// <summary>
+        /// Starts Metro Cutscene by changing the background and enabling the Metro object.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator CutsceneMetroBack()
+        {
+            cutscene.GetComponent<Image>().sprite = background[1];
+            animationMetroBack.SetActive(true);
+            cutscene.SetActive(true);
+            yield return new WaitForSeconds(5f);
+            animationMetroBack.SetActive(false);
             cutscene.SetActive(false);
         }
         /// <summary>
