@@ -32,7 +32,7 @@ namespace Player
             Sprite guitar = Resources.Load<Sprite>("eguitarSquare");
             itemsQuest.Add(new QuestItem("Guitar", guitar, "Electric guitar. You need an amplifier to play it."));
 			this.playerSprite = Resources.Load<Sprite> ("Jarno");
-			this.backStory = "Jarno plays the guitar, drinks beer occasionaly, and is a nice guy in general";
+			this.backStory = "The Bohemian\n\nOccupation: Musician / Unemployed\n\nJarno goes by his charisma and the money from The Social Insurance Institution to get by in life.";
 			character.sprite = playerSprite;
         }
 

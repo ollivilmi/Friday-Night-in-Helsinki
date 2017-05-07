@@ -35,7 +35,7 @@ namespace Player
             Sprite knife = Resources.Load<Sprite>("Chef_Knife");
             itemsQuest.Add(new QuestItem("Knife", knife, "In case of emergency."));
 			this.playerSprite = Resources.Load<Sprite> ("Make");
-			this.backStory = "MAKE IS A MAN";
+			this.backStory = "The Working Man\n\nOccupation: Factory worker\n\nMake has been working since he graduated from primary school. He isn't very good with money so he lives from paycheck to paycheck spending everything on alcohol.";
         }
 
         override public string Think()

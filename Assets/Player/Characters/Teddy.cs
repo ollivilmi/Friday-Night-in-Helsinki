@@ -26,7 +26,7 @@ namespace Player
             Sprite phone = Resources.Load<Sprite>("iphone");
             itemsQuest.Add(new QuestItem("iPhone", phone, "Your mobile phone. It's turned off today."));
 			this.playerSprite = Resources.Load<Sprite> ("Teddy");
-			this.backStory = "Teddy has money";
+			this.backStory = "The Capitalist\n\nOccupation: Banker/Investor\n\nTheore 'Teddy' Walrus never wanted to become a banker, but his father forced him. Teddy quickly became addicted to having all this money. His political views gradually shifted to those of the bourgeoisie, as he turned into one of them. Even after transforming into a career banker and a true capitalist, something from his past life still remained.";
         }
 
         override public string Think()

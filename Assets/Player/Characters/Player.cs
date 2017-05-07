@@ -27,13 +27,13 @@ namespace Player
         public string special { get; set; }
         protected System.Random random;
         protected char[] delimiter;
-		public Sprite playerSprite;
-		public string backStory;
+		public Sprite playerSprite { get; set; }
+		public string backStory { get; set; }
         public bool interacting { get; set; }
 		protected SpriteRenderer character;
-		public Animator playerAnimator;
-        public GameEvents events;
-        public bool[] questAlexander;
+		public Animator playerAnimator { get; set; }
+        public GameEvents events { get; set; }
+        public bool[] questAlexander { get; set; }
         public float height { get; set; }
 
         public Player()

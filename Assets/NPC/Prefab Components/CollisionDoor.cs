@@ -13,7 +13,7 @@ namespace NPC
 {
     public class CollisionDoor : Collision
     {
-		Door doorway;
+		private Door doorway;
 
         override protected void Start()
         {
