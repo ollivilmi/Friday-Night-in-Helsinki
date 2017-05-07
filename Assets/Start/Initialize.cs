@@ -14,20 +14,14 @@ using Dialogue;
 
 public class Initialize : MonoBehaviour {
 
-	public Button Char1 { get; set; }
-	public Button Char2 { get; set; }
-	public Button Char3 { get; set; }
-	public Button CharCreation{ get; set;}
-	public Button StartGame { get; set; }
-	public Text BackStory { get; set;}
-	public Image CharImage { get; set;}
+    private Button char1, char2, char3, startSelection, startGame;
+    private GameObject CharCreation;
+    private Text backStory;
+    private Image charImage;
 
-	public GameObject ActivePlayer;
-	//public Image playerImage;
-	public Sprite playerSprite;
-	public  string backStory;
-	//public Player.Jarno jarno;
-
+    private Sprite playerSprite;
+    private string charBackStory;
+    private SwitchScene switchScene;
 	private DataSaver dataSaver;
 
 	public Player.Player jarno;
@@ -41,26 +35,33 @@ public class Initialize : MonoBehaviour {
 		make = new Make();
 		teddy = new Teddy();
 
-		ActivePlayer = GameObject.Find("ActivePlayer");
+        switchScene = FindObjectOfType<SwitchScene>();
         dataSaver = FindObjectOfType<DataSaver>();
 
         // Find UI elements
-        Char1 = GameObject.Find("Character 1").GetComponent<Button>();
-		Char2 = GameObject.Find("Character 2").GetComponent<Button>();
-		Char3 = GameObject.Find("Character 3").GetComponent<Button>();
-		CharCreation = GameObject.Find("Character Creation").GetComponent<Button>();
-		StartGame = GameObject.Find("Start Game").GetComponent<Button>();
-		BackStory = GameObject.Find("Back Story").GetComponent<Text>();
-		CharImage = GameObject.Find("Character Image").GetComponent<Image>();
+        char1 = GameObject.Find("Character 1").GetComponent<Button>();
+        char1.onClick.AddListener(() => ChooseJarno());
+        char2 = GameObject.Find("Character 2").GetComponent<Button>();
+        char2.onClick.AddListener(() => ChooseMake());
+        char3 = GameObject.Find("Character 3").GetComponent<Button>();
+        char3.onClick.AddListener(() => ChooseTeddy());
+        startSelection = GameObject.Find("Startbutton").GetComponent<Button>();
+        startSelection.onClick.AddListener(() => GotoCharacterCreation());
+        startGame = GameObject.Find("Start Game").GetComponent<Button>();
+        startGame.onClick.AddListener(() => switchScene.Change());
+
+        CharCreation = GameObject.Find("Character Creation");
+		startGame = GameObject.Find("Start Game").GetComponent<Button>();
+		backStory = GameObject.Find("Back Story").GetComponent<Text>();
+		charImage = GameObject.Find("Character Image").GetComponent<Image>();
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(false);
-		Char2.gameObject.SetActive(false);
-		Char3.gameObject.SetActive(false);
-		CharCreation.gameObject.SetActive(true);
-		StartGame.gameObject.SetActive(false);
-		BackStory.gameObject.SetActive(false);
-		CharImage.gameObject.SetActive(false);
+		char1.gameObject.SetActive(false);
+		char2.gameObject.SetActive(false);
+		char3.gameObject.SetActive(false);
+		startGame.gameObject.SetActive(false);
+		backStory.gameObject.SetActive(false);
+		charImage.gameObject.SetActive(false);
 
 		// set other scenes inactive
 		foreach(GameObject g in SceneManager.GetSceneAt(2).GetRootGameObjects()){
@@ -84,33 +85,33 @@ public class Initialize : MonoBehaviour {
 	public void GotoCharacterCreation(){
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(true);
-		Char2.gameObject.SetActive(true);
-		Char3.gameObject.SetActive(true);
+		char1.gameObject.SetActive(true);
+		char2.gameObject.SetActive(true);
+		char3.gameObject.SetActive(true);
 		CharCreation.gameObject.SetActive(false);
-		StartGame.gameObject.SetActive(false);
-		BackStory.gameObject.SetActive(true);
-		CharImage.gameObject.SetActive(true);
+		startGame.gameObject.SetActive(false);
+		backStory.gameObject.SetActive(true);
+		charImage.gameObject.SetActive(true);
 	}
 
 	public void GotoStart(){
 
-		Char1 = GameObject.Find("Character 1").GetComponent<Button>();
-		Char2 = GameObject.Find("Character 2").GetComponent<Button>();
-		Char3 = GameObject.Find("Character 3").GetComponent<Button>();
-		CharCreation = GameObject.Find("Character Creation").GetComponent<Button>();
-		StartGame = GameObject.Find("Start Game").GetComponent<Button>();
-		BackStory = GameObject.Find("Back Story").GetComponent<Text>();
-		CharImage = GameObject.Find("Character Image").GetComponent<Image>();
+		char1 = GameObject.Find("Character 1").GetComponent<Button>();
+		char2 = GameObject.Find("Character 2").GetComponent<Button>();
+		char3 = GameObject.Find("Character 3").GetComponent<Button>();
+        CharCreation = GameObject.Find("Character Creation");
+		startGame = GameObject.Find("Start Game").GetComponent<Button>();
+		backStory = GameObject.Find("Back Story").GetComponent<Text>();
+		charImage = GameObject.Find("Character Image").GetComponent<Image>();
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(false);
-		Char2.gameObject.SetActive(false);
-		Char3.gameObject.SetActive(false);
+		char1.gameObject.SetActive(false);
+		char2.gameObject.SetActive(false);
+		char3.gameObject.SetActive(false);
 		CharCreation.gameObject.SetActive(true);
-		StartGame.gameObject.SetActive(false);
-		BackStory.gameObject.SetActive(false);
-		CharImage.gameObject.SetActive(false);
+		startGame.gameObject.SetActive(false);
+		backStory.gameObject.SetActive(false);
+		charImage.gameObject.SetActive(false);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -120,21 +121,21 @@ public class Initialize : MonoBehaviour {
 	public void ChooseJarno (){
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(true);
-		Char2.gameObject.SetActive(true);
-		Char3.gameObject.SetActive(true);
+		char1.gameObject.SetActive(true);
+		char2.gameObject.SetActive(true);
+		char3.gameObject.SetActive(true);
 		CharCreation.gameObject.SetActive(false);
-		StartGame.gameObject.SetActive(true);
-		BackStory.gameObject.SetActive(true);
-		CharImage.gameObject.SetActive(true);
+		startGame.gameObject.SetActive(true);
+		backStory.gameObject.SetActive(true);
+		charImage.gameObject.SetActive(true);
 
 		// insert Jarno's back story and picture (sprite) to corresponding elements
-		backStory = jarno.GetBackStory();
-		Text text = BackStory.GetComponentInChildren<Text>();
-		text.text = backStory;
+		charBackStory = jarno.GetBackStory();
+		Text text = backStory.GetComponentInChildren<Text>();
+		text.text = charBackStory;
 
 		playerSprite = jarno.GetPlayerSprite();
-		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		Image playerImage = charImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
 
 		dataSaver.character = "Jarno";
@@ -144,21 +145,21 @@ public class Initialize : MonoBehaviour {
 	public void ChooseMake (){
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(true);
-		Char2.gameObject.SetActive(true);
-		Char3.gameObject.SetActive(true);
+		char1.gameObject.SetActive(true);
+		char2.gameObject.SetActive(true);
+		char3.gameObject.SetActive(true);
 		CharCreation.gameObject.SetActive(false);
-		StartGame.gameObject.SetActive(true);
-		BackStory.gameObject.SetActive(true);
-		CharImage.gameObject.SetActive(true);
+		startGame.gameObject.SetActive(true);
+		backStory.gameObject.SetActive(true);
+		charImage.gameObject.SetActive(true);
 
 		// insert Make's back story and picture (sprite) to corresponding elements
-		backStory = make.GetBackStory();
-		Text text = BackStory.GetComponentInChildren<Text>();
-		text.text = backStory;
+		charBackStory = make.GetBackStory();
+		Text text = backStory.GetComponentInChildren<Text>();
+		text.text = charBackStory;
 
 		playerSprite = make.GetPlayerSprite();
-		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		Image playerImage = charImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
 
 		dataSaver.character = "Make";
@@ -169,21 +170,21 @@ public class Initialize : MonoBehaviour {
 	public void ChooseTeddy (){
 
 		// set UI elements on/off
-		Char1.gameObject.SetActive(true);
-		Char2.gameObject.SetActive(true);
-		Char3.gameObject.SetActive(true);
+		char1.gameObject.SetActive(true);
+		char2.gameObject.SetActive(true);
+		char3.gameObject.SetActive(true);
 		CharCreation.gameObject.SetActive(false);
-		StartGame.gameObject.SetActive(true);
-		BackStory.gameObject.SetActive(true);
-		CharImage.gameObject.SetActive(true);
+		startGame.gameObject.SetActive(true);
+		backStory.gameObject.SetActive(true);
+		charImage.gameObject.SetActive(true);
 
 		// insert Teddy's back story and picture (sprite) to corresponding elements
-		backStory = teddy.GetBackStory();
-		Text text = BackStory.GetComponentInChildren<Text>();
-		text.text = backStory;
+		charBackStory = teddy.GetBackStory();
+		Text text = backStory.GetComponentInChildren<Text>();
+		text.text = charBackStory;
 
 		playerSprite = teddy.GetPlayerSprite();
-		Image playerImage = CharImage.GetComponentInChildren<Image> ();
+		Image playerImage = charImage.GetComponentInChildren<Image> ();
 		playerImage.sprite = playerSprite;
 
 		dataSaver.character = "Teddy";
