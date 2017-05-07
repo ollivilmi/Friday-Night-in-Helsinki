@@ -9,19 +9,6 @@ public class SwitchScene : MonoBehaviour {
 	public bool change = false;
 	private Initialize init;
 
-
-	// Use this for initialization
-	void Start () {
-		
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		
-	}
-
 	public void Quit (){
 		SceneManager.SetActiveScene (SceneManager.GetSceneAt (1));
 		foreach(GameObject g in SceneManager.GetSceneAt(1).GetRootGameObjects()){
